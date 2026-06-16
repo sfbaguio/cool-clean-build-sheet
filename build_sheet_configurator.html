@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cool Clean – Omega Build Sheet Configurator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#EEF1F6;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16203A;-webkit-font-smoothing:antialiased;line-height:1.4}
+button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:pointer}
+::selection{background:#0E9F8E33}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* grid */
+.cfg-grid{display:grid;grid-template-columns:1fr 384px;gap:24px;align-items:start}
+@media(max-width:1080px){
+  .cfg-grid{grid-template-columns:1fr}
+  .cfg-aside{position:static!important;top:auto!important}
+}
+
+/* card */
+.card{border:1px solid #E4E8EF;background:#fff;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.04);padding:20px 22px}
+.card+.card{margin-top:20px}
+
+/* option button */
+.opt-btn{display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;padding:11px 15px;border-radius:10px;font-family:inherit;transition:box-shadow .12s,border-color .12s,background .12s;min-width:104px;cursor:pointer}
+.opt-btn.selected{border:1.5px solid #0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.13)}
+.opt-btn.unselected{border:1.5px solid #E4E8EF;background:#fff}
+.opt-btn.locked{border:1.5px solid #EDF0F5;background:#F4F6FA;cursor:not-allowed;opacity:.5;pointer-events:none}
+.opt-btn .opt-label{font-size:15px;font-weight:600;white-space:nowrap;color:#16203A}
+.opt-btn .opt-hint{font-size:12px;color:#8A94A6;line-height:1.3}
+
+/* toggle row */
+.toggle-row{display:flex;align-items:flex-start;gap:12px;text-align:left;padding:12px 14px;border-radius:10px;cursor:pointer;font-family:inherit;transition:box-shadow .12s,border-color .12s,background .12s}
+.toggle-row.on{border:1.5px solid #0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.10)}
+.toggle-row.off{border:1.5px solid #E4E8EF;background:#fff}
+.check-box{width:20px;height:20px;border-radius:6px;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.check-box.on{background:#0E9F8E;color:#fff}
+.check-box.off{background:#fff;border:1.5px solid #C3CAD6;color:transparent}
+
+/* stepper */
+.step-pill{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:999px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
+.step-dot{width:22px;height:22px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;line-height:1;transition:background .2s,color .2s}
+.step-pill.active{background:#0C1322;border:1px solid #0C1322;color:#fff;box-shadow:0 3px 10px rgba(12,19,34,.16)}
+.step-pill.active .step-dot{background:#0E9F8E;color:#fff}
+.step-pill.complete{background:#fff;border:1px solid #E4E8EF;color:#16203A}
+.step-pill.complete .step-dot{background:#E8F6EF;color:#1F9D6B}
+.step-pill.upcoming{background:#F4F6FA;border:1px solid #EAEDF2;color:#9CA6B6}
+.step-pill.upcoming .step-dot{background:#EBEEF3;color:#A6AFBF}
+.step-pill.resolved{background:#E8F6EF;border:1px solid #B4E2CC;color:#0B5A50}
+.step-pill.resolved .step-dot{background:#1F9D6B;color:#fff}
+
+/* amber flag */
+.q-flag{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#B45309;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:6px;padding:3px 8px;cursor:pointer;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.q-flag:hover{background:#fde8be}
+
+/* amber note */
+.amber-note{font-size:13px;color:#B45309;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:8px;padding:8px 12px}
+
+/* decoder chip */
+.dec-chip{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 11px;border-radius:9px;background:#EAF1FD;border:1px solid #BFD3F5;color:#1E4FA8;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px}
+.dec-chip .chip-lab{font-size:10px;font-family:'IBM Plex Sans',sans-serif;font-weight:500;opacity:.75;white-space:nowrap;line-height:1.1;color:#1E4FA8}
+
+/* draft section */
+.draft-banner{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#B45309;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:6px;padding:4px 10px;display:inline-block;margin-bottom:12px}
+
+/* field read-only */
+.ro-field{border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#F8FAFC;font-size:15px;margin-top:5px;color:#2B3445}
+.field-label{font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
+
+/* badge */
+.badge{width:30px;height:30px;flex:none;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px}
+.badge.dark{background:#16203A;color:#fff}
+.badge.teal{background:#E7F6F3;color:#0B7A6E}
+.badge.blue{background:#EAF1FD;color:#2D6CDF;font-size:12px}
+
+/* sub-q badge */
+.sub-badge{width:20px;height:20px;flex:none;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600}
+.sub-badge.grey{background:#EEF1F6;color:#5A6478}
+.sub-badge.teal{background:#E7F6F3;color:#0B7A6E}
+
+/* stepper counter */
+.stepper-ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.stepper-btn{width:44px;height:44px;flex:none;border:1px solid #D8DDE7;background:#fff;border-radius:8px;font-size:22px;line-height:1;cursor:pointer;color:#16203A;display:flex;align-items:center;justify-content:center}
+.stepper-val{text-align:center;min-width:96px}
+.stepper-num{font-size:38px;line-height:1;font-family:'IBM Plex Mono',monospace;font-weight:600;color:#16203A}
+.stepper-sub{font-size:12px;color:#8A94A6;margin-top:3px}
+
+/* band chip */
+.band-chip{font-size:11px;font-weight:600;padding:5px 9px;border-radius:7px;font-family:'IBM Plex Mono',monospace;line-height:1}
+.band-chip.active{background:#0C1322;color:#9FE3CC}
+.band-chip.inactive{background:#F4F6FA;color:#A6AFBF;border:1px solid #EAEDF2}
+
+/* family row */
+.family-row{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:10px}
+.family-row.match{border:1.5px solid #0E9F8E;background:#F0FBF8}
+.family-row.no-match{border:1px solid #EEF1F6;background:#fff;opacity:.62}
+
+/* match badge */
+.match-badge{flex:none;font-size:10px;font-weight:700;letter-spacing:.6px;padding:4px 9px;border-radius:6px;background:#0E9F8E;color:#fff}
+
+/* Q modal */
+.q-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:center;justify-content:center}
+.q-modal-bg.open{display:flex}
+.q-modal{background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:24px;max-width:480px;width:calc(100% - 48px);position:relative}
+.q-modal-id{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#B45309;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px}
+.q-modal-text{font-size:15px;color:#16203A;line-height:1.5}
+.q-modal-close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:6px;border:1px solid #E4E8EF;background:#F8FAFC;color:#5A6478;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+/* resolved locked badge */
+@keyframes lockIn{0%{opacity:0;transform:translateY(-3px)}100%{opacity:1;transform:translateY(0)}}
+.locked-badge{position:absolute;top:13px;right:13px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.3px;color:#1F9D6B;background:#fff;border:1px solid #B4E2CC;padding:3px 9px;border-radius:999px;animation:lockIn .2s ease-out}
+
+/* multi-match */
+.multi-match{background:#FEF4E3;border:1px solid #F2D9A8;border-radius:8px;padding:10px 13px;margin-top:8px}
+.multi-match-title{font-size:11px;font-weight:600;color:#B45309;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.multi-match-item{font-size:13px;color:#7A4E0A;font-family:'IBM Plex Mono',monospace;padding:3px 0;border-bottom:1px solid #F2D9A8}
+.multi-match-item:last-child{border-bottom:none}
+
+/* hides */
+.hidden{display:none!important}
+
+/* stage 8 draft */
+.stage8-section{margin-bottom:16px}
+.stage8-title{font-size:13px;font-weight:600;color:#5A6478;letter-spacing:.4px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #EEF1F6}
+.stage8-row{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:8px;background:#F8FAFC;border:1px solid #EEF1F6;margin-bottom:6px;cursor:not-allowed;opacity:.7}
+.stage8-check{width:18px;height:18px;border-radius:4px;border:1.5px solid #C3CAD6;flex:none;margin-top:1px}
+.stage8-lbl{font-size:14px;color:#5A6478}
+
+/* ship-to confirm */
+.ship-confirm{margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ship-confirm-btn{font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid #0E9F8E;background:#F0FBF8;color:#0B5A50;cursor:pointer;transition:background .12s}
+.ship-confirm-btn:hover{background:#ddf5ef}
+.ship-confirm-btn.confirmed-btn{background:#0E9F8E;color:#fff;border-color:#0E9F8E}
+
+/* textarea */
+.ship-textarea{width:100%;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;resize:vertical;min-height:72px;margin-top:5px}
+.ship-textarea:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
+
+/* select */
+.form-select{border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%;cursor:pointer}
+.form-select:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
+
+/* nozzle multiselect */
+.nozzle-opts{display:flex;gap:8px;flex-wrap:wrap}
+
+/* progress header */
+.prog-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+
+/* HEN/SW-HEN interchangeable note */
+.info-note{font-size:13px;color:#5A6478;background:#F4F6FA;border:1px solid #E4E8EF;border-radius:8px;padding:8px 12px;margin-top:10px;line-height:1.4}
+
+/* Confirm button */
+.confirm-btn{margin-top:14px;width:100%;border:none;background:#16203A;color:#fff;border-radius:9px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s}
+.confirm-btn:hover{background:#0f1926}
+</style>
+</head>
+<body>
+
+<!-- Q-MODAL -->
+<div class="q-modal-bg" id="qModal" onclick="if(event.target===this)closeQModal()">
+  <div class="q-modal">
+    <button class="q-modal-close" onclick="closeQModal()">×</button>
+    <div class="q-modal-id" id="qModalId"></div>
+    <div class="q-modal-text" id="qModalText"></div>
+  </div>
+</div>
+
+<!-- TOP APP BAR -->
+<div style="background:#0C1322;color:#E8ECF4;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between">
+  <div style="display:flex;align-items:baseline;gap:10px">
+    <div style="font-weight:700;font-size:18px;letter-spacing:.4px">COOL<span style="color:#0E9F8E">CLEAN</span></div>
+    <div style="font-size:10px;letter-spacing:1.6px;color:#7E8AA0;text-transform:uppercase">Technologies</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="mono" style="font-size:11px;color:#0E9F8E;border:1px solid #1d3a4e;border-radius:6px;padding:4px 10px;letter-spacing:1.5px">DEV</div>
+  </div>
+</div>
+
+<!-- SUB-HEADER -->
+<div style="background:#fff;border-bottom:1px solid #E4E8EF;padding:18px 28px">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="font-size:13px;color:#8A94A6;display:flex;gap:8px;align-items:center">
+      <span>Apps</span><span style="color:#C3CAD6">›</span><span style="color:#2D6CDF">CoolAnalytics</span><span style="color:#C3CAD6">›</span><span style="color:#16203A;font-weight:600">Build Configurator</span>
+    </div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:12px">
+      <div>
+        <h1 style="margin:0;font-size:28px;font-weight:700;letter-spacing:-.3px">Omega Build Sheet</h1>
+        <div style="font-size:14px;color:#8A94A6;margin-top:5px">Complete all stages — the configurator resolves the correct system and PDM numbers.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div id="quoteChip" class="mono" style="font-size:12px;color:#5A6478;border:1px solid #E4E8EF;border-radius:8px;padding:8px 13px;background:#F8FAFC">Quote #FA-20488</div>
+        <button style="display:flex;align-items:center;gap:7px;border:1px solid #D8DDE7;background:#fff;color:#16203A;border-radius:8px;padding:8px 14px;font-size:14px;font-weight:500;cursor:pointer">Export</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div style="max-width:1280px;margin:0 auto;padding:24px 28px 80px">
+
+  <!-- STEPPER -->
+  <div id="stepper" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px"></div>
+
+  <div class="cfg-grid">
+
+    <!-- LEFT COLUMN -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+
+      <!-- STAGE 1: PROJECT SETUP -->
+      <div class="card" id="sec-project">
+        <div class="prog-header">
+          <div class="badge dark">1</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Project setup</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 1 · auto-filled from the quote</div>
+          </div>
+          <div style="font-size:11px;color:#5A6478;border:1px solid #E4E8EF;border-radius:6px;padding:5px 10px;background:#F8FAFC;font-weight:500">Auto-filled</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
+          <div>
+            <div class="field-label">Sales Contact</div>
+            <div class="ro-field" id="field-sales-contact">—</div>
+          </div>
+          <div>
+            <div class="field-label">Date Submitted</div>
+            <div class="ro-field mono" id="field-date-submitted">—</div>
+          </div>
+          <div>
+            <div class="field-label">Build Completion Date <span class="q-flag" onclick="openQ('Q-derived-build')">⚑ derived</span></div>
+            <div class="ro-field mono" id="field-build-completion">—</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
+          <div>
+            <div class="field-label">Company</div>
+            <div class="ro-field" id="field-company">Northgate Coatings Ltd</div>
+          </div>
+          <div>
+            <div class="field-label">Contact</div>
+            <div class="ro-field" id="field-contact">J. Halloran</div>
+          </div>
+          <div>
+            <div class="field-label">Contact Phone</div>
+            <div class="ro-field mono" id="field-phone">+44 7700 900123</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <div>
+            <div class="field-label">Contact Email</div>
+            <div class="ro-field mono" id="field-email">j.halloran@northgate.co.uk</div>
+          </div>
+          <div>
+            <div class="field-label">Quote Ref</div>
+            <div class="ro-field mono">#FA-20488</div>
+          </div>
+        </div>
+
+        <!-- Ship To Address -->
+        <div style="margin-bottom:14px">
+          <div class="field-label">
+            Ship To Address
+            <span class="q-flag" onclick="openQ('Q-001')">⚑ Q-001</span>
+          </div>
+          <textarea class="ship-textarea" id="field-ship-to" oninput="onShipToEdit()">Northgate Coatings Ltd
+Unit 4, Riverside Industrial Park
+Sheffield, S9 2EU
+United Kingdom</textarea>
+          <div class="ship-confirm">
+            <button class="ship-confirm-btn" id="shipConfirmBtn" onclick="confirmShipTo()">Confirm address ✓</button>
+            <span id="shipConfirmNote" style="font-size:12px;color:#8A94A6">Please confirm the Ship To address — it may differ from the PO.</span>
+          </div>
+        </div>
+
+        <!-- Type -->
+        <div>
+          <div class="field-label" style="margin-bottom:8px">Type</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="type-opts"></div>
+        </div>
+      </div>
+
+      <!-- STAGE 2: FLEX CONFIGURATION -->
+      <div class="card" id="sec-flex">
+        <div class="prog-header">
+          <div class="badge dark">2</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Flex configuration</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 2 · drives module filtering &amp; spray head branching</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:18px">
+          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Flex Configuration?</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="flex-opts"></div>
+        </div>
+
+        <!-- Multiple spray heads (flex==true) -->
+        <div id="sec-multi-heads" class="hidden">
+          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Are there multiple spray heads?</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="multi-heads-opts"></div>
+        </div>
+
+        <!-- Spray head details (multiple==true) -->
+        <div id="sec-spray-head-details" class="hidden" style="margin-top:16px">
+          <div style="margin-bottom:12px">
+            <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">How many spray heads?</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap" id="spray-head-count-opts"></div>
+          </div>
+
+          <div id="sec-head-nozzles" style="margin-bottom:12px">
+            <!-- per-head nozzle selects rendered here -->
+          </div>
+
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">
+              How will the spray heads be operated?
+              <span class="q-flag" onclick="openQ('Q-003')">⚑ Q-003</span>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap" id="head-operation-opts"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3: NOZZLE TYPE -->
+      <div class="card" id="sec-nozzle">
+        <div class="prog-header">
+          <div class="badge teal">3</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Nozzle type</div>
+            <div style="font-size:11px;color:#0B7A6E;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 3 · drives the system family</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:14px">
+          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Nozzle Type</div>
+          <div class="nozzle-opts" id="nozzle-type-opts"></div>
+        </div>
+
+        <!-- Interchangeable setup: only when HEN AND SW-HEN both selected -->
+        <div id="sec-interchangeable" class="hidden" style="margin-top:14px">
+          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Interchangeable Setup?</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="interchangeable-opts"></div>
+          <div class="info-note">Both HEN and SW-HEN selected — confirm whether this is an interchangeable setup where nozzles can be swapped between types.</div>
+        </div>
+      </div>
+
+      <!-- STAGE 3b: NOZZLE HOLDING / FIXTURING (only when flex==false) -->
+      <div class="card hidden" id="sec-fixturing">
+        <div class="prog-header">
+          <div class="badge dark" style="font-size:12px">3b</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Nozzle holding / fixturing</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 3b · non-flex only</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Nozzle Holding/Fixturing</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="fixturing-opts"></div>
+          <!-- custom text -->
+          <div id="fixturing-custom-wrap" class="hidden" style="margin-top:10px">
+            <input type="text" id="fixturing-custom-text" placeholder="Describe custom fixturing…" style="border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%" oninput="onFixturingCustom(this.value)">
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 4: MODULES & SYSTEM SPECS -->
+      <div class="card" id="sec-modules">
+        <div class="prog-header">
+          <div class="badge dark">4</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Modules &amp; system specs</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 4 · resolves to system name &amp; PDM</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">System / Module</div>
+          <div id="module-opts" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+          <div id="module-no-match" class="hidden amber-note" style="margin-top:8px">No matching system found for the current input combination. Please review your selections in Stages 2–3.</div>
+        </div>
+
+        <!-- Voltage (derived, display only) -->
+        <div id="voltage-row" class="hidden" style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:12px">
+          <div>
+            <div class="field-label">Voltage (derived)</div>
+            <div class="ro-field mono" id="field-voltage" style="min-width:260px">—</div>
+          </div>
+        </div>
+
+        <!-- Channels (derived, multi-channel systems only) -->
+        <div id="channels-row" class="hidden">
+          <div class="field-label">Channels (derived)</div>
+          <div class="ro-field mono" id="field-channels" style="display:inline-block;margin-top:5px;min-width:60px">—</div>
+        </div>
+      </div>
+
+      <!-- STAGE 5: OPTIONS -->
+      <div class="card" id="sec-options">
+        <div class="prog-header">
+          <div class="badge dark">5</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Options</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 5 · add-ons (constrained by system)</div>
+          </div>
+        </div>
+        <div id="options-body">
+          <!-- rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- STAGE 6: HOSES -->
+      <div class="card" id="sec-hoses">
+        <div class="prog-header">
+          <div class="badge dark">6</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Hoses</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 6 · per-system branching</div>
+          </div>
+        </div>
+        <div id="hoses-body">
+          <!-- rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- STAGE 7: ADDITIVE HOSES (auto-included) -->
+      <div class="card hidden" id="sec-additive-hoses">
+        <div class="prog-header">
+          <div class="badge dark">7</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Additive hoses</div>
+            <div style="font-size:11px;color:#0B7A6E;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 7 · auto-included with additive injection</div>
+          </div>
+          <div style="font-size:11px;color:#5A6478;border:1px solid #E4E8EF;border-radius:6px;padding:5px 10px;background:#F8FAFC;font-weight:500">Auto-included</div>
+        </div>
+        <div id="additive-hoses-body"></div>
+      </div>
+
+      <!-- STAGE 8: CONTROLS, BOOSTERS, ETC. (NOT SPECIFIED) -->
+      <div class="card" id="sec-stage8">
+        <div class="prog-header">
+          <div class="badge dark">8</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Controls, boosters, condensers, purification, interconnect &amp; other</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 8</div>
+          </div>
+        </div>
+
+        <div class="draft-banner">⚑ Draft — behaviour rules TBD (Q-005)</div>
+        <div style="font-size:13px;color:#B45309;margin-bottom:16px;line-height:1.4">These fields are rendered from the spec but are <strong>not wired up</strong> — no selection logic is active. Reviewers: see open question <span class="q-flag" onclick="openQ('Q-005')">Q-005</span> for the outstanding behaviour rules.</div>
+
+        <!-- Controls -->
+        <div class="stage8-section">
+          <div class="stage8-title">Controls</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Ethernet IP <span style="font-size:11px;color:#8A94A6">(Standard)</span></div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Discrete I/O through Remote Communication Connector</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">BUS Communication Type <span style="font-size:11px;color:#8A94A6">(optional — specify type)</span></div></div>
+        </div>
+
+        <!-- Booster Modules -->
+        <div class="stage8-section">
+          <div class="stage8-title">Booster modules</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">AMP Booster — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">AMP Booster w/ Heat Exchanger</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Parallel Setup</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LB-40 Booster — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1 (CS)</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1-SS</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1-R (Relay Control)</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB2 (CS)</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB2-SS</div></div>
+        </div>
+
+        <!-- Condenser Modules -->
+        <div class="stage8-section">
+          <div class="stage8-title">Condenser modules</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LC2000 — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LC2000-W — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+        </div>
+
+        <!-- Purification Modules -->
+        <div class="stage8-section">
+          <div class="stage8-title">Purification modules</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Purification System — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Purification System – Basic — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+        </div>
+
+        <!-- Interconnect Hoses -->
+        <div class="stage8-section">
+          <div class="stage8-title">Interconnect hoses</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">No Hoses Included</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Standard Bottle Connection Kit</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">CO2 Supply to Booster</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Booster to Omega</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Liquid Booster/LC2000 to Omega</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Custom</div></div>
+        </div>
+
+        <!-- Other -->
+        <div class="stage8-section">
+          <div class="stage8-title">Other</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">CO2 Monitor (Standard – Safety Alarm with Remote)</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Intrinsically Safe CO2 Monitor (Class 1, Division 1 Rated)</div></div>
+        </div>
+      </div>
+
+    </div><!-- end left column -->
+
+    <!-- RIGHT COLUMN: RESULTS PANEL -->
+    <aside class="cfg-aside" id="sec-resolve" style="position:sticky;top:24px;border:1px solid #E4E8EF;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(16,24,40,.08);overflow:hidden">
+      <div style="padding:18px 20px;background:#0C1322;color:#E8ECF4">
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#0E9F8E;font-weight:600">Build sheet summary</div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:6px">
+          <div style="font-size:20px;font-weight:600;line-height:1.15;flex:1;min-width:0">Resolving your system</div>
+          <div class="mono" id="matchCountLabel" style="font-size:12px;color:#9FE3CC;white-space:nowrap;flex:none">—</div>
+        </div>
+      </div>
+
+      <div style="background:#fff;padding:18px 20px 22px">
+
+        <!-- Stage summary -->
+        <div id="stage-summary" style="margin-bottom:16px;display:flex;flex-direction:column;gap:6px"></div>
+
+        <!-- Resolved system -->
+        <div style="padding-top:14px;border-top:1px solid #E4E8EF">
+          <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:#2D6CDF;font-weight:600;margin-bottom:10px">Resolved System</div>
+
+          <!-- Match results -->
+          <div id="match-results">
+            <div id="no-match-msg" class="amber-note hidden">No system matched — check your selections.</div>
+            <div id="single-match-card" class="hidden" style="border:1px solid #B4E2CC;background:#E8F6EF;border-radius:10px;padding:14px 16px;position:relative">
+              <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.6px;text-transform:uppercase">Matched system</div>
+              <div id="resolved-name" style="font-size:22px;font-weight:700;line-height:1.05;color:#0B5A50;margin-top:4px"></div>
+              <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap">
+                <div>
+                  <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Base PDM</div>
+                  <div class="mono" id="resolved-base-pdm" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
+                </div>
+                <div>
+                  <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM</div>
+                  <div class="mono" id="resolved-kit-pdm" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
+                </div>
+              </div>
+              <div id="locked-badge" class="locked-badge hidden">✓ Locked</div>
+            </div>
+            <div id="multi-match-card" class="hidden">
+              <div class="multi-match">
+                <div class="multi-match-title">⚑ Multiple systems match — needs selection</div>
+                <div id="multi-match-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Build summary derived values -->
+          <div id="build-summary-block" class="hidden" style="margin-top:14px;border:1px solid #E4E8EF;border-radius:10px;padding:13px 15px">
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px">Build summary</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <div style="font-size:11px;color:#8A94A6;font-weight:500">Type</div>
+                <div class="mono" id="sum-type" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:#8A94A6;font-weight:500">Build Completion</div>
+                <div class="mono" id="sum-build-date" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:#8A94A6;font-weight:500">Flex</div>
+                <div class="mono" id="sum-flex" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:#8A94A6;font-weight:500">Nozzle type(s)</div>
+                <div class="mono" id="sum-nozzles" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:#8A94A6;font-weight:500">Options</div>
+                <div class="mono" id="sum-options" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:#8A94A6;font-weight:500">Voltage</div>
+                <div class="mono" id="sum-voltage" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="confirm-btn" onclick="confirmSheet()">Confirm build sheet →</button>
+          <div style="margin-top:10px;font-size:12px;color:#9AA3B5;line-height:1.45">All fields auto-resolve from your stage inputs. Confirm to lock the build sheet.</div>
+        </div>
+
+      </div>
+    </aside>
+
+  </div><!-- end cfg-grid -->
+</div><!-- end content -->
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const OPEN_QUESTIONS = {
+  'Q-001': 'Ship To Address — source from SAP rather than from the Quote? (Currently defaulting from Quote)',
+  'Q-002': '4000 additive hose exact spec — described as "some version of a 16\'" but not confirmed',
+  'Q-003': 'Nozzles-per-head: should each head have a uniform nozzle count, or can individual heads have different counts?',
+  'Q-004': 'Additive Injection on FLEX systems — the spec says hide all Options for FLEX, but the hose rules reference Additive Injection being set on FLEX systems. How is this resolved?',
+  'Q-005': 'Behaviour rules for Controls / Boosters / Condensers / Purification / Interconnect / Other are not yet defined — this entire stage is a placeholder',
+  'Q-105': 'Gen 2 selectable? (Wylie: keep flexible; Zach: kit in PDM; "won\'t sell")',
+  'Q-106': 'Does valve type (PV/SV) drive hose selection?',
+  'Q-107': '4000 flex-coanda exception real or excluded?',
+  'Q-derived-build': 'Build Completion Date = Date Submitted + (system lead time − 2 weeks). Omega 3500: 14wk lead → shows 12wk. Omega 1500: 12wk lead → shows 10wk. Other systems: not yet specified.',
+};
+
+// Voltage lookup by module key pattern
+const VOLTAGE_LOOKUP = {
+  '1500': '208–240V, 1-Ph, 15A (10ft or 3m cord, flying leads)',
+  '1500A': '208–240V, 1-Ph, 15A (10ft or 3m cord, flying leads)',
+  '1500 FLEX': '208–240V, 1-Ph, 15A (10ft or 3m cord, flying leads)',
+  '3000 FLEX': '208–240V, 1-Ph, 40A',
+  '3500 FLEX': '208–240V, 3-Ph, 40A',
+  '3500 FLEX HF': '208–240V, 3-Ph, 40A',
+  '4000': '208–240V, 1-Ph, 40A',
+  '9000 FLEX': '208–240V, 3-Ph, 60A',
+  '9500 FLEX': 'Dual: 480V, 3-Ph, 30A + 208–240V, 1-Ph, 25A',
+};
+
+// Module options from spec (pre-filtered by flex state)
+const ALL_MODULES = [
+  '1500 (Gen 2)','1500A (Gen 2)','1500 FLEX','3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX','4000'
+];
+const FLEX_ONLY_MODULES = ['1500 FLEX','3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'];
+const NON_FLEX_MODULES = ['1500 (Gen 2)','1500A (Gen 2)','4000'];
+const MULTI_CHANNEL_MODULES = ['3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'];
+
+// System lookup data (embedded from system_lookup.json)
+const SYSTEM_LOOKUP = [{"nozzle":"Coanda","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coanda","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"Coanda","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coanda","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coanda","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coax","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coax","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"Coax","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coax","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coax","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"HEN","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"HEN","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"SWH","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"SWH","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"SWH","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"SWH","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"SWH","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH, 4000 2CH","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","base_pdm":"3500-001126,4000-004105","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 SV Flex 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH FLEX","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH Flex w/AIS","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH, 4000 2CH","base_pdm":"3500-001126,4000-004105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","base_pdm":"3500-001126,4000-004105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 SV Flex 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH FLEX","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH Flex w/AIS","base_pdm":"1126","kit_pdm":"TBD"}];
+
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  // Stage 1
+  type: null,           // 'Sales'|'Demo'|'Rental'
+  shipConfirmed: false,
+
+  // Stage 2
+  flex: null,           // true|false
+  multipleHeads: null,  // true|false
+  headCount: 2,         // 2|3|4
+  headNozzles: {1:1,2:1,3:1,4:1},
+  headOperation: null,  // 'On/Off Together'|'Independent'
+
+  // Stage 3
+  nozzleTypes: [],      // ['Coanda','Coaxial','HEN','SW-HEN']
+  interchangeable: null,// true|false
+
+  // Stage 3b
+  fixturing: null,      // 'Black Handle (Standard)'|'Bulkhead Tee'|'Custom'
+  fixturingCustom: '',
+
+  // Stage 4
+  selectedModule: null,
+
+  // Stage 5
+  options: [],          // ['Ultrafiltration','Additive Injection','Intrinsically Safe']
+
+  // Stage 6
+  hoseType: null,
+  standardLength: null, // true|false
+  customLengthDetails: '',
+  dualSplit: null,
+  dualSplitDetails: '',
+
+  // Confirmed
+  confirmed: false,
+
+  // Touch tracking
+  touched: {},
+};
+
+// ============================================================
+// HELPERS
+// ============================================================
+function show(el){ if(el) el.classList.remove('hidden'); }
+function hide(el){ if(el) el.classList.add('hidden'); }
+function toggle(el, cond){ cond ? show(el) : hide(el); }
+function $(id){ return document.getElementById(id); }
+
+function makeOptBtn(label, hint, selected, locked, onClick){
+  const btn = document.createElement('button');
+  btn.className = 'opt-btn ' + (locked ? 'locked' : selected ? 'selected' : 'unselected');
+  btn.innerHTML = `<span class="opt-label">${label}</span><span class="opt-hint">${hint||''}</span>`;
+  if(!locked) btn.onclick = onClick;
+  return btn;
+}
+
+function renderOptGroup(containerId, defs, currentVal, onSelect, locked){
+  const c = $(containerId);
+  if(!c) return;
+  c.innerHTML = '';
+  defs.forEach(d => {
+    const btn = makeOptBtn(d.label, d.hint||'', currentVal===d.val, locked, ()=>{onSelect(d.val); render();});
+    c.appendChild(btn);
+  });
+}
+
+function openQ(id){
+  const text = OPEN_QUESTIONS[id] || 'No details available.';
+  $('qModalId').textContent = id;
+  $('qModalText').textContent = text;
+  $('qModal').classList.add('open');
+}
+function closeQModal(){ $('qModal').classList.remove('open'); }
+
+// ============================================================
+// INIT
+// ============================================================
+function init(){
+  // Set auto-filled fields
+  const today = new Date(2026,5,17); // 2026-06-17
+  $('field-sales-contact').textContent = 'Samantha Baguio';
+  $('field-date-submitted').textContent = today.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  updateBuildCompletionDate();
+  render();
+}
+
+function updateBuildCompletionDate(){
+  // Derive from selected module if possible
+  const mod = state.selectedModule;
+  let weeksOffset = null;
+  if(mod && mod.includes('3500')) weeksOffset = 12;
+  else if(mod && (mod.includes('1500')||mod.includes('1500A'))) weeksOffset = 10;
+  const today = new Date(2026,5,17);
+  if(weeksOffset !== null){
+    const d = new Date(today);
+    d.setDate(d.getDate() + weeksOffset*7);
+    $('field-build-completion').textContent = d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  } else {
+    $('field-build-completion').textContent = '— (select system)';
+  }
+}
+
+// ============================================================
+// SYSTEM LOOKUP
+// ============================================================
+function nozzleKeyMap(nozzleTypes){
+  // Map UI nozzle types to lookup keys
+  const map = {'Coanda':'Coanda','Coaxial':'Coax','HEN':'HEN','SW-HEN':'SWH'};
+  return nozzleTypes.map(n=>map[n]).filter(Boolean);
+}
+
+function totalNozzleCount(){
+  if(state.flex === false){
+    // Non-flex: single head, count from head #1 nozzle select (if multiple heads false or N/A)
+    return state.headNozzles[1] || 1;
+  }
+  if(state.multipleHeads === false){
+    return state.headNozzles[1] || 1;
+  }
+  // Multiple heads: sum all
+  let total = 0;
+  const count = state.headCount;
+  for(let i=1;i<=count;i++) total += (state.headNozzles[i]||1);
+  return total;
+}
+
+function resolveSystem(){
+  if(state.flex === null || state.nozzleTypes.length === 0) return [];
+  const isFlex = state.flex;
+  const nozzleKeys = nozzleKeyMap(state.nozzleTypes);
+  const totalNozzles = totalNozzleCount();
+  const hasAdditive = state.options.includes('Additive Injection');
+  const hasUF = state.options.includes('Ultrafiltration');
+  const isIS = state.options.includes('Intrinsically Safe');
+
+  // Filter lookup
+  const matches = SYSTEM_LOOKUP.filter(row => {
+    if(row.flex !== isFlex) return false;
+    if(!nozzleKeys.includes(row.nozzle)) return false;
+    if(row.nozzle_count !== totalNozzles) return false;
+    if(hasAdditive && !row.additive) return false;
+    if(hasUF && !row.ultrafilter) return false;
+    if(isIS && !row.intrinsically_safe) return false;
+    return true;
+  });
+
+  // De-duplicate by system_name
+  const seen = new Set();
+  return matches.filter(r => { if(seen.has(r.system_name)) return false; seen.add(r.system_name); return true; });
+}
+
+// ============================================================
+// DERIVED: module-level info
+// ============================================================
+function getVoltage(mod){
+  if(!mod) return null;
+  for(const key of Object.keys(VOLTAGE_LOOKUP)){
+    if(mod.includes(key) || key===mod) return VOLTAGE_LOOKUP[key];
+  }
+  // Try partial
+  if(mod.includes('1500')) return VOLTAGE_LOOKUP['1500'];
+  if(mod.includes('3000')) return VOLTAGE_LOOKUP['3000 FLEX'];
+  if(mod.includes('3500') && mod.includes('HF')) return VOLTAGE_LOOKUP['3500 FLEX HF'];
+  if(mod.includes('3500')) return VOLTAGE_LOOKUP['3500 FLEX'];
+  if(mod.includes('4000')) return VOLTAGE_LOOKUP['4000'];
+  if(mod.includes('9500')) return VOLTAGE_LOOKUP['9500 FLEX'];
+  if(mod.includes('9000')) return VOLTAGE_LOOKUP['9000 FLEX'];
+  return null;
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
+function render(){
+  renderStage1();
+  renderStage2();
+  renderStage3();
+  renderStage3b();
+  renderStage4();
+  renderStage5();
+  renderStage6();
+  renderStage7();
+  renderStepper();
+  renderPanel();
+  updateBuildCompletionDate();
+}
+
+// --- STAGE 1 ---
+function renderStage1(){
+  // Type options
+  renderOptGroup('type-opts',[
+    {val:'Sales',label:'Sales',hint:'Customer purchase'},
+    {val:'Demo',label:'Demo',hint:'Evaluation unit'},
+    {val:'Rental',label:'Rental',hint:'Monthly billing'},
+  ], state.type, v=>{state.type=v;state.touched.stage1=true;state.confirmed=false;});
+}
+
+function onShipToEdit(){ state.shipConfirmed=false; renderShipConfirm(); state.confirmed=false; }
+function renderShipConfirm(){
+  const btn = $('shipConfirmBtn');
+  const note = $('shipConfirmNote');
+  if(state.shipConfirmed){
+    btn.className='ship-confirm-btn confirmed-btn';
+    btn.textContent='✓ Address confirmed';
+    note.textContent='Address confirmed for this build sheet.';
+  } else {
+    btn.className='ship-confirm-btn';
+    btn.textContent='Confirm address ✓';
+    note.textContent='Please confirm the Ship To address — it may differ from the PO.';
+  }
+}
+function confirmShipTo(){ state.shipConfirmed=true; state.touched.stage1=true; renderShipConfirm(); renderStepper(); }
+
+// --- STAGE 2 ---
+function renderStage2(){
+  // Flex opts
+  renderOptGroup('flex-opts',[
+    {val:true,label:'Yes — Flex',hint:'Multiple/adjustable spray heads'},
+    {val:false,label:'No — Fixed',hint:'Non-flex capillary setup'},
+  ], state.flex, v=>{
+    state.flex=v; state.touched.stage2=true; state.confirmed=false;
+    // Effects from spec
+    if(v===true){
+      // remove 1500 Gen2 / 1500A options handled in stage 4
+      // hide fixturing
+    }
+    if(v===false){
+      // clear multi-head state
+      state.multipleHeads=null; state.headOperation=null;
+    }
+    render();
+  }, false);
+
+  // Multi heads (show_when flex==true)
+  toggle($('sec-multi-heads'), state.flex===true);
+  if(state.flex===true){
+    renderOptGroup('multi-heads-opts',[
+      {val:true,label:'Yes',hint:'Multiple spray heads'},
+      {val:false,label:'No',hint:'Single spray head'},
+    ], state.multipleHeads, v=>{
+      state.multipleHeads=v; state.touched.stage2=true; state.confirmed=false;
+      render();
+    });
+  }
+
+  // Spray head details
+  const showDetails = state.flex===true && state.multipleHeads===true;
+  toggle($('sec-spray-head-details'), showDetails);
+  if(showDetails){
+    // Head count
+    renderOptGroup('spray-head-count-opts',[
+      {val:2,label:'2 heads',hint:''},
+      {val:3,label:'3 heads',hint:''},
+      {val:4,label:'4 heads',hint:'Max 4'},
+    ], state.headCount, v=>{state.headCount=v; state.touched.stage2=true; state.confirmed=false; render();});
+
+    // Per-head nozzle selects
+    renderHeadNozzles();
+
+    // Operation
+    renderOptGroup('head-operation-opts',[
+      {val:'On/Off Together',label:'On/Off Together',hint:'All heads fire simultaneously'},
+      {val:'Independent',label:'Independent',hint:'Each head controlled separately'},
+    ], state.headOperation, v=>{state.headOperation=v; state.touched.stage2=true; state.confirmed=false; render();});
+  }
+}
+
+function renderHeadNozzles(){
+  const container = $('sec-head-nozzles');
+  container.innerHTML = '';
+  const count = state.headCount;
+  for(let i=1;i<=count;i++){
+    const wrap = document.createElement('div');
+    wrap.style.cssText='margin-bottom:10px';
+    const lbl = document.createElement('div');
+    lbl.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:6px';
+    lbl.textContent=`Spray Head #${i} — number of nozzles`;
+    wrap.appendChild(lbl);
+    const sel = document.createElement('select');
+    sel.className='form-select';
+    sel.style.maxWidth='200px';
+    for(let n=1;n<=12;n++){
+      const opt=document.createElement('option');
+      opt.value=n; opt.textContent=`${n} nozzle${n>1?'s':''}`;
+      if((state.headNozzles[i]||1)===n) opt.selected=true;
+      sel.appendChild(opt);
+    }
+    sel.onchange=()=>{state.headNozzles[i]=parseInt(sel.value); state.confirmed=false; renderPanel(); updateBuildCompletionDate();};
+    wrap.appendChild(sel);
+    container.appendChild(wrap);
+  }
+}
+
+// --- STAGE 3 ---
+function renderStage3(){
+  const c = $('nozzle-type-opts');
+  c.innerHTML='';
+  const all=['Coanda','Coaxial','HEN','SW-HEN'];
+  all.forEach(n=>{
+    const sel=state.nozzleTypes.includes(n);
+    const btn=makeOptBtn(n, n==='Coanda'?'General coatings':n==='Coaxial'?'Coaxial spray':n==='HEN'?'High Efficiency Nozzle':'SW-HEN variant', sel, false, ()=>{
+      if(sel) state.nozzleTypes=state.nozzleTypes.filter(x=>x!==n);
+      else state.nozzleTypes=[...state.nozzleTypes,n];
+      state.touched.stage3=true; state.confirmed=false; render();
+    });
+    c.appendChild(btn);
+  });
+
+  // Interchangeable: show only when HEN AND SW-HEN both selected
+  const showIC = state.nozzleTypes.includes('HEN') && state.nozzleTypes.includes('SW-HEN');
+  toggle($('sec-interchangeable'), showIC);
+  if(showIC){
+    renderOptGroup('interchangeable-opts',[
+      {val:true,label:'Yes',hint:'Nozzles can be swapped between HEN and SW-HEN'},
+      {val:false,label:'No',hint:'Fixed nozzle type per position'},
+    ], state.interchangeable, v=>{state.interchangeable=v; state.confirmed=false; render();});
+  }
+}
+
+// --- STAGE 3b ---
+function renderStage3b(){
+  const el=$('sec-fixturing');
+  toggle(el, state.flex===false);
+  if(state.flex===false){
+    const opts=['Black Handle (Standard)','Bulkhead Tee','Custom'];
+    renderOptGroup('fixturing-opts', opts.map(o=>({val:o,label:o,hint:''})), state.fixturing, v=>{
+      state.fixturing=v; state.touched.stage3b=true; state.confirmed=false; render();
+    });
+    toggle($('fixturing-custom-wrap'), state.fixturing==='Custom');
+  }
+}
+function onFixturingCustom(v){ state.fixturingCustom=v; }
+
+// --- STAGE 4 ---
+function renderStage4(){
+  const c=$('module-opts');
+  c.innerHTML='';
+
+  let mods = [...ALL_MODULES];
+  if(state.flex===true){
+    mods=FLEX_ONLY_MODULES;
+  } else if(state.flex===false){
+    mods=NON_FLEX_MODULES;
+  }
+
+  if(mods.length===0){
+    hide($('module-no-match'));
+    return;
+  }
+
+  mods.forEach(m=>{
+    const btn=makeOptBtn(m,'',state.selectedModule===m,false,()=>{
+      state.selectedModule=m; state.touched.stage4=true; state.confirmed=false;
+      renderVoltage(); renderChannels(); updateBuildCompletionDate(); render();
+    });
+    c.appendChild(btn);
+  });
+
+  show($('voltage-row'));
+  renderVoltage();
+  renderChannels();
+  hide($('module-no-match'));
+}
+
+function renderVoltage(){
+  const v=getVoltage(state.selectedModule);
+  $('field-voltage').textContent = v||'— (select module)';
+  $('sum-voltage').textContent = v||'—';
+}
+
+function renderChannels(){
+  const isMulti = state.selectedModule && MULTI_CHANNEL_MODULES.some(m=>state.selectedModule.includes(m.replace(' FLEX','').replace(' HF','')));
+  const el=$('channels-row');
+  if(isMulti && state.selectedModule){
+    show(el);
+    // Derive channel count from module name
+    let ch='—';
+    const match=state.selectedModule.match(/(\d)CH/);
+    if(match) ch=match[1];
+    $('field-channels').textContent=ch+' channel'+(ch!=='1'?'s':'');
+  } else {
+    hide(el);
+  }
+}
+
+// --- STAGE 5 ---
+function renderStage5(){
+  const body=$('options-body');
+  body.innerHTML='';
+
+  const mod=state.selectedModule||'';
+  const isFlex=state.flex===true;
+
+  // Hide all options for FLEX (per spec constraint) — but surface Q-004 flag
+  if(isFlex){
+    const note=document.createElement('div');
+    note.className='amber-note';
+    note.innerHTML=`All options are hidden for FLEX systems per the spec.
+      <span class="q-flag" onclick="openQ('Q-004')">⚑ Q-004 — additive tension</span>
+      <br><span style="font-size:12px;margin-top:6px;display:block;color:#7A4E0A">Open question: FLEX hose rules reference Additive Injection being set — see Q-004 for the unresolved logic.</span>`;
+    body.appendChild(note);
+    return;
+  }
+
+  const optDefs=[
+    {id:'Ultrafiltration',label:'Ultrafiltration',hint:'Available for 1500, 1500A, 4000 only',
+      available: !mod || mod.includes('1500') || mod.includes('4000')},
+    {id:'Additive Injection',label:'Additive Injection',hint:'Not available for 1500 or 1500A',
+      available: !mod || (!mod.includes('1500 (') && !mod.includes('1500A'))},
+    {id:'Intrinsically Safe',label:'Intrinsically Safe',hint:'Intrinsically safe valve (PV)',
+      available: true},
+  ];
+
+  optDefs.forEach(o=>{
+    const sel=state.options.includes(o.id);
+    const locked=!o.available;
+    const row=document.createElement('div');
+    row.className='toggle-row '+(locked?'off':sel?'on':'off');
+    if(locked) row.style.opacity='.4';
+    row.innerHTML=`<div class="check-box ${sel&&!locked?'on':'off'}">${sel&&!locked?'✓':''}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:15px;font-weight:600">${o.label}${locked?'<span style="font-size:11px;font-weight:400;color:#B45309;margin-left:8px">(not available for this module)</span>':''}</div>
+        <div style="font-size:12px;color:#8A94A6">${o.hint}</div>
+      </div>`;
+    if(!locked){
+      row.style.cursor='pointer';
+      row.onclick=()=>{
+        if(sel) state.options=state.options.filter(x=>x!==o.id);
+        else state.options=[...state.options,o.id];
+        state.touched.stage5=true; state.confirmed=false; render();
+      };
+    }
+    body.appendChild(row);
+  });
+}
+
+// --- STAGE 6 ---
+function renderStage6(){
+  const body=$('hoses-body');
+  body.innerHTML='';
+  const mod=state.selectedModule||'';
+
+  function addSection(title, content){
+    const wrap=document.createElement('div');
+    wrap.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">${title}</div>${content}`;
+    body.appendChild(wrap);
+    body.appendChild(document.createElement('br'));
+  }
+
+  // Determine branch
+  const isStd1500 = mod.includes('1500') && !mod.includes('FLEX');
+  const is1500Flex = mod.includes('1500 FLEX');
+  const isBigFlex = ['3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'].some(m=>mod.includes(m.replace(' FLEX','').replace(' HF','')));
+  const is4000 = mod.includes('4000');
+
+  if(!mod){
+    body.innerHTML='<div style="font-size:13px;color:#8A94A6">Select a module in Stage 4 to see hose options.</div>';
+    return;
+  }
+
+  // Hose type
+  const c_ht=document.createElement('div');
+  c_ht.style.marginBottom='16px';
+  const htLabel=document.createElement('div');
+  htLabel.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px';
+
+  if(isStd1500||is4000){
+    htLabel.textContent='Hose type';
+    c_ht.appendChild(htLabel);
+    const htOpts=document.createElement('div');
+    htOpts.style.cssText='display:flex;gap:10px;flex-wrap:wrap';
+    ['Black Corrugated','Bare PFA Tubing'].forEach(v=>{
+      const btn=makeOptBtn(v,'',state.hoseType===v,false,()=>{state.hoseType=v;state.touched.stage6=true;state.confirmed=false;render();});
+      htOpts.appendChild(btn);
+    });
+    c_ht.appendChild(htOpts);
+    body.appendChild(c_ht);
+
+    // Dual split (for 1500/4000 only)
+    const dsBr=document.createElement('div');
+    dsBr.style.marginBottom='16px';
+    const dsLbl=document.createElement('div');
+    dsLbl.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px';
+    dsLbl.textContent='Dual Split?';
+    dsBr.appendChild(dsLbl);
+    const dsOpts=document.createElement('div');
+    dsOpts.style.cssText='display:flex;gap:10px;flex-wrap:wrap';
+    [{val:true,l:'Yes',h:'Split hose assembly'},{val:false,l:'No',h:'Single run'}].forEach(o=>{
+      const btn=makeOptBtn(o.l,o.h,state.dualSplit===o.val,false,()=>{state.dualSplit=o.val;state.touched.stage6=true;state.confirmed=false;render();});
+      dsOpts.appendChild(btn);
+    });
+    dsBr.appendChild(dsOpts);
+    if(state.dualSplit===true){
+      const inp=document.createElement('input');
+      inp.type='text'; inp.placeholder='Split details…';
+      inp.style.cssText='margin-top:8px;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%';
+      inp.value=state.dualSplitDetails||'';
+      inp.oninput=()=>{state.dualSplitDetails=inp.value;};
+      dsBr.appendChild(inp);
+    }
+    body.appendChild(dsBr);
+  } else if(is1500Flex){
+    const htDisp=document.createElement('div');
+    htDisp.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Hose type</div>
+      <div class="ro-field" style="display:inline-block">Black Corrugated <span style="font-size:11px;color:#8A94A6">(fixed for 1500 FLEX)</span></div>`;
+    body.appendChild(htDisp);
+  } else if(isBigFlex){
+    const htDisp=document.createElement('div');
+    htDisp.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Hose type</div>
+      <div class="ro-field" style="display:inline-block">Black Corrugated <span style="font-size:11px;color:#8A94A6">(fixed for FLEX systems)</span></div>`;
+    body.appendChild(htDisp);
+  }
+
+  // Standard length
+  const slBr=document.createElement('div');
+  slBr.style.marginBottom='16px';
+  const slLbl=document.createElement('div');
+  slLbl.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px';
+  slLbl.textContent='Standard Length?';
+  slBr.appendChild(slLbl);
+  const slOpts=document.createElement('div');
+  slOpts.style.cssText='display:flex;gap:10px;flex-wrap:wrap';
+  [{val:true,l:'Yes',h:'Use standard assembly'},{val:false,l:'No',h:'Specify custom length'}].forEach(o=>{
+    const btn=makeOptBtn(o.l,o.h,state.standardLength===o.val,false,()=>{state.standardLength=o.val;state.touched.stage6=true;state.confirmed=false;render();});
+    slOpts.appendChild(btn);
+  });
+  slBr.appendChild(slOpts);
+
+  // Standard length autofill
+  if(state.standardLength===true){
+    let stdDesc='';
+    if(isStd1500||is4000) stdDesc='16\' Hose Assembly – 1/2" OD Tube, 1/2" OD Tube';
+    else if(is1500Flex) stdDesc='15\' FLEX Hose Assembly – Hose 1/2" Braided SS, 1/4" Braided SS, M12 Cable';
+    else stdDesc='28\' FLEX Hose Assembly – 3/4" Braided SS CDA, 1/4" Braided SS CO2';
+    const desc=document.createElement('div');
+    desc.style.cssText='margin-top:8px;font-size:13px;color:#1F9D6B;background:#E8F6EF;border:1px solid #B4E2CC;border-radius:8px;padding:9px 12px;font-family:"IBM Plex Mono",monospace';
+    desc.textContent=stdDesc;
+    slBr.appendChild(desc);
+  } else if(state.standardLength===false){
+    const inp=document.createElement('input');
+    inp.type='text'; inp.placeholder='Custom length details…';
+    inp.style.cssText='margin-top:8px;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%';
+    inp.value=state.customLengthDetails||'';
+    inp.oninput=()=>{state.customLengthDetails=inp.value;};
+    slBr.appendChild(inp);
+  }
+  body.appendChild(slBr);
+}
+
+// --- STAGE 7 ---
+function renderStage7(){
+  const hasAdditive=state.options.includes('Additive Injection');
+  const el=$('sec-additive-hoses');
+  toggle(el, hasAdditive);
+  if(!hasAdditive) return;
+
+  const mod=state.selectedModule||'';
+  const body=$('additive-hoses-body');
+  body.innerHTML='';
+
+  let hoses=[];
+  if(mod.includes('1500 FLEX')){
+    hoses=[
+      '15\' Pneumatic Hose Assembly – 1/2" Braided SS, 1/4" Braided SS, 1/4" OD Tube',
+      '15\' Additive FLEX Hose Assembly – 1/4" Braided SS, 1/4" OD Tube'
+    ];
+  } else if(mod.includes('4000')){
+    hoses=['Some version of a 16\' additive hose assembly'];
+    const flag=document.createElement('span');
+    flag.className='q-flag';
+    flag.textContent='⚑ Q-002 — spec unconfirmed';
+    flag.onclick=()=>openQ('Q-002');
+  } else if(['3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'].some(m=>mod.includes(m.replace(' FLEX','').replace(' HF','')))){
+    hoses=['28\' Pneumatic FLEX Hose Assembly – 1/2" Braided SS, 1/4" Braided SS, 1/4" OD Tube'];
+  } else if(mod.includes('1500')||mod.includes('1500A')){
+    // 1500/1500A: none per spec
+    body.innerHTML='<div style="font-size:13px;color:#8A94A6">No additive hoses for 1500/1500A systems.</div>';
+    return;
+  }
+
+  if(hoses.length===0){
+    body.innerHTML='<div style="font-size:13px;color:#8A94A6">Select a module to see additive hose specification.</div>';
+    return;
+  }
+
+  hoses.forEach(h=>{
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:8px;background:#E8F6EF;border:1px solid #B4E2CC;margin-bottom:8px';
+    row.innerHTML=`<span style="color:#1F9D6B;font-size:16px">✓</span><span class="mono" style="font-size:13px;color:#0B5A50">${h}</span>`;
+    body.appendChild(row);
+    if(h.includes('16\'')&&mod.includes('4000')){
+      const note=document.createElement('div');
+      note.innerHTML=`<span class="q-flag" onclick="openQ('Q-002')" style="margin-left:0">⚑ Q-002 — exact 4000 additive hose spec unconfirmed</span>`;
+      body.appendChild(note);
+    }
+  });
+}
+
+// --- STEPPER ---
+function renderStepper(){
+  const s=$('stepper');
+  s.innerHTML='';
+  const steps=[
+    {n:'1',l:'Project',key:'sec-project',done: !!state.type && state.shipConfirmed},
+    {n:'2',l:'Flex config',key:'sec-flex',done: state.flex!==null},
+    {n:'3',l:'Nozzle type',key:'sec-nozzle',done: state.nozzleTypes.length>0},
+    {n:'4',l:'Modules',key:'sec-modules',done: !!state.selectedModule},
+    {n:'5',l:'Options',key:'sec-options',done: !!state.touched.stage5},
+    {n:'6',l:'Hoses',key:'sec-hoses',done: state.standardLength!==null},
+    {n:'7',l:'Resolve',key:'sec-resolve',done: state.confirmed},
+  ];
+  let firstIncomplete=null;
+  steps.forEach((st,i)=>{
+    if(!st.done && firstIncomplete===null) firstIncomplete=i;
+  });
+  steps.forEach((st,i)=>{
+    const isActive=i===firstIncomplete;
+    const isDone=st.done;
+    const isResolve=i===6;
+    let cls='step-pill ';
+    if(isResolve&&state.confirmed) cls+='resolved';
+    else if(isDone) cls+='complete';
+    else if(isActive) cls+='active';
+    else cls+='upcoming';
+    const pill=document.createElement('button');
+    pill.className=cls;
+    const mark = isDone||state.confirmed ? '✓' : st.n;
+    pill.innerHTML=`<span class="step-dot">${mark}</span><span>${st.l}</span>`;
+    pill.onclick=()=>{
+      const el=$(st.key);
+      if(el){ const y=el.getBoundingClientRect().top+window.scrollY-80; window.scrollTo({top:y,behavior:'smooth'}); }
+    };
+    s.appendChild(pill);
+  });
+}
+
+// --- PANEL ---
+function renderPanel(){
+  const matches=resolveSystem();
+  const matchCount=matches.length;
+  $('matchCountLabel').textContent = matchCount===0 ? 'No match' : matchCount===1 ? '1 match' : `${matchCount} matches`;
+
+  // Summary items
+  const sum=$('stage-summary');
+  sum.innerHTML='';
+  function sumRow(label,value,warn){
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;padding:4px 0;border-bottom:1px solid #F4F6FA';
+    row.innerHTML=`<span style="color:#8A94A6;font-weight:500">${label}</span><span class="mono" style="color:${warn?'#B45309':'#16203A'};font-size:12px">${value||'—'}</span>`;
+    sum.appendChild(row);
+  }
+  sumRow('Type', state.type);
+  sumRow('Flex', state.flex===null?null:state.flex?'Yes':'No');
+  sumRow('Nozzle type(s)', state.nozzleTypes.join(', ')||null);
+  sumRow('Total nozzles', state.nozzleTypes.length>0&&state.flex!==null ? String(totalNozzleCount()) : null);
+  sumRow('Module', state.selectedModule);
+  const optStr=state.options.join(', ')||'None';
+  sumRow('Options', optStr);
+
+  $('sum-type').textContent=state.type||'—';
+  $('sum-flex').textContent=state.flex===null?'—':state.flex?'Yes — Flex':'No — Fixed';
+  $('sum-nozzles').textContent=state.nozzleTypes.join(', ')||'—';
+  $('sum-options').textContent=state.options.length?state.options.join(', '):'None';
+
+  // Match cards
+  hide($('no-match-msg'));
+  hide($('single-match-card'));
+  hide($('multi-match-card'));
+
+  if(state.nozzleTypes.length===0 || state.flex===null){
+    hide($('build-summary-block'));
+  } else {
+    show($('build-summary-block'));
+    if(matchCount===0){
+      show($('no-match-msg'));
+    } else if(matchCount===1){
+      show($('single-match-card'));
+      $('resolved-name').textContent=matches[0].system_name;
+      $('resolved-base-pdm').textContent=matches[0].base_pdm;
+      $('resolved-kit-pdm').textContent=matches[0].kit_pdm;
+      toggle($('locked-badge'), state.confirmed);
+    } else {
+      show($('multi-match-card'));
+      const list=$('multi-match-list');
+      list.innerHTML='';
+      matches.forEach(m=>{
+        const row=document.createElement('div');
+        row.className='multi-match-item';
+        row.textContent=`${m.system_name}  |  Base: ${m.base_pdm}  |  Kit: ${m.kit_pdm}`;
+        list.appendChild(row);
+      });
+      // Also show in single-match card as selection needed
+      show($('multi-match-card'));
+    }
+  }
+}
+
+function confirmSheet(){
+  state.confirmed=true;
+  state.touched={...state.touched,stage1:true,stage2:true,stage3:true,stage4:true,stage5:true,stage6:true};
+  render();
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
