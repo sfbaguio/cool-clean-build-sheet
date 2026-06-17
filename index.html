@@ -299,21 +299,22 @@ United Kingdom</textarea>
           <div style="display:flex;gap:10px;flex-wrap:wrap" id="flex-opts"></div>
         </div>
 
-        <!-- Multiple spray heads (flex==true) -->
+        <!-- Multiple spray heads (flex==true OR flex==false — BR-15) -->
         <div id="sec-multi-heads" class="hidden">
           <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Are there multiple spray heads?</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap" id="multi-heads-opts"></div>
         </div>
 
-        <!-- Spray head details (multiple==true) -->
+        <!-- Head nozzles: always shown (at minimum head #1 per BR-29) -->
+        <div id="sec-head-nozzles" style="margin-top:14px">
+          <!-- per-head nozzle type+count rendered here -->
+        </div>
+
+        <!-- Spray head details (multiple==true for both flex branches) -->
         <div id="sec-spray-head-details" class="hidden" style="margin-top:16px">
           <div style="margin-bottom:12px">
             <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">How many spray heads?</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap" id="spray-head-count-opts"></div>
-          </div>
-
-          <div id="sec-head-nozzles" style="margin-bottom:12px">
-            <!-- per-head nozzle selects rendered here -->
           </div>
 
           <div>
@@ -326,28 +327,6 @@ United Kingdom</textarea>
         </div>
       </div>
 
-      <!-- STAGE 3: NOZZLE TYPE -->
-      <div class="card" id="sec-nozzle">
-        <div class="prog-header">
-          <div class="badge teal">3</div>
-          <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Nozzle type</div>
-            <div style="font-size:11px;color:#0B7A6E;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 3 · drives the system family</div>
-          </div>
-        </div>
-
-        <div style="margin-bottom:14px">
-          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Nozzle Type</div>
-          <div class="nozzle-opts" id="nozzle-type-opts"></div>
-        </div>
-
-        <!-- Interchangeable setup: only when HEN AND SW-HEN both selected -->
-        <div id="sec-interchangeable" class="hidden" style="margin-top:14px">
-          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Interchangeable Setup?</div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap" id="interchangeable-opts"></div>
-          <div class="info-note">Both HEN and SW-HEN selected — confirm whether this is an interchangeable setup where nozzles can be swapped between types.</div>
-        </div>
-      </div>
 
       <!-- STAGE 3b: NOZZLE HOLDING / FIXTURING (only when flex==false) -->
       <div class="card hidden" id="sec-fixturing">
@@ -369,13 +348,13 @@ United Kingdom</textarea>
         </div>
       </div>
 
-      <!-- STAGE 4: MODULES & SYSTEM SPECS -->
+      <!-- STAGE 5: MODULES & SYSTEM SPECS -->
       <div class="card" id="sec-modules">
         <div class="prog-header">
-          <div class="badge dark">4</div>
+          <div class="badge dark">5</div>
           <div style="flex:1">
             <div style="font-size:17px;font-weight:600;line-height:1.2">Modules &amp; system specs</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 4 · resolves to system name &amp; PDM</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 5 · resolves to system name &amp; PDM</div>
           </div>
         </div>
 
@@ -400,13 +379,13 @@ United Kingdom</textarea>
         </div>
       </div>
 
-      <!-- STAGE 5: OPTIONS -->
+      <!-- STAGE 4: OPTIONS -->
       <div class="card" id="sec-options">
         <div class="prog-header">
-          <div class="badge dark">5</div>
+          <div class="badge dark">4</div>
           <div style="flex:1">
             <div style="font-size:17px;font-weight:600;line-height:1.2">Options</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 5 · add-ons (constrained by system)</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 4 · add-ons (constrained by system)</div>
           </div>
         </div>
         <div id="options-body">
@@ -605,7 +584,7 @@ United Kingdom</textarea>
 const OPEN_QUESTIONS = {
   'Q-001': 'Ship To Address — source from SAP rather than from the Quote? (Currently defaulting from Quote)',
   'Q-002': '4000 additive hose exact spec — described as "some version of a 16\'" but not confirmed',
-  'Q-003': 'Nozzles-per-head: should each head have a uniform nozzle count, or can individual heads have different counts?',
+  'Q-003': 'RESOLVED — nozzle type and count are now specified per individual spray head (BR-27, BR-30).',
   'Q-004': 'Additive Injection on FLEX systems — the spec says hide all Options for FLEX, but the hose rules reference Additive Injection being set on FLEX systems. How is this resolved?',
   'Q-005': 'Behaviour rules for Controls / Boosters / Condensers / Purification / Interconnect / Other are not yet defined — this entire stage is a placeholder',
   'Q-105': 'Gen 2 selectable? (Wylie: keep flexible; Zach: kit in PDM; "won\'t sell")',
@@ -651,6 +630,7 @@ const state = {
   multipleHeads: null,  // true|false
   headCount: 2,         // 2|3|4
   headNozzles: {1:1,2:1,3:1,4:1},
+  headNozzleTypes: {1:'Coanda',2:'Coanda',3:'Coanda',4:'Coanda'},
   headOperation: null,  // 'On/Off Together'|'Independent'
 
   // Stage 3
@@ -752,6 +732,16 @@ function nozzleKeyMap(nozzleTypes){
   return nozzleTypes.map(n=>map[n]).filter(Boolean);
 }
 
+function getActiveNozzleTypes(){
+  // Collect unique nozzle types across all active heads (from headNozzleTypes)
+  const activeCount = state.multipleHeads===true ? state.headCount : 1;
+  const types = new Set();
+  for(let i=1; i<=activeCount; i++){
+    types.add(state.headNozzleTypes[i]||'Coanda');
+  }
+  return Array.from(types);
+}
+
 function totalNozzleCount(){
   if(state.flex === false){
     // Non-flex: single head, count from head #1 nozzle select (if multiple heads false or N/A)
@@ -768,9 +758,11 @@ function totalNozzleCount(){
 }
 
 function resolveSystem(){
-  if(state.flex === null || state.nozzleTypes.length === 0) return [];
+  if(state.flex === null) return [];
+  const activeNozzleTypes = getActiveNozzleTypes();
+  if(activeNozzleTypes.length === 0) return [];
   const isFlex = state.flex;
-  const nozzleKeys = nozzleKeyMap(state.nozzleTypes);
+  const nozzleKeys = nozzleKeyMap(activeNozzleTypes);
   const totalNozzles = totalNozzleCount();
   const hasAdditive = state.options.includes('Additive Injection');
   const hasUF = state.options.includes('Ultrafiltration');
@@ -818,10 +810,9 @@ function getVoltage(mod){
 function render(){
   renderStage1();
   renderStage2();
-  renderStage3();
   renderStage3b();
-  renderStage4();
   renderStage5();
+  renderStage4();
   renderStage6();
   renderStage7();
   renderStepper();
@@ -869,15 +860,15 @@ function renderStage2(){
       // hide fixturing
     }
     if(v===false){
-      // clear multi-head state
-      state.multipleHeads=null; state.headOperation=null;
+      // keep multipleHeads; clear operation (operation only valid for flex=true multiple heads)
+      state.headOperation=null;
     }
     render();
   }, false);
 
-  // Multi heads (show_when flex==true)
-  toggle($('sec-multi-heads'), state.flex===true);
-  if(state.flex===true){
+  // Multi heads (show when flex==true OR flex==false — BR-15)
+  toggle($('sec-multi-heads'), state.flex!==null);
+  if(state.flex!==null){
     renderOptGroup('multi-heads-opts',[
       {val:true,label:'Yes',hint:'Multiple spray heads'},
       {val:false,label:'No',hint:'Single spray head'},
@@ -887,39 +878,83 @@ function renderStage2(){
     });
   }
 
-  // Spray head details
-  const showDetails = state.flex===true && state.multipleHeads===true;
+  // Spray head details — show head count + nozzles when multipleHeads===true (both flex branches)
+  // Also always render head #1 nozzle type+count (BR-29, Change 7)
+  const showDetails = state.multipleHeads===true;
   toggle($('sec-spray-head-details'), showDetails);
   if(showDetails){
-    // Head count
-    renderOptGroup('spray-head-count-opts',[
-      {val:2,label:'2 heads',hint:''},
-      {val:3,label:'3 heads',hint:''},
-      {val:4,label:'4 heads',hint:'Max 4'},
-    ], state.headCount, v=>{state.headCount=v; state.touched.stage2=true; state.confirmed=false; render();});
+    // Head count: only 2 for flex=false; up to 4 for flex=true
+    if(state.flex===true){
+      renderOptGroup('spray-head-count-opts',[
+        {val:2,label:'2 heads',hint:''},
+        {val:3,label:'3 heads',hint:''},
+        {val:4,label:'4 heads',hint:'Max 4'},
+      ], state.headCount, v=>{state.headCount=v; state.touched.stage2=true; state.confirmed=false; render();});
+    } else {
+      // flex=false: fixed 2 heads, no selector shown — ensure headCount is 2
+      state.headCount=2;
+      const hcContainer = $('spray-head-count-opts');
+      if(hcContainer) hcContainer.innerHTML='<div style="font-size:13px;color:#8A94A6">2 heads (fixed for non-flex dual split)</div>';
+    }
 
-    // Per-head nozzle selects
-    renderHeadNozzles();
+    // Per-head nozzle type+count
+    renderHeadNozzles(state.headCount);
 
-    // Operation
-    renderOptGroup('head-operation-opts',[
-      {val:'On/Off Together',label:'On/Off Together',hint:'All heads fire simultaneously'},
-      {val:'Independent',label:'Independent',hint:'Each head controlled separately'},
-    ], state.headOperation, v=>{state.headOperation=v; state.touched.stage2=true; state.confirmed=false; render();});
+    // Operation: only show when flex===true (BR-21/Change 2)
+    if(state.flex===true){
+      renderOptGroup('head-operation-opts',[
+        {val:'On/Off Together',label:'On/Off Together',hint:'All heads fire simultaneously'},
+        {val:'Independent',label:'Independent',hint:'Each head controlled separately'},
+      ], state.headOperation, v=>{state.headOperation=v; state.touched.stage2=true; state.confirmed=false; render();});
+    } else {
+      const opContainer = $('head-operation-opts');
+      if(opContainer) opContainer.innerHTML='';
+    }
+  } else {
+    // Single head or not yet answered: always render head #1 (BR-29, Change 7)
+    renderHeadNozzles(1);
   }
 }
 
-function renderHeadNozzles(){
+function renderHeadNozzles(headCount){
   const container = $('sec-head-nozzles');
   container.innerHTML = '';
-  const count = state.headCount;
+  const count = headCount || state.headCount;
+  const nozzleTypeOpts = ['Coanda','Coaxial','HEN','SW-HEN'];
+  const nozzleTypeHints = {Coanda:'General coatings',Coaxial:'Coaxial spray',HEN:'High Efficiency Nozzle','SW-HEN':'SW-HEN variant'};
   for(let i=1;i<=count;i++){
     const wrap = document.createElement('div');
-    wrap.style.cssText='margin-bottom:10px';
-    const lbl = document.createElement('div');
-    lbl.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:6px';
-    lbl.textContent=`Spray Head #${i} — number of nozzles`;
-    wrap.appendChild(lbl);
+    wrap.style.cssText='margin-bottom:16px;padding:14px;border:1px solid #E4E8EF;border-radius:10px;background:#F8FAFC';
+    const headLbl = document.createElement('div');
+    headLbl.style.cssText='font-size:15px;font-weight:600;color:#16203A;margin-bottom:10px';
+    headLbl.textContent=`Spray Head #${i}`;
+    wrap.appendChild(headLbl);
+
+    // Nozzle TYPE row
+    const typeLbl = document.createElement('div');
+    typeLbl.style.cssText='font-size:13px;font-weight:600;color:#5A6478;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px';
+    typeLbl.textContent='Nozzle Type';
+    wrap.appendChild(typeLbl);
+    const typeRow = document.createElement('div');
+    typeRow.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px';
+    const currentType = state.headNozzleTypes[i]||'Coanda';
+    nozzleTypeOpts.forEach(nt=>{
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn ' + (currentType===nt?'selected':'unselected');
+      btn.innerHTML=`<span class="opt-label">${nt}</span><span class="opt-hint">${nozzleTypeHints[nt]||''}</span>`;
+      btn.onclick=()=>{
+        state.headNozzleTypes[i]=nt;
+        state.touched.stage2=true; state.confirmed=false; render();
+      };
+      typeRow.appendChild(btn);
+    });
+    wrap.appendChild(typeRow);
+
+    // Nozzle COUNT row
+    const countLbl = document.createElement('div');
+    countLbl.style.cssText='font-size:13px;font-weight:600;color:#5A6478;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px';
+    countLbl.textContent='Number of Nozzles';
+    wrap.appendChild(countLbl);
     const sel = document.createElement('select');
     sel.className='form-select';
     sel.style.maxWidth='200px';
@@ -935,31 +970,9 @@ function renderHeadNozzles(){
   }
 }
 
-// --- STAGE 3 ---
-function renderStage3(){
-  const c = $('nozzle-type-opts');
-  c.innerHTML='';
-  const all=['Coanda','Coaxial','HEN','SW-HEN'];
-  all.forEach(n=>{
-    const sel=state.nozzleTypes.includes(n);
-    const btn=makeOptBtn(n, n==='Coanda'?'General coatings':n==='Coaxial'?'Coaxial spray':n==='HEN'?'High Efficiency Nozzle':'SW-HEN variant', sel, false, ()=>{
-      if(sel) state.nozzleTypes=state.nozzleTypes.filter(x=>x!==n);
-      else state.nozzleTypes=[...state.nozzleTypes,n];
-      state.touched.stage3=true; state.confirmed=false; render();
-    });
-    c.appendChild(btn);
-  });
-
-  // Interchangeable: show only when HEN AND SW-HEN both selected
-  const showIC = state.nozzleTypes.includes('HEN') && state.nozzleTypes.includes('SW-HEN');
-  toggle($('sec-interchangeable'), showIC);
-  if(showIC){
-    renderOptGroup('interchangeable-opts',[
-      {val:true,label:'Yes',hint:'Nozzles can be swapped between HEN and SW-HEN'},
-      {val:false,label:'No',hint:'Fixed nozzle type per position'},
-    ], state.interchangeable, v=>{state.interchangeable=v; state.confirmed=false; render();});
-  }
-}
+// --- STAGE 3 (removed) ---
+// Nozzle type is now per-head inside renderHeadNozzles() (BR-27, BR-30).
+// TODO: confirm with Parker whether Interchangeable Setup should still appear for a single-head with both HEN and SW-HEN nozzle types selected (BR-22 currently removes it for multiple heads only)
 
 // --- STAGE 3b ---
 function renderStage3b(){
@@ -1120,29 +1133,21 @@ function renderStage6(){
     c_ht.appendChild(htOpts);
     body.appendChild(c_ht);
 
-    // Dual split (for 1500/4000 only)
-    const dsBr=document.createElement('div');
-    dsBr.style.marginBottom='16px';
-    const dsLbl=document.createElement('div');
-    dsLbl.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px';
-    dsLbl.textContent='Dual Split?';
-    dsBr.appendChild(dsLbl);
-    const dsOpts=document.createElement('div');
-    dsOpts.style.cssText='display:flex;gap:10px;flex-wrap:wrap';
-    [{val:true,l:'Yes',h:'Split hose assembly'},{val:false,l:'No',h:'Single run'}].forEach(o=>{
-      const btn=makeOptBtn(o.l,o.h,state.dualSplit===o.val,false,()=>{state.dualSplit=o.val;state.touched.stage6=true;state.confirmed=false;render();});
-      dsOpts.appendChild(btn);
-    });
-    dsBr.appendChild(dsOpts);
-    if(state.dualSplit===true){
+    // Dual Split — automatic (BR-61): derived from flex=false + multipleHeads=true
+    const autoDualSplit = state.flex===false && state.multipleHeads===true;
+    if(autoDualSplit){
+      const dsBr=document.createElement('div');
+      dsBr.style.marginBottom='16px';
+      dsBr.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:6px">Dual Split</div>
+        <div class="ro-field" style="display:inline-block;color:#1F9D6B">Automatic — Flex=No + multiple heads</div>`;
       const inp=document.createElement('input');
-      inp.type='text'; inp.placeholder='Split details…';
+      inp.type='text'; inp.placeholder='Split details (optional)…';
       inp.style.cssText='margin-top:8px;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%';
       inp.value=state.dualSplitDetails||'';
       inp.oninput=()=>{state.dualSplitDetails=inp.value;};
       dsBr.appendChild(inp);
+      body.appendChild(dsBr);
     }
-    body.appendChild(dsBr);
   } else if(is1500Flex){
     const htDisp=document.createElement('div');
     htDisp.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Hose type</div>
@@ -1247,9 +1252,9 @@ function renderStepper(){
   const steps=[
     {n:'1',l:'Project',key:'sec-project',done: !!state.type && state.shipConfirmed},
     {n:'2',l:'Flex config',key:'sec-flex',done: state.flex!==null},
-    {n:'3',l:'Nozzle type',key:'sec-nozzle',done: state.nozzleTypes.length>0},
-    {n:'4',l:'Modules',key:'sec-modules',done: !!state.selectedModule},
-    {n:'5',l:'Options',key:'sec-options',done: !!state.touched.stage5},
+    {n:'3',l:'Fixturing',key:'sec-fixturing',done: state.flex===false ? !!state.fixturing : true},
+    {n:'4',l:'Options',key:'sec-options',done: !!state.touched.stage5},
+    {n:'5',l:'Modules',key:'sec-modules',done: !!state.selectedModule},
     {n:'6',l:'Hoses',key:'sec-hoses',done: state.standardLength!==null},
     {n:'7',l:'Resolve',key:'sec-resolve',done: state.confirmed},
   ];
@@ -1295,15 +1300,16 @@ function renderPanel(){
   }
   sumRow('Type', state.type);
   sumRow('Flex', state.flex===null?null:state.flex?'Yes':'No');
-  sumRow('Nozzle type(s)', state.nozzleTypes.join(', ')||null);
-  sumRow('Total nozzles', state.nozzleTypes.length>0&&state.flex!==null ? String(totalNozzleCount()) : null);
+  const activeNozzleTypesPanel = getActiveNozzleTypes();
+  sumRow('Nozzle type(s)', activeNozzleTypesPanel.join(', ')||null);
+  sumRow('Total nozzles', state.flex!==null ? String(totalNozzleCount()) : null);
   sumRow('Module', state.selectedModule);
   const optStr=state.options.join(', ')||'None';
   sumRow('Options', optStr);
 
   $('sum-type').textContent=state.type||'—';
   $('sum-flex').textContent=state.flex===null?'—':state.flex?'Yes — Flex':'No — Fixed';
-  $('sum-nozzles').textContent=state.nozzleTypes.join(', ')||'—';
+  $('sum-nozzles').textContent=getActiveNozzleTypes().join(', ')||'—';
   $('sum-options').textContent=state.options.length?state.options.join(', '):'None';
 
   // Match cards
@@ -1311,7 +1317,7 @@ function renderPanel(){
   hide($('single-match-card'));
   hide($('multi-match-card'));
 
-  if(state.nozzleTypes.length===0 || state.flex===null){
+  if(state.flex===null){
     hide($('build-summary-block'));
   } else {
     show($('build-summary-block'));
