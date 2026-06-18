@@ -15,34 +15,27 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
 ::selection{background:#0E9F8E33}
 .mono{font-family:'IBM Plex Mono',monospace}
 
-/* grid */
 .cfg-grid{display:grid;grid-template-columns:1fr 384px;gap:24px;align-items:start}
 @media(max-width:1080px){
   .cfg-grid{grid-template-columns:1fr}
   .cfg-aside{position:static!important;top:auto!important}
 }
 
-/* card */
 .card{border:1px solid #E4E8EF;background:#fff;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.04);padding:20px 22px}
-.card+.card{margin-top:20px}
 
-/* option button */
 .opt-btn{display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;padding:11px 15px;border-radius:10px;font-family:inherit;transition:box-shadow .12s,border-color .12s,background .12s;min-width:104px;cursor:pointer}
 .opt-btn.selected{border:1.5px solid #0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.13)}
 .opt-btn.unselected{border:1.5px solid #E4E8EF;background:#fff}
-.opt-btn.locked{border:1.5px solid #EDF0F5;background:#F4F6FA;cursor:not-allowed;opacity:.5;pointer-events:none}
+.opt-btn.locked{border:1.5px solid #EDF0F5;background:#F4F6FA;cursor:not-allowed;opacity:.4;pointer-events:none}
 .opt-btn .opt-label{font-size:15px;font-weight:600;white-space:nowrap;color:#16203A}
 .opt-btn .opt-hint{font-size:12px;color:#8A94A6;line-height:1.3}
 
-/* toggle row */
-.toggle-row{display:flex;align-items:flex-start;gap:12px;text-align:left;padding:12px 14px;border-radius:10px;cursor:pointer;font-family:inherit;transition:box-shadow .12s,border-color .12s,background .12s}
-.toggle-row.on{border:1.5px solid #0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.10)}
-.toggle-row.off{border:1.5px solid #E4E8EF;background:#fff}
+.toggle-row{display:flex;align-items:flex-start;gap:12px;text-align:left;padding:12px 14px;border-radius:10px;cursor:pointer;font-family:inherit;transition:box-shadow .12s,border-color .12s,background .12s;border:1.5px solid #E4E8EF;background:#fff}
+.toggle-row.on{border-color:#0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.10)}
 .check-box{width:20px;height:20px;border-radius:6px;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
 .check-box.on{background:#0E9F8E;color:#fff}
 .check-box.off{background:#fff;border:1.5px solid #C3CAD6;color:transparent}
 
-/* stepper */
 .step-pill{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:999px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .step-dot{width:22px;height:22px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;line-height:1;transition:background .2s,color .2s}
 .step-pill.active{background:#0C1322;border:1px solid #0C1322;color:#fff;box-shadow:0 3px 10px rgba(12,19,34,.16)}
@@ -54,75 +47,55 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
 .step-pill.resolved{background:#E8F6EF;border:1px solid #B4E2CC;color:#0B5A50}
 .step-pill.resolved .step-dot{background:#1F9D6B;color:#fff}
 
-/* amber flag */
-.q-flag{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#B45309;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:6px;padding:3px 8px;cursor:pointer;vertical-align:middle;margin-left:6px;white-space:nowrap}
-.q-flag:hover{background:#fde8be}
-
-/* amber note */
 .amber-note{font-size:13px;color:#B45309;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:8px;padding:8px 12px}
-
-/* decoder chip */
-.dec-chip{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 11px;border-radius:9px;background:#EAF1FD;border:1px solid #BFD3F5;color:#1E4FA8;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px}
-.dec-chip .chip-lab{font-size:10px;font-family:'IBM Plex Sans',sans-serif;font-weight:500;opacity:.75;white-space:nowrap;line-height:1.1;color:#1E4FA8}
-
-/* draft section */
 .draft-banner{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#B45309;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:6px;padding:4px 10px;display:inline-block;margin-bottom:12px}
-
-/* field read-only */
 .ro-field{border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#F8FAFC;font-size:15px;margin-top:5px;color:#2B3445}
 .field-label{font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
 
-/* badge */
 .badge{width:30px;height:30px;flex:none;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px}
 .badge.dark{background:#16203A;color:#fff}
 .badge.teal{background:#E7F6F3;color:#0B7A6E}
 .badge.blue{background:#EAF1FD;color:#2D6CDF;font-size:12px}
 
-/* sub-q badge */
-.sub-badge{width:20px;height:20px;flex:none;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600}
-.sub-badge.grey{background:#EEF1F6;color:#5A6478}
-.sub-badge.teal{background:#E7F6F3;color:#0B7A6E}
+.prog-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
 
-/* stepper counter */
-.stepper-ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.stepper-btn{width:44px;height:44px;flex:none;border:1px solid #D8DDE7;background:#fff;border-radius:8px;font-size:22px;line-height:1;cursor:pointer;color:#16203A;display:flex;align-items:center;justify-content:center}
-.stepper-val{text-align:center;min-width:96px}
-.stepper-num{font-size:38px;line-height:1;font-family:'IBM Plex Mono',monospace;font-weight:600;color:#16203A}
-.stepper-sub{font-size:12px;color:#8A94A6;margin-top:3px}
+.form-select{border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%;cursor:pointer}
+.form-select:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
+.form-select:disabled{opacity:.45;cursor:not-allowed;background:#F4F6FA}
 
-/* band chip */
-.band-chip{font-size:11px;font-weight:600;padding:5px 9px;border-radius:7px;font-family:'IBM Plex Mono',monospace;line-height:1}
-.band-chip.active{background:#0C1322;color:#9FE3CC}
-.band-chip.inactive{background:#F4F6FA;color:#A6AFBF;border:1px solid #EAEDF2}
+.ship-textarea{width:100%;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;resize:vertical;min-height:72px;margin-top:5px}
+.ship-textarea:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
+.ship-confirm{margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ship-confirm-btn{font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid #0E9F8E;background:#F0FBF8;color:#0B5A50;cursor:pointer;transition:background .12s}
+.ship-confirm-btn:hover{background:#ddf5ef}
+.ship-confirm-btn.confirmed-btn{background:#0E9F8E;color:#fff;border-color:#0E9F8E}
 
-/* family row */
-.family-row{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:10px}
-.family-row.match{border:1.5px solid #0E9F8E;background:#F0FBF8}
-.family-row.no-match{border:1px solid #EEF1F6;background:#fff;opacity:.62}
+.hidden{display:none!important}
 
-/* match badge */
-.match-badge{flex:none;font-size:10px;font-weight:700;letter-spacing:.6px;padding:4px 9px;border-radius:6px;background:#0E9F8E;color:#fff}
-
-/* Q modal */
-.q-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:center;justify-content:center}
-.q-modal-bg.open{display:flex}
-.q-modal{background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:24px;max-width:480px;width:calc(100% - 48px);position:relative}
-.q-modal-id{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#B45309;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px}
-.q-modal-text{font-size:15px;color:#16203A;line-height:1.5}
-.q-modal-close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:6px;border:1px solid #E4E8EF;background:#F8FAFC;color:#5A6478;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-
-/* resolved locked badge */
 @keyframes lockIn{0%{opacity:0;transform:translateY(-3px)}100%{opacity:1;transform:translateY(0)}}
 .locked-badge{position:absolute;top:13px;right:13px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.3px;color:#1F9D6B;background:#fff;border:1px solid #B4E2CC;padding:3px 9px;border-radius:999px;animation:lockIn .2s ease-out}
 
-/* multi-match */
-.multi-match{background:#FEF4E3;border:1px solid #F2D9A8;border-radius:8px;padding:10px 13px;margin-top:8px}
-.multi-match-title{font-size:11px;font-weight:600;color:#B45309;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
-.multi-match-item{font-size:13px;color:#7A4E0A;font-family:'IBM Plex Mono',monospace;padding:3px 0;border-bottom:1px solid #F2D9A8}
-.multi-match-item:last-child{border-bottom:none}
+.confirm-btn{margin-top:14px;width:100%;border:none;background:#16203A;color:#fff;border-radius:9px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s}
+.confirm-btn:hover{background:#0f1926}
 
-/* hides */
-.hidden{display:none!important}
+/* nozzle stepper */
+.nozzle-stepper{display:flex;align-items:center;gap:12px}
+.ns-btn{width:40px;height:40px;flex:none;border:1px solid #D8DDE7;background:#fff;border-radius:8px;font-size:20px;line-height:1;cursor:pointer;color:#16203A;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.ns-btn:disabled{opacity:.35;cursor:not-allowed}
+.ns-val{min-width:56px;text-align:center;font-size:32px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#16203A;line-height:1}
+.ns-sub{font-size:12px;color:#8A94A6;margin-top:2px;text-align:center}
+
+/* output cards */
+.out-card-stock{border:1.5px solid #0E9F8E;background:#E8F6EF;border-radius:12px;padding:18px 20px}
+.out-card-custom{border:1.5px solid #F2D9A8;background:#FEF4E3;border-radius:12px;padding:18px 20px}
+.out-card-empty{border:1px solid #E4E8EF;background:#F8FAFC;border-radius:12px;padding:18px 20px;opacity:.6}
+
+/* qualifier toggles grid */
+.qual-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:500px){.qual-grid{grid-template-columns:1fr}}
+
+/* channel cap note */
+.cap-note{font-size:12px;color:#B45309;margin-top:6px}
 
 /* stage 8 draft */
 .stage8-section{margin-bottom:16px}
@@ -130,45 +103,9 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
 .stage8-row{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:8px;background:#F8FAFC;border:1px solid #EEF1F6;margin-bottom:6px;cursor:not-allowed;opacity:.7}
 .stage8-check{width:18px;height:18px;border-radius:4px;border:1.5px solid #C3CAD6;flex:none;margin-top:1px}
 .stage8-lbl{font-size:14px;color:#5A6478}
-
-/* ship-to confirm */
-.ship-confirm{margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ship-confirm-btn{font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid #0E9F8E;background:#F0FBF8;color:#0B5A50;cursor:pointer;transition:background .12s}
-.ship-confirm-btn:hover{background:#ddf5ef}
-.ship-confirm-btn.confirmed-btn{background:#0E9F8E;color:#fff;border-color:#0E9F8E}
-
-/* textarea */
-.ship-textarea{width:100%;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;resize:vertical;min-height:72px;margin-top:5px}
-.ship-textarea:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
-
-/* select */
-.form-select{border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%;cursor:pointer}
-.form-select:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
-
-/* nozzle multiselect */
-.nozzle-opts{display:flex;gap:8px;flex-wrap:wrap}
-
-/* progress header */
-.prog-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
-
-/* HEN/SW-HEN interchangeable note */
-.info-note{font-size:13px;color:#5A6478;background:#F4F6FA;border:1px solid #E4E8EF;border-radius:8px;padding:8px 12px;margin-top:10px;line-height:1.4}
-
-/* Confirm button */
-.confirm-btn{margin-top:14px;width:100%;border:none;background:#16203A;color:#fff;border-radius:9px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s}
-.confirm-btn:hover{background:#0f1926}
 </style>
 </head>
 <body>
-
-<!-- Q-MODAL -->
-<div class="q-modal-bg" id="qModal" onclick="if(event.target===this)closeQModal()">
-  <div class="q-modal">
-    <button class="q-modal-close" onclick="closeQModal()">×</button>
-    <div class="q-modal-id" id="qModalId"></div>
-    <div class="q-modal-text" id="qModalText"></div>
-  </div>
-</div>
 
 <!-- TOP APP BAR -->
 <div style="background:#0C1322;color:#E8ECF4;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between">
@@ -190,10 +127,10 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:12px">
       <div>
         <h1 style="margin:0;font-size:28px;font-weight:700;letter-spacing:-.3px">Omega Build Sheet</h1>
-        <div style="font-size:14px;color:#8A94A6;margin-top:5px">Complete all stages — the configurator resolves the correct system and PDM numbers.</div>
+        <div style="font-size:14px;color:#8A94A6;margin-top:5px">Answer four steps — the configurator resolves the exact Omega system.</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
-        <div id="quoteChip" class="mono" style="font-size:12px;color:#5A6478;border:1px solid #E4E8EF;border-radius:8px;padding:8px 13px;background:#F8FAFC">Quote #FA-20488</div>
+        <div class="mono" style="font-size:12px;color:#5A6478;border:1px solid #E4E8EF;border-radius:8px;padding:8px 13px;background:#F8FAFC">Quote #FA-20488</div>
         <button style="display:flex;align-items:center;gap:7px;border:1px solid #D8DDE7;background:#fff;color:#16203A;border-radius:8px;padding:8px 14px;font-size:14px;font-weight:500;cursor:pointer">Export</button>
       </div>
     </div>
@@ -211,280 +148,169 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
     <!-- LEFT COLUMN -->
     <div style="display:flex;flex-direction:column;gap:20px">
 
-      <!-- STAGE 1: PROJECT SETUP -->
+      <!-- PROJECT SETUP -->
       <div class="card" id="sec-project">
         <div class="prog-header">
-          <div class="badge dark">1</div>
+          <div class="badge dark" style="font-size:12px">P</div>
           <div style="flex:1">
             <div style="font-size:17px;font-weight:600;line-height:1.2">Project setup</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 1 · auto-filled from the quote</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Auto-filled from the quote</div>
           </div>
           <div style="font-size:11px;color:#5A6478;border:1px solid #E4E8EF;border-radius:6px;padding:5px 10px;background:#F8FAFC;font-weight:500">Auto-filled</div>
         </div>
-
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
-          <div>
-            <div class="field-label">Sales Contact</div>
-            <div class="ro-field" id="field-sales-contact">—</div>
-          </div>
-          <div>
-            <div class="field-label">Date Submitted</div>
-            <div class="ro-field mono" id="field-date-submitted">—</div>
-          </div>
-          <div>
-            <div class="field-label">Build Completion Date <span class="q-flag" onclick="openQ('Q-derived-build')">⚑ derived</span></div>
-            <div class="ro-field mono" id="field-build-completion">—</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
-          <div>
-            <div class="field-label">Company</div>
-            <div class="ro-field" id="field-company">Northgate Coatings Ltd</div>
-          </div>
-          <div>
-            <div class="field-label">Contact</div>
-            <div class="ro-field" id="field-contact">J. Halloran</div>
-          </div>
-          <div>
-            <div class="field-label">Contact Phone</div>
-            <div class="ro-field mono" id="field-phone">+44 7700 900123</div>
-          </div>
+          <div><div class="field-label">Sales Contact</div><div class="ro-field" id="f-contact">—</div></div>
+          <div><div class="field-label">Date Submitted</div><div class="ro-field mono" id="f-date">—</div></div>
+          <div><div class="field-label">Company</div><div class="ro-field">Northgate Coatings Ltd</div></div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-          <div>
-            <div class="field-label">Contact Email</div>
-            <div class="ro-field mono" id="field-email">j.halloran@northgate.co.uk</div>
-          </div>
-          <div>
-            <div class="field-label">Quote Ref</div>
-            <div class="ro-field mono">#FA-20488</div>
-          </div>
+          <div><div class="field-label">Contact</div><div class="ro-field">J. Halloran</div></div>
+          <div><div class="field-label">Quote Ref</div><div class="ro-field mono">#FA-20488</div></div>
         </div>
-
-        <!-- Ship To Address -->
         <div style="margin-bottom:14px">
-          <div class="field-label">
-            Ship To Address
-            <span class="q-flag" onclick="openQ('Q-001')">⚑ Q-001</span>
-          </div>
-          <textarea class="ship-textarea" id="field-ship-to" oninput="onShipToEdit()">Northgate Coatings Ltd
+          <div class="field-label">Ship To Address</div>
+          <textarea class="ship-textarea" id="f-ship" oninput="state.shipConfirmed=false;renderShipBtn()">Northgate Coatings Ltd
 Unit 4, Riverside Industrial Park
 Sheffield, S9 2EU
 United Kingdom</textarea>
           <div class="ship-confirm">
-            <button class="ship-confirm-btn" id="shipConfirmBtn" onclick="confirmShipTo()">Confirm address ✓</button>
-            <span id="shipConfirmNote" style="font-size:12px;color:#8A94A6">Please confirm the Ship To address — it may differ from the PO.</span>
+            <button class="ship-confirm-btn" id="shipBtn" onclick="state.shipConfirmed=true;renderShipBtn()">Confirm address ✓</button>
+            <span id="shipNote" style="font-size:12px;color:#8A94A6">Please confirm the Ship To address — it may differ from the PO.</span>
           </div>
         </div>
-
-        <!-- Type -->
         <div>
           <div class="field-label" style="margin-bottom:8px">Type</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap" id="type-opts"></div>
         </div>
       </div>
 
-      <!-- STAGE 2: FLEX CONFIGURATION -->
-      <div class="card" id="sec-flex">
+      <!-- STEP 1: QUALIFIERS -->
+      <div class="card" id="sec-step1">
+        <div class="prog-header">
+          <div class="badge dark">1</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Qualifiers</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Step 1 · four yes/no toggles</div>
+          </div>
+        </div>
+        <div class="qual-grid">
+          <div class="toggle-row" id="q-flex" onclick="toggleQual('flex')">
+            <div class="check-box off" id="q-flex-box"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:15px;font-weight:600">Flex</div>
+              <div style="font-size:12px;color:#8A94A6">Adjustable / FLEX system</div>
+            </div>
+          </div>
+          <div class="toggle-row" id="q-is" onclick="toggleQual('is')">
+            <div class="check-box off" id="q-is-box"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:15px;font-weight:600">Intrinsically Safe</div>
+              <div style="font-size:12px;color:#8A94A6">ATEX / spark-safe (PV valve)</div>
+            </div>
+          </div>
+          <div class="toggle-row" id="q-add" onclick="toggleQual('add')">
+            <div class="check-box off" id="q-add-box"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:15px;font-weight:600">Additive System</div>
+              <div style="font-size:12px;color:#8A94A6">Additive injection (AIS)</div>
+            </div>
+          </div>
+          <div class="toggle-row" id="q-uf" onclick="toggleQual('uf')">
+            <div class="check-box off" id="q-uf-box"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:15px;font-weight:600">Ultra Filtration</div>
+              <div style="font-size:12px;color:#8A94A6">UF module included</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: HOSES & CHANNELS -->
+      <div class="card" id="sec-step2">
         <div class="prog-header">
           <div class="badge dark">2</div>
           <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Flex configuration</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 2 · drives module filtering &amp; spray head branching</div>
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Hoses &amp; channels</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Step 2 · channels cannot exceed hoses</div>
           </div>
         </div>
-
-        <div style="margin-bottom:18px">
-          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Flex Configuration?</div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap" id="flex-opts"></div>
-        </div>
-
-        <!-- Multiple spray heads (flex==true OR flex==false — BR-15) -->
-        <div id="sec-multi-heads" class="hidden">
-          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Are there multiple spray heads?</div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap" id="multi-heads-opts"></div>
-        </div>
-
-        <!-- Head nozzles: always shown (at minimum head #1 per BR-29) -->
-        <div id="sec-head-nozzles" style="margin-top:14px">
-          <!-- per-head nozzle type+count rendered here -->
-        </div>
-
-        <!-- Spray head details (multiple==true for both flex branches) -->
-        <div id="sec-spray-head-details" class="hidden" style="margin-top:16px">
-          <div style="margin-bottom:12px">
-            <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">How many spray heads?</div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap" id="spray-head-count-opts"></div>
-          </div>
-
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
           <div>
-            <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">
-              How will the spray heads be operated?
-              <span class="q-flag" onclick="openQ('Q-003')">⚑ Q-003</span>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap" id="head-operation-opts"></div>
+            <div class="field-label" style="margin-bottom:9px">Hoses (1–4)</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap" id="hose-opts"></div>
+          </div>
+          <div>
+            <div class="field-label" style="margin-bottom:9px">Channels (1–4)</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap" id="chan-opts"></div>
+            <div class="cap-note hidden" id="chan-cap-note">Channels capped to match hoses</div>
           </div>
         </div>
       </div>
 
-
-      <!-- STAGE 3b: NOZZLE HOLDING / FIXTURING (only when flex==false) -->
-      <div class="card hidden" id="sec-fixturing">
+      <!-- STEP 3: NOZZLE -->
+      <div class="card" id="sec-step3">
         <div class="prog-header">
-          <div class="badge dark" style="font-size:12px">3b</div>
+          <div class="badge teal">3</div>
           <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Nozzle holding / fixturing</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 3b · non-flex only</div>
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Nozzle</div>
+            <div style="font-size:11px;color:#0B7A6E;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Step 3 · type &amp; count</div>
           </div>
         </div>
-
+        <div style="margin-bottom:20px">
+          <div class="field-label" style="margin-bottom:9px">Nozzle type</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="nozzle-type-opts"></div>
+        </div>
         <div>
-          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Nozzle Holding/Fixturing</div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap" id="fixturing-opts"></div>
-          <!-- custom text -->
-          <div id="fixturing-custom-wrap" class="hidden" style="margin-top:10px">
-            <input type="text" id="fixturing-custom-text" placeholder="Describe custom fixturing…" style="border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%" oninput="onFixturingCustom(this.value)">
+          <div class="field-label" style="margin-bottom:9px">Number of nozzles <span style="font-size:11px;font-weight:400;color:#8A94A6;text-transform:none;letter-spacing:0">(1–28)</span></div>
+          <div class="nozzle-stepper">
+            <button class="ns-btn" id="noz-dec" onclick="changeNozzles(-1)">−</button>
+            <div>
+              <div class="ns-val" id="noz-val">1</div>
+              <div class="ns-sub">nozzles</div>
+            </div>
+            <button class="ns-btn" id="noz-inc" onclick="changeNozzles(1)">+</button>
           </div>
         </div>
       </div>
 
-      <!-- STAGE 5: MODULES & SYSTEM SPECS -->
-      <div class="card" id="sec-modules">
-        <div class="prog-header">
-          <div class="badge dark">5</div>
-          <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Modules &amp; system specs</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 5 · resolves to system name &amp; PDM</div>
-          </div>
-        </div>
+      <!-- STEP 4 OUTPUTS (left column mirror) removed — outputs are in right panel only -->
 
-        <div style="margin-bottom:16px">
-          <div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">System / Module</div>
-          <div id="module-opts" style="display:flex;gap:10px;flex-wrap:wrap"></div>
-          <div id="module-no-match" class="hidden amber-note" style="margin-top:8px">No matching system found for the current input combination. Please review your selections in Stages 2–3.</div>
-        </div>
-
-        <!-- Voltage (derived, display only) -->
-        <div id="voltage-row" class="hidden" style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:12px">
-          <div>
-            <div class="field-label">Voltage (derived)</div>
-            <div class="ro-field mono" id="field-voltage" style="min-width:260px">—</div>
-          </div>
-        </div>
-
-        <!-- Channels (derived, multi-channel systems only) -->
-        <div id="channels-row" class="hidden">
-          <div class="field-label">Channels (derived)</div>
-          <div class="ro-field mono" id="field-channels" style="display:inline-block;margin-top:5px;min-width:60px">—</div>
-        </div>
-      </div>
-
-      <!-- STAGE 4: OPTIONS -->
-      <div class="card" id="sec-options">
-        <div class="prog-header">
-          <div class="badge dark">4</div>
-          <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Options</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 4 · add-ons (constrained by system)</div>
-          </div>
-        </div>
-        <div id="options-body">
-          <!-- rendered dynamically -->
-        </div>
-      </div>
-
-      <!-- STAGE 6: HOSES -->
-      <div class="card" id="sec-hoses">
-        <div class="prog-header">
-          <div class="badge dark">6</div>
-          <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Hoses</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 6 · per-system branching</div>
-          </div>
-        </div>
-        <div id="hoses-body">
-          <!-- rendered dynamically -->
-        </div>
-      </div>
-
-      <!-- STAGE 7: ADDITIVE HOSES (auto-included) -->
-      <div class="card hidden" id="sec-additive-hoses">
-        <div class="prog-header">
-          <div class="badge dark">7</div>
-          <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Additive hoses</div>
-            <div style="font-size:11px;color:#0B7A6E;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 7 · auto-included with additive injection</div>
-          </div>
-          <div style="font-size:11px;color:#5A6478;border:1px solid #E4E8EF;border-radius:6px;padding:5px 10px;background:#F8FAFC;font-weight:500">Auto-included</div>
-        </div>
-        <div id="additive-hoses-body"></div>
-      </div>
-
-      <!-- STAGE 8: CONTROLS, BOOSTERS, ETC. (NOT SPECIFIED) -->
+      <!-- STAGE 8 DRAFT -->
       <div class="card" id="sec-stage8">
         <div class="prog-header">
-          <div class="badge dark">8</div>
+          <div class="badge dark" style="font-size:11px">S8</div>
           <div style="flex:1">
-            <div style="font-size:17px;font-weight:600;line-height:1.2">Controls, boosters, condensers, purification, interconnect &amp; other</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Stage 8</div>
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Controls, boosters, condensers &amp; other</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Rules TBD</div>
           </div>
         </div>
-
-        <div class="draft-banner">⚑ Draft — behaviour rules TBD (Q-005)</div>
-        <div style="font-size:13px;color:#B45309;margin-bottom:16px;line-height:1.4">These fields are rendered from the spec but are <strong>not wired up</strong> — no selection logic is active. Reviewers: see open question <span class="q-flag" onclick="openQ('Q-005')">Q-005</span> for the outstanding behaviour rules.</div>
-
-        <!-- Controls -->
+        <div class="draft-banner">⚑ Draft — behaviour rules TBD</div>
+        <div style="font-size:13px;color:#B45309;margin-bottom:16px;line-height:1.4">These fields are not wired up — no selection logic is active.</div>
         <div class="stage8-section">
           <div class="stage8-title">Controls</div>
           <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Ethernet IP <span style="font-size:11px;color:#8A94A6">(Standard)</span></div></div>
           <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Discrete I/O through Remote Communication Connector</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">BUS Communication Type <span style="font-size:11px;color:#8A94A6">(optional — specify type)</span></div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">BUS Communication Type</div></div>
         </div>
-
-        <!-- Booster Modules -->
         <div class="stage8-section">
           <div class="stage8-title">Booster modules</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">AMP Booster — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">AMP Booster w/ Heat Exchanger</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Parallel Setup</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LB-40 Booster — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1 (CS)</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1-SS</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1-R (Relay Control)</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB2 (CS)</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB2-SS</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">AMP Booster</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LB-40 Booster</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1 (CS) / ECB1-SS / ECB1-R / ECB2 (CS) / ECB2-SS</div></div>
         </div>
-
-        <!-- Condenser Modules -->
         <div class="stage8-section">
-          <div class="stage8-title">Condenser modules</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LC2000 — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LC2000-W — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
+          <div class="stage8-title">Condensers &amp; purification</div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LC2000 / LC2000-W</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Purification System / Purification System – Basic</div></div>
         </div>
-
-        <!-- Purification Modules -->
-        <div class="stage8-section">
-          <div class="stage8-title">Purification modules</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Purification System — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Purification System – Basic — qty: <span class="mono" style="color:#8A94A6">TBD</span></div></div>
-        </div>
-
-        <!-- Interconnect Hoses -->
         <div class="stage8-section">
           <div class="stage8-title">Interconnect hoses</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">No Hoses Included</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Standard Bottle Connection Kit</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">CO2 Supply to Booster</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Booster to Omega</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Liquid Booster/LC2000 to Omega</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Custom</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">No Hoses / Standard Bottle Connection Kit / CO2 Supply to Booster / Booster to Omega / Liquid Booster–LC2000 to Omega / Custom</div></div>
         </div>
-
-        <!-- Other -->
         <div class="stage8-section">
           <div class="stage8-title">Other</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">CO2 Monitor (Standard – Safety Alarm with Remote)</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Intrinsically Safe CO2 Monitor (Class 1, Division 1 Rated)</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">CO2 Monitor (Standard)</div></div>
+          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Intrinsically Safe CO2 Monitor (Class 1, Division 1)</div></div>
         </div>
       </div>
 
@@ -492,348 +318,568 @@ United Kingdom</textarea>
 
     <!-- RIGHT COLUMN: RESULTS PANEL -->
     <aside class="cfg-aside" id="sec-resolve" style="position:sticky;top:24px;border:1px solid #E4E8EF;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(16,24,40,.08);overflow:hidden">
+
       <div style="padding:18px 20px;background:#0C1322;color:#E8ECF4">
-        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#0E9F8E;font-weight:600">Build sheet summary</div>
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#0E9F8E;font-weight:600">Step 4 · outputs</div>
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:6px">
-          <div style="font-size:20px;font-weight:600;line-height:1.15;flex:1;min-width:0">Resolving your system</div>
-          <div class="mono" id="matchCountLabel" style="font-size:12px;color:#9FE3CC;white-space:nowrap;flex:none">—</div>
+          <div style="font-size:20px;font-weight:600;line-height:1.15">Resolved system</div>
+          <div class="mono" id="match-label" style="font-size:12px;color:#9FE3CC;white-space:nowrap">—</div>
         </div>
       </div>
 
-      <div style="background:#fff;padding:18px 20px 22px">
+      <div style="padding:18px 20px 22px">
 
-        <!-- Stage summary -->
-        <div id="stage-summary" style="margin-bottom:16px;display:flex;flex-direction:column;gap:6px"></div>
+        <!-- Inputs summary -->
+        <div id="inputs-summary" style="margin-bottom:16px;display:flex;flex-direction:column;gap:5px"></div>
 
-        <!-- Resolved system -->
-        <div style="padding-top:14px;border-top:1px solid #E4E8EF">
-          <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:#2D6CDF;font-weight:600;margin-bottom:10px">Resolved System</div>
-
-          <!-- Match results -->
-          <div id="match-results">
-            <div id="no-match-msg" class="amber-note hidden">No system matched — check your selections.</div>
-            <div id="single-match-card" class="hidden" style="border:1px solid #B4E2CC;background:#E8F6EF;border-radius:10px;padding:14px 16px;position:relative">
-              <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.6px;text-transform:uppercase">Matched system</div>
-              <div id="resolved-name" style="font-size:22px;font-weight:700;line-height:1.05;color:#0B5A50;margin-top:4px"></div>
-              <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap">
-                <div>
-                  <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Base PDM</div>
-                  <div class="mono" id="resolved-base-pdm" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
-                </div>
-                <div>
-                  <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM</div>
-                  <div class="mono" id="resolved-kit-pdm" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
-                </div>
-              </div>
-              <div id="locked-badge" class="locked-badge hidden">✓ Locked</div>
-            </div>
-            <div id="multi-match-card" class="hidden">
-              <div class="multi-match">
-                <div class="multi-match-title">⚑ Multiple systems match — needs selection</div>
-                <div id="multi-match-list"></div>
-              </div>
-            </div>
+        <!-- Output result -->
+        <div id="output-area">
+          <div id="out-empty" class="out-card-empty">
+            <div style="font-size:13px;color:#8A94A6;text-align:center;padding:8px 0">Complete steps 1–3 to resolve the system.</div>
           </div>
-
-          <!-- Build summary derived values -->
-          <div id="build-summary-block" class="hidden" style="margin-top:14px;border:1px solid #E4E8EF;border-radius:10px;padding:13px 15px">
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px">Build summary</div>
+          <div id="out-no-match" class="hidden amber-note" style="margin-top:8px">
+            No matching system found for this combination. Check your qualifier and nozzle selections.
+          </div>
+          <div id="out-stock" class="out-card-stock hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#0B5A50">Standard build</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:.6px;padding:3px 9px;border-radius:6px;background:#0E9F8E;color:#fff">STOCK</div>
+            </div>
+            <div id="out-stock-name" style="font-size:22px;font-weight:700;line-height:1.1;color:#0B5A50;margin-bottom:12px"></div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <div style="font-size:11px;color:#8A94A6;font-weight:500">Type</div>
-                <div class="mono" id="sum-type" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+                <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Base PDM</div>
+                <div class="mono" id="out-stock-base" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
               </div>
               <div>
-                <div style="font-size:11px;color:#8A94A6;font-weight:500">Build Completion</div>
-                <div class="mono" id="sum-build-date" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+                <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM</div>
+                <div class="mono" id="out-stock-kit" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
+              </div>
+            </div>
+            <div id="locked-badge" class="locked-badge hidden">✓ Locked</div>
+          </div>
+          <div id="out-custom" class="out-card-custom hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#B45309">Custom build</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:.6px;padding:3px 9px;border-radius:6px;background:#F2D9A8;color:#7A4E0A;border:1px solid #F2D9A8">CUSTOM</div>
+            </div>
+            <div id="out-custom-name" style="font-size:22px;font-weight:700;line-height:1.1;color:#7A4E0A;margin-bottom:8px"></div>
+            <div style="font-size:12px;color:#B45309;background:#fff;border:1px solid #F2D9A8;border-radius:8px;padding:8px 11px;margin-bottom:12px;line-height:1.4">
+              Pricing: next highest existing system + engineering fee
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <div style="font-size:11px;color:#B45309;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Base PDM</div>
+                <div class="mono" id="out-custom-base" style="font-size:13px;color:#7A4E0A;margin-top:2px"></div>
               </div>
               <div>
-                <div style="font-size:11px;color:#8A94A6;font-weight:500">Flex</div>
-                <div class="mono" id="sum-flex" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:#8A94A6;font-weight:500">Nozzle type(s)</div>
-                <div class="mono" id="sum-nozzles" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:#8A94A6;font-weight:500">Options</div>
-                <div class="mono" id="sum-options" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:#8A94A6;font-weight:500">Voltage</div>
-                <div class="mono" id="sum-voltage" style="font-size:13px;color:#16203A;margin-top:2px">—</div>
+                <div style="font-size:11px;color:#B45309;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM</div>
+                <div class="mono" id="out-custom-kit" style="font-size:13px;color:#7A4E0A;margin-top:2px"></div>
               </div>
             </div>
           </div>
-
-          <button class="confirm-btn" onclick="confirmSheet()">Confirm build sheet →</button>
-          <div style="margin-top:10px;font-size:12px;color:#9AA3B5;line-height:1.45">All fields auto-resolve from your stage inputs. Confirm to lock the build sheet.</div>
         </div>
 
+        <!-- Multi-match (same system name, multiple rows — surface both PDMs) -->
+        <div id="out-multi" class="hidden" style="margin-top:10px;background:#FEF4E3;border:1px solid #F2D9A8;border-radius:8px;padding:10px 13px">
+          <div style="font-size:11px;font-weight:600;color:#B45309;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">⚑ Multiple rows match — review PDMs</div>
+          <div id="out-multi-list" style="font-size:12px;font-family:'IBM Plex Mono',monospace;color:#7A4E0A"></div>
+        </div>
+
+        <button class="confirm-btn" onclick="confirmSheet()">Confirm build sheet →</button>
+        <div style="margin-top:10px;font-size:12px;color:#9AA3B5;line-height:1.45">All outputs are driven from the Omega system sizing spreadsheet. Confirm to lock.</div>
       </div>
     </aside>
 
-  </div><!-- end cfg-grid -->
-</div><!-- end content -->
+  </div>
+</div>
 
 <script>
-// ============================================================
-// DATA
-// ============================================================
-
-const OPEN_QUESTIONS = {
-  'Q-001': 'Ship To Address — source from SAP rather than from the Quote? (Currently defaulting from Quote)',
-  'Q-002': '4000 additive hose exact spec — described as "some version of a 16\'" but not confirmed',
-  'Q-003': 'RESOLVED — nozzle type and count are now specified per individual spray head (BR-27, BR-30).',
-  'Q-004': 'Additive Injection on FLEX systems — the spec says hide all Options for FLEX, but the hose rules reference Additive Injection being set on FLEX systems. How is this resolved?',
-  'Q-005': 'Behaviour rules for Controls / Boosters / Condensers / Purification / Interconnect / Other are not yet defined — this entire stage is a placeholder',
-  'Q-105': 'Gen 2 selectable? (Wylie: keep flexible; Zach: kit in PDM; "won\'t sell")',
-  'Q-106': 'Does valve type (PV/SV) drive hose selection?',
-  'Q-107': '4000 flex-coanda exception real or excluded?',
-  'Q-derived-build': 'Build Completion Date = Date Submitted + (system lead time − 2 weeks). Omega 3500: 14wk lead → shows 12wk. Omega 1500: 12wk lead → shows 10wk. Other systems: not yet specified.',
-};
-
-// Voltage lookup by module key pattern
-const VOLTAGE_LOOKUP = {
-  '1500': '208–240V, 1-Ph, 15A (10ft or 3m cord, flying leads)',
-  '1500A': '208–240V, 1-Ph, 15A (10ft or 3m cord, flying leads)',
-  '1500 FLEX': '208–240V, 1-Ph, 15A (10ft or 3m cord, flying leads)',
-  '3000 FLEX': '208–240V, 1-Ph, 40A',
-  '3500 FLEX': '208–240V, 3-Ph, 40A',
-  '3500 FLEX HF': '208–240V, 3-Ph, 40A',
-  '4000': '208–240V, 1-Ph, 40A',
-  '9000 FLEX': '208–240V, 3-Ph, 60A',
-  '9500 FLEX': 'Dual: 480V, 3-Ph, 30A + 208–240V, 1-Ph, 25A',
-};
-
-// Module options from spec (pre-filtered by flex state)
-const ALL_MODULES = [
-  '1500 (Gen 2)','1500A (Gen 2)','1500 FLEX','3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX','4000'
+// ─── LOOKUP DATA (from CSV, parsed exactly) ───────────────────────────────────
+// Columns: nozzle, nozzle_count, hoses, channels, flex, is, additive, uf, omega, nozzle_head, base_pdm, kit_pdm
+const CSV = [
+["Coanda",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["Coanda",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["Coanda",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
+["Coanda",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
+["Coanda",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["Coax",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["Coax",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["Coax",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
+["Coax",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
+["Coax",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["HEN",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["HEN",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["HEN",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
+["HEN",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
+["HEN",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["SWH",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["SWH",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["SWH",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
+["SWH",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
+["SWH",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["HEN",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["Coanda",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["Coanda",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["Coanda",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
+["Coanda",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
+["Coanda",2,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["Coanda",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Not Custom","4105","TBD"],
+["Coanda",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Not Custom","4105","TBD"],
+["Coanda",2,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 4000 2CH","Not Custom","1126","TBD"],
+["Coanda",2,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","Not Custom","3500-001126,4000-004105","TBD"],
+["Coanda",2,2,2,"Yes","YES","NO","NO","4000 SV Flex 2CH","Not Custom","4105","TBD"],
+["Coax",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["Coax",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["HEN",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Custom","Gen2-001483,Gen3-003437","Gen3-003571"],
+["HEN",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["HEN",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Custom","Gen3-003437","Gen-003572"],
+["HEN",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Custom","Gen3-003437","Gen3-003573"],
+["HEN",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
+["HEN",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
+["HEN",2,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["HEN",2,2,2,"Yes","NO","YES","NO","3500 2CH Flex w/AIS","Custom","1126","TBD"],
+["Coax",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
+["Coax",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
+["SWH",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
+["SWH",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
+["SWH",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Custom","Gen3-003437","Gen3-003571"],
+["SWH",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Custom","Gen3-003437","Gen3-003573"],
+["Coax",2,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
+["Coax",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Not Custom","4105","TBD"],
+["Coax",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Not Custom","4105","TBD"],
+["Coax",2,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 4000 2CH","Not Custom","3500-001126,4000-004105","TBD"],
+["Coax",2,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","Not Custom","3500-001126,4000-004105","TBD"],
+["Coax",2,2,2,"Yes","YES","NO","NO","4000 SV Flex 2CH","Not Custom","4105","TBD"],
+["SWH",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
+["SWH",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
+["SWH",2,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["SWH",2,2,2,"Yes","NO","YES","NO","3500 2CH Flex w/AIS","Custom","1126","TBD"],
+["Coax",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
+["Coax",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Not Custom","4105","TBD"],
+["Coax",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
+["Coax",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
+["Coanda",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["Coanda",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["Coanda",3,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
+["Coanda",3,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
+["Coanda",3,2,2,"Yes","NO","NO","NO","4000 SV 2CH","Custom","4105","TBD"],
+["Coanda",3,2,2,"Yes","YES","YES","NO","4000 PV w/AIS 2CH","Custom","4105","TBD"],
+["Coanda",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
+["Coanda",3,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Not Custom","4105","TBD"],
+["Coanda",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
+["Coanda",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
+["HEN",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
+["HEN",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Not Custom","4105","TBD"],
+["HEN",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
+["HEN",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
+["Coax",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["Coax",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["Coax",3,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
+["Coax",3,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
+["Coax",3,2,2,"Yes","NO","NO","NO","4000 SV 2CH","Custom","4105","TBD"],
+["Coax",3,2,2,"Yes","YES","YES","NO","4000 PV w/AIS 2CH","Custom","4105","TBD"],
+["HEN",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["HEN",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["HEN",3,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["HEN",3,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["SWH",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
+["SWH",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Not Custom","4105","TBD"],
+["SWH",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
+["SWH",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
+["SWH",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["SWH",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["SWH",3,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["SWH",3,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coax",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
+["Coax",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
+["Coax",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
+["Coanda",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["Coanda",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["Coanda",4,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
+["Coanda",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","Not Custom","4105","TBD"],
+["Coanda",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
+["Coanda",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
+["Coanda",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
+["HEN",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","Not Custom","4105","TBD"],
+["HEN",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
+["HEN",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
+["HEN",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
+["Coax",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["Coax",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["Coax",4,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
+["Coax",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["HEN",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["HEN",4,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["HEN",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",4,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["HEN",4,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
+["HEN",4,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["HEN",4,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
+["SWH",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","Not Custom","4105","TBD"],
+["SWH",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
+["SWH",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
+["SWH",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
+["SWH",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["SWH",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["SWH",4,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["SWH",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["SWH",4,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["SWH",4,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
+["SWH",4,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["SWH",4,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
+["Coanda",5,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["Coanda",5,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["Coanda",5,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
+["Coanda",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["Coanda",5,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
+["Coanda",5,3,3,"Yes","NO","NO","NO","4000 SV FLEX 3CH","Custom","4105","TBD"],
+["Coanda",5,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
+["Coanda",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["Coanda",5,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
+["Coanda",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
+["Coanda",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS Flex 4CH","Custom","4105","TBD"],
+["Coax",5,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
+["Coax",5,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
+["Coax",5,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
+["Coax",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coax",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["Coax",5,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
+["Coax",5,3,3,"Yes","NO","NO","NO","4000 SV FLEX 3CH","Custom","4105","TBD"],
+["Coax",5,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
+["Coax",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["Coax",5,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
+["Coax",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
+["Coax",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS Flex 4CH","Custom","4105","TBD"],
+["HEN",5,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["HEN",5,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["HEN",5,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["HEN",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["HEN",5,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
+["HEN",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
+["HEN",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
+["HEN",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["HEN",5,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
+["HEN",5,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["HEN",5,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
+["SWH",5,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["SWH",5,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["SWH",5,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["SWH",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["SWH",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["SWH",5,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
+["SWH",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
+["SWH",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
+["SWH",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["SWH",5,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
+["SWH",5,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["SWH",5,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
+["Coanda",6,1,1,"Yes","YES","NO","NO","3000 SV Flex","Not Custom","1088","TBD"],
+["Coanda",6,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Not Custom","1088","TBD"],
+["Coanda",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Not Custom","1126","TBD"],
+["Coanda",6,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS","Not Custom","1126","TBD"],
+["Coanda",6,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 9000 SV Flex, 9500 SV Flex","Not Custom","3500-00126,9000-TBD,9500-002341","TBD"],
+["Coanda",6,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
+["Coanda",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["Coanda",6,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
+["Coanda",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["Coanda",6,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
+["Coanda",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["Coanda",6,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
+["Coanda",6,4,4,"Yes","NO","NO","NO","4000 SV FLEX 4CH","Custom","4105","TBD"],
+["Coanda",6,4,4,"Yes","YES","YES","YES","4000 PV Flex w/AIS 4CH","Custom","4105","TBD"],
+["Coax",6,1,1,"Yes","YES","NO","NO","3000 SV Flex","Not Custom","1088","TBD"],
+["Coax",6,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Not Custom","1088","TBD"],
+["Coax",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Not Custom","1126","TBD"],
+["Coax",6,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS","Not Custom","1126","TBD"],
+["Coax",6,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 9000 SV Flex, 9500 SV Flex","Not Custom","3500-00126,9000-TBD,9500-002341","TBD"],
+["Coax",6,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
+["Coax",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["Coax",6,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
+["Coax",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["Coax",6,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
+["Coax",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["Coax",6,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
+["Coax",6,4,4,"Yes","NO","NO","NO","4000 SV FLEX 4CH","Custom","4105","TBD"],
+["Coax",6,4,4,"Yes","YES","YES","YES","4000 PV Flex w/AIS 4CH","Custom","4105","TBD"],
+["HEN",6,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
+["HEN",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
+["HEN",6,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["HEN",6,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["HEN",6,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
+["HEN",6,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
+["HEN",6,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
+["HEN",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["HEN",6,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
+["HEN",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["HEN",6,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
+["SWH",6,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
+["SWH",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
+["SWH",6,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["SWH",6,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["SWH",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
+["SWH",6,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
+["SWH",6,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
+["SWH",6,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
+["SWH",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
+["SWH",6,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
+["SWH",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
+["SWH",6,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
+["Coanda",7,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["Coanda",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["Coanda",7,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coanda",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coax",7,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["Coax",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["Coax",7,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coax",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",7,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
+["HEN",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
+["HEN",7,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["HEN",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["SWH",7,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
+["SWH",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
+["SWH",7,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["SWH",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coax",8,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
+["Coax",8,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
+["Coax",8,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coax",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",8,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
+["Coanda",8,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
+["Coanda",8,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coanda",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",8,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
+["HEN",8,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
+["HEN",8,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["HEN",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["SWH",8,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
+["SWH",8,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
+["SWH",8,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
+["SWH",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",9,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["Coanda",9,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["Coanda",9,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coanda",9,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coax",9,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["Coax",9,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["Coax",9,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coax",9,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",9,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["HEN",9,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
+["HEN",9,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["HEN",9,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["SWH",9,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["SWH",9,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
+["SWH",9,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["SWH",9,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["Coax",10,1,1,"Yes","NO","NO","NO","3500 Flex 1 CH","Not Custom","1126","TBD"],
+["Coax",10,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
+["Coax",10,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coax",10,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",10,1,1,"Yes","NO","NO","NO","3500 Flex 1 CH","Not Custom","1126","TBD"],
+["Coanda",10,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
+["Coanda",10,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coanda",10,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",10,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["HEN",10,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
+["HEN",10,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["HEN",10,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["SWH",10,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["SWH",10,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
+["SWH",10,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["SWH",10,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",11,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["Coanda",11,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["Coanda",11,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coanda",11,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coax",11,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
+["Coax",11,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
+["Coax",11,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coax",11,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",11,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["HEN",11,1,1,"Yes","NO","YES","NO","3500HF1CH w/AIS","Custom","1126","TBD"],
+["HEN",11,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["HEN",11,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["SWH",11,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["SWH",11,1,1,"Yes","NO","YES","NO","3500HF1CH w/AIS","Custom","1126","TBD"],
+["SWH",11,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["SWH",11,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["Coax",12,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
+["Coax",12,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
+["Coax",12,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coax",12,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",12,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
+["Coanda",12,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
+["Coanda",12,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
+["Coanda",12,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
+["HEN",12,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["HEN",12,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
+["HEN",12,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["HEN",12,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["SWH",12,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
+["SWH",12,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
+["SWH",12,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
+["SWH",12,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
+["Coanda",13,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coanda",13,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["Coax",13,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coax",13,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["HEN",13,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["HEN",13,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["SWH",13,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["SWH",13,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",14,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coanda",14,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["Coax",14,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coax",14,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["HEN",14,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["HEN",14,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["SWH",14,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["SWH",14,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",15,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coanda",15,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["Coax",15,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coax",15,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["HEN",15,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["HEN",15,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["SWH",15,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["SWH",15,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",16,2,2,"Yes","NO","NO","NO","9000 SV Flex, 9500 SV Flex","Not Custom","9000-TBD,9500-002341","TBD"],
+["Coax",16,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
+["Coanda",16,2,2,"Yes","NO","NO","NO","9000 SV Flex, 9500 SV Flex","Not Custom","9000-TBD,9500-002341","TBD"],
+["Coanda",16,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
+["HEN",16,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["HEN",16,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["SWH",16,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["SWH",16,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",17,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coanda",17,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["Coax",17,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coax",17,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["HEN",17,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["HEN",17,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["SWH",17,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["SWH",17,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",18,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coanda",18,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["Coax",18,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
+["Coax",18,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
+["HEN",18,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["HEN",18,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["SWH",18,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["SWH",18,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",19,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",19,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",19,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",19,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",20,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
+["Coax",20,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
+["Coanda",20,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
+["Coanda",20,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
+["Coanda",21,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",21,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",21,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",21,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",22,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",22,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",22,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",22,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",23,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",23,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",23,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",23,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",24,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
+["Coax",24,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
+["Coanda",24,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
+["Coanda",24,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
+["Coanda",25,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",25,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",25,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",25,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",26,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",26,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",26,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",26,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",27,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",27,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",27,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",27,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coanda",28,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coanda",28,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
+["Coax",28,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
+["Coax",28,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"]
 ];
-const FLEX_ONLY_MODULES = ['1500 FLEX','3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'];
-const NON_FLEX_MODULES = ['1500 (Gen 2)','1500A (Gen 2)','4000'];
-const MULTI_CHANNEL_MODULES = ['3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'];
 
-// System lookup data (embedded from system_lookup.json)
-const SYSTEM_LOOKUP = [{"nozzle":"Coanda","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coanda","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"Coanda","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coanda","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coanda","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coax","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coax","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"Coax","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coax","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coax","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"HEN","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"HEN","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"SWH","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"SWH","nozzle_count":1,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"SWH","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"SWH","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"SWH","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"HEN","nozzle_count":1,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH, 4000 2CH","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","base_pdm":"3500-001126,4000-004105","kit_pdm":"TBD"},{"nozzle":"Coanda","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 SV Flex 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"HEN","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH FLEX","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"HEN","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH Flex w/AIS","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen2, 1500 Gen 3","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003613"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"1500 Gen2 w/UF, 1500 Gen 3 w/UF","base_pdm":"Gen2-001483,Gen3-003437","kit_pdm":"Gen2-TBD,Gen3-003616"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 SV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003571"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"1500 Gen3 PV Flex","base_pdm":"Gen3-003437","kit_pdm":"Gen3-003573"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":1,"channels":1,"intrinsically_safe":true,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"1500 Gen3 PV Flex w/AIS","base_pdm":"Gen3-003437","kit_pdm":"Gen-003572"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":false,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH, 4000 2CH","base_pdm":"3500-001126,4000-004105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","base_pdm":"3500-001126,4000-004105","kit_pdm":"TBD"},{"nozzle":"Coax","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":true,"additive":false,"ultrafilter":false,"nozzle_head_custom":false,"system_name":"4000 SV Flex 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"4000 FLC 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":false,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":true,"nozzle_head_custom":true,"system_name":"4000 FLC w/UF 2CH","base_pdm":"4105","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":false,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH FLEX","base_pdm":"1126","kit_pdm":"TBD"},{"nozzle":"SWH","nozzle_count":2,"flex":true,"hoses":2,"channels":2,"intrinsically_safe":false,"additive":true,"ultrafilter":false,"nozzle_head_custom":true,"system_name":"3500 2CH Flex w/AIS","base_pdm":"1126","kit_pdm":"TBD"}];
-
-// ============================================================
-// STATE
-// ============================================================
+// ─── STATE ───────────────────────────────────────────────────────────────────
 const state = {
-  // Stage 1
-  type: null,           // 'Sales'|'Demo'|'Rental'
+  type: null,
   shipConfirmed: false,
-
-  // Stage 2
-  flex: null,           // true|false
-  multipleHeads: null,  // true|false
-  headCount: 2,         // 2|3|4
-  headNozzles: {1:1,2:1,3:1,4:1},
-  headNozzleTypes: {1:'Coanda',2:'Coanda',3:'Coanda',4:'Coanda'},
-  headOperation: null,  // 'On/Off Together'|'Independent'
-
-  // Stage 3
-  nozzleTypes: [],      // ['Coanda','Coaxial','HEN','SW-HEN']
-  interchangeable: null,// true|false
-
-  // Stage 3b
-  fixturing: null,      // 'Black Handle (Standard)'|'Bulkhead Tee'|'Custom'
-  fixturingCustom: '',
-
-  // Stage 4
-  selectedModule: null,
-
-  // Stage 5
-  options: [],          // ['Ultrafiltration','Additive Injection','Intrinsically Safe']
-
-  // Stage 6
-  hoseType: null,
-  standardLength: null, // true|false
-  customLengthDetails: '',
-  dualSplit: null,
-  dualSplitDetails: '',
-
-  // Confirmed
+  // Step 1
+  flex: false,
+  is: false,
+  add: false,
+  uf: false,
+  // Step 2
+  hoses: 1,
+  channels: 1,
+  // Step 3
+  nozzleType: null,   // 'Coanda'|'Coax'|'HEN'|'SWH'
+  nozzleCount: 1,
+  // Confirm
   confirmed: false,
-
-  // Touch tracking
-  touched: {},
 };
 
-// ============================================================
-// HELPERS
-// ============================================================
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function $(id){ return document.getElementById(id); }
 function show(el){ if(el) el.classList.remove('hidden'); }
 function hide(el){ if(el) el.classList.add('hidden'); }
-function toggle(el, cond){ cond ? show(el) : hide(el); }
-function $(id){ return document.getElementById(id); }
 
 function makeOptBtn(label, hint, selected, locked, onClick){
   const btn = document.createElement('button');
   btn.className = 'opt-btn ' + (locked ? 'locked' : selected ? 'selected' : 'unselected');
-  btn.innerHTML = `<span class="opt-label">${label}</span><span class="opt-hint">${hint||''}</span>`;
+  btn.innerHTML = `<span class="opt-label">${label}</span>${hint?`<span class="opt-hint">${hint}</span>`:''}`;
   if(!locked) btn.onclick = onClick;
   return btn;
 }
 
-function renderOptGroup(containerId, defs, currentVal, onSelect, locked){
-  const c = $(containerId);
-  if(!c) return;
-  c.innerHTML = '';
-  defs.forEach(d => {
-    const btn = makeOptBtn(d.label, d.hint||'', currentVal===d.val, locked, ()=>{onSelect(d.val); render();});
-    c.appendChild(btn);
-  });
+// ─── LOOKUP ──────────────────────────────────────────────────────────────────
+function lookup(){
+  const flexVal  = state.flex  ? "Yes" : "No";
+  const isVal    = state.is    ? "YES" : "NO";
+  const addVal   = state.add   ? "YES" : "NO";
+  const ufVal    = state.uf    ? "YES" : "NO";
+  return CSV.filter(r =>
+    r[0] === state.nozzleType &&
+    r[1] === state.nozzleCount &&
+    r[2] === state.hoses &&
+    r[3] === state.channels &&
+    r[4] === flexVal &&
+    r[5] === isVal &&
+    r[6] === addVal &&
+    r[7] === ufVal
+  );
 }
 
-function openQ(id){
-  const text = OPEN_QUESTIONS[id] || 'No details available.';
-  $('qModalId').textContent = id;
-  $('qModalText').textContent = text;
-  $('qModal').classList.add('open');
-}
-function closeQModal(){ $('qModal').classList.remove('open'); }
-
-// ============================================================
-// INIT
-// ============================================================
-function init(){
-  // Set auto-filled fields
-  const today = new Date(2026,5,17); // 2026-06-17
-  $('field-sales-contact').textContent = 'Samantha Baguio';
-  $('field-date-submitted').textContent = today.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
-  updateBuildCompletionDate();
-  render();
-}
-
-function updateBuildCompletionDate(){
-  // Derive from selected module if possible
-  const mod = state.selectedModule;
-  let weeksOffset = null;
-  if(mod && mod.includes('3500')) weeksOffset = 12;
-  else if(mod && (mod.includes('1500')||mod.includes('1500A'))) weeksOffset = 10;
-  const today = new Date(2026,5,17);
-  if(weeksOffset !== null){
-    const d = new Date(today);
-    d.setDate(d.getDate() + weeksOffset*7);
-    $('field-build-completion').textContent = d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
-  } else {
-    $('field-build-completion').textContent = '— (select system)';
-  }
-}
-
-// ============================================================
-// SYSTEM LOOKUP
-// ============================================================
-function nozzleKeyMap(nozzleTypes){
-  // Map UI nozzle types to lookup keys
-  const map = {'Coanda':'Coanda','Coaxial':'Coax','HEN':'HEN','SW-HEN':'SWH'};
-  return nozzleTypes.map(n=>map[n]).filter(Boolean);
-}
-
-function getActiveNozzleTypes(){
-  // Collect unique nozzle types across all active heads (from headNozzleTypes)
-  const activeCount = state.multipleHeads===true ? state.headCount : 1;
-  const types = new Set();
-  for(let i=1; i<=activeCount; i++){
-    types.add(state.headNozzleTypes[i]||'Coanda');
-  }
-  return Array.from(types);
-}
-
-function totalNozzleCount(){
-  if(state.flex === false){
-    // Non-flex: single head, count from head #1 nozzle select (if multiple heads false or N/A)
-    return state.headNozzles[1] || 1;
-  }
-  if(state.multipleHeads === false){
-    return state.headNozzles[1] || 1;
-  }
-  // Multiple heads: sum all
-  let total = 0;
-  const count = state.headCount;
-  for(let i=1;i<=count;i++) total += (state.headNozzles[i]||1);
-  return total;
-}
-
-function resolveSystem(){
-  if(state.flex === null) return [];
-  const activeNozzleTypes = getActiveNozzleTypes();
-  if(activeNozzleTypes.length === 0) return [];
-  const isFlex = state.flex;
-  const nozzleKeys = nozzleKeyMap(activeNozzleTypes);
-  const totalNozzles = totalNozzleCount();
-  const hasAdditive = state.options.includes('Additive Injection');
-  const hasUF = state.options.includes('Ultrafiltration');
-  const isIS = state.options.includes('Intrinsically Safe');
-
-  // Filter lookup
-  const matches = SYSTEM_LOOKUP.filter(row => {
-    if(row.flex !== isFlex) return false;
-    if(!nozzleKeys.includes(row.nozzle)) return false;
-    if(row.nozzle_count !== totalNozzles) return false;
-    if(hasAdditive && !row.additive) return false;
-    if(hasUF && !row.ultrafilter) return false;
-    if(isIS && !row.intrinsically_safe) return false;
-    return true;
-  });
-
-  // De-duplicate by system_name
-  const seen = new Set();
-  return matches.filter(r => { if(seen.has(r.system_name)) return false; seen.add(r.system_name); return true; });
-}
-
-// ============================================================
-// DERIVED: module-level info
-// ============================================================
-function getVoltage(mod){
-  if(!mod) return null;
-  for(const key of Object.keys(VOLTAGE_LOOKUP)){
-    if(mod.includes(key) || key===mod) return VOLTAGE_LOOKUP[key];
-  }
-  // Try partial
-  if(mod.includes('1500')) return VOLTAGE_LOOKUP['1500'];
-  if(mod.includes('3000')) return VOLTAGE_LOOKUP['3000 FLEX'];
-  if(mod.includes('3500') && mod.includes('HF')) return VOLTAGE_LOOKUP['3500 FLEX HF'];
-  if(mod.includes('3500')) return VOLTAGE_LOOKUP['3500 FLEX'];
-  if(mod.includes('4000')) return VOLTAGE_LOOKUP['4000'];
-  if(mod.includes('9500')) return VOLTAGE_LOOKUP['9500 FLEX'];
-  if(mod.includes('9000')) return VOLTAGE_LOOKUP['9000 FLEX'];
-  return null;
-}
-
-// ============================================================
-// RENDER FUNCTIONS
-// ============================================================
-
+// ─── RENDER ──────────────────────────────────────────────────────────────────
 function render(){
-  renderStage1();
-  renderStage2();
-  renderStage3b();
-  renderStage5();
-  renderStage4();
-  renderStage6();
-  renderStage7();
+  renderShipBtn();
+  renderTypeOpts();
+  renderQuals();
+  renderHosesChan();
+  renderNozzleType();
+  renderNozzleCount();
   renderStepper();
   renderPanel();
-  updateBuildCompletionDate();
 }
 
-// --- STAGE 1 ---
-function renderStage1(){
-  // Type options
-  renderOptGroup('type-opts',[
-    {val:'Sales',label:'Sales',hint:'Customer purchase'},
-    {val:'Demo',label:'Demo',hint:'Evaluation unit'},
-    {val:'Rental',label:'Rental',hint:'Monthly billing'},
-  ], state.type, v=>{state.type=v;state.touched.stage1=true;state.confirmed=false;});
-}
-
-function onShipToEdit(){ state.shipConfirmed=false; renderShipConfirm(); state.confirmed=false; }
-function renderShipConfirm(){
-  const btn = $('shipConfirmBtn');
-  const note = $('shipConfirmNote');
+function renderShipBtn(){
+  const btn = $('shipBtn'), note = $('shipNote');
   if(state.shipConfirmed){
     btn.className='ship-confirm-btn confirmed-btn';
     btn.textContent='✓ Address confirmed';
@@ -844,516 +890,226 @@ function renderShipConfirm(){
     note.textContent='Please confirm the Ship To address — it may differ from the PO.';
   }
 }
-function confirmShipTo(){ state.shipConfirmed=true; state.touched.stage1=true; renderShipConfirm(); renderStepper(); }
 
-// --- STAGE 2 ---
-function renderStage2(){
-  // Flex opts
-  renderOptGroup('flex-opts',[
-    {val:true,label:'Yes — Flex',hint:'Multiple/adjustable spray heads'},
-    {val:false,label:'No — Fixed',hint:'Non-flex capillary setup'},
-  ], state.flex, v=>{
-    state.flex=v; state.touched.stage2=true; state.confirmed=false;
-    // Effects from spec
-    if(v===true){
-      // remove 1500 Gen2 / 1500A options handled in stage 4
-      // hide fixturing
-    }
-    if(v===false){
-      // keep multipleHeads; clear operation (operation only valid for flex=true multiple heads)
-      state.headOperation=null;
-    }
-    render();
-  }, false);
-
-  // Multi heads (show when flex==true OR flex==false — BR-15)
-  toggle($('sec-multi-heads'), state.flex!==null);
-  if(state.flex!==null){
-    renderOptGroup('multi-heads-opts',[
-      {val:true,label:'Yes',hint:'Multiple spray heads'},
-      {val:false,label:'No',hint:'Single spray head'},
-    ], state.multipleHeads, v=>{
-      state.multipleHeads=v; state.touched.stage2=true; state.confirmed=false;
-      render();
-    });
-  }
-
-  // Spray head details — show head count + nozzles when multipleHeads===true (both flex branches)
-  // Also always render head #1 nozzle type+count (BR-29, Change 7)
-  const showDetails = state.multipleHeads===true;
-  toggle($('sec-spray-head-details'), showDetails);
-  if(showDetails){
-    // Head count: only 2 for flex=false; up to 4 for flex=true
-    if(state.flex===true){
-      renderOptGroup('spray-head-count-opts',[
-        {val:2,label:'2 heads',hint:''},
-        {val:3,label:'3 heads',hint:''},
-        {val:4,label:'4 heads',hint:'Max 4'},
-      ], state.headCount, v=>{state.headCount=v; state.touched.stage2=true; state.confirmed=false; render();});
-    } else {
-      // flex=false: fixed 2 heads, no selector shown — ensure headCount is 2
-      state.headCount=2;
-      const hcContainer = $('spray-head-count-opts');
-      if(hcContainer) hcContainer.innerHTML='<div style="font-size:13px;color:#8A94A6">2 heads (fixed for non-flex dual split)</div>';
-    }
-
-    // Per-head nozzle type+count
-    renderHeadNozzles(state.headCount);
-
-    // Operation: only show when flex===true (BR-21/Change 2)
-    if(state.flex===true){
-      renderOptGroup('head-operation-opts',[
-        {val:'On/Off Together',label:'On/Off Together',hint:'All heads fire simultaneously'},
-        {val:'Independent',label:'Independent',hint:'Each head controlled separately'},
-      ], state.headOperation, v=>{state.headOperation=v; state.touched.stage2=true; state.confirmed=false; render();});
-    } else {
-      const opContainer = $('head-operation-opts');
-      if(opContainer) opContainer.innerHTML='';
-    }
-  } else {
-    // Single head or not yet answered: always render head #1 (BR-29, Change 7)
-    renderHeadNozzles(1);
-  }
-}
-
-function renderHeadNozzles(headCount){
-  const container = $('sec-head-nozzles');
-  container.innerHTML = '';
-  const count = headCount || state.headCount;
-  const nozzleTypeOpts = ['Coanda','Coaxial','HEN','SW-HEN'];
-  const nozzleTypeHints = {Coanda:'General coatings',Coaxial:'Coaxial spray',HEN:'High Efficiency Nozzle','SW-HEN':'SW-HEN variant'};
-  for(let i=1;i<=count;i++){
-    const wrap = document.createElement('div');
-    wrap.style.cssText='margin-bottom:16px;padding:14px;border:1px solid #E4E8EF;border-radius:10px;background:#F8FAFC';
-    const headLbl = document.createElement('div');
-    headLbl.style.cssText='font-size:15px;font-weight:600;color:#16203A;margin-bottom:10px';
-    headLbl.textContent=`Spray Head #${i}`;
-    wrap.appendChild(headLbl);
-
-    // Nozzle TYPE row
-    const typeLbl = document.createElement('div');
-    typeLbl.style.cssText='font-size:13px;font-weight:600;color:#5A6478;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px';
-    typeLbl.textContent='Nozzle Type';
-    wrap.appendChild(typeLbl);
-    const typeRow = document.createElement('div');
-    typeRow.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px';
-    const currentType = state.headNozzleTypes[i]||'Coanda';
-    nozzleTypeOpts.forEach(nt=>{
-      const btn = document.createElement('button');
-      btn.className = 'opt-btn ' + (currentType===nt?'selected':'unselected');
-      btn.innerHTML=`<span class="opt-label">${nt}</span><span class="opt-hint">${nozzleTypeHints[nt]||''}</span>`;
-      btn.onclick=()=>{
-        state.headNozzleTypes[i]=nt;
-        state.touched.stage2=true; state.confirmed=false; render();
-      };
-      typeRow.appendChild(btn);
-    });
-    wrap.appendChild(typeRow);
-
-    // Nozzle COUNT row
-    const countLbl = document.createElement('div');
-    countLbl.style.cssText='font-size:13px;font-weight:600;color:#5A6478;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px';
-    countLbl.textContent='Number of Nozzles';
-    wrap.appendChild(countLbl);
-    const sel = document.createElement('select');
-    sel.className='form-select';
-    sel.style.maxWidth='200px';
-    for(let n=1;n<=12;n++){
-      const opt=document.createElement('option');
-      opt.value=n; opt.textContent=`${n} nozzle${n>1?'s':''}`;
-      if((state.headNozzles[i]||1)===n) opt.selected=true;
-      sel.appendChild(opt);
-    }
-    sel.onchange=()=>{state.headNozzles[i]=parseInt(sel.value); state.confirmed=false; renderPanel(); updateBuildCompletionDate();};
-    wrap.appendChild(sel);
-    container.appendChild(wrap);
-  }
-}
-
-// --- STAGE 3 (removed) ---
-// Nozzle type is now per-head inside renderHeadNozzles() (BR-27, BR-30).
-// TODO: confirm with Parker whether Interchangeable Setup should still appear for a single-head with both HEN and SW-HEN nozzle types selected (BR-22 currently removes it for multiple heads only)
-
-// --- STAGE 3b ---
-function renderStage3b(){
-  const el=$('sec-fixturing');
-  toggle(el, state.flex===false);
-  if(state.flex===false){
-    const opts=['Black Handle (Standard)','Bulkhead Tee','Custom'];
-    renderOptGroup('fixturing-opts', opts.map(o=>({val:o,label:o,hint:''})), state.fixturing, v=>{
-      state.fixturing=v; state.touched.stage3b=true; state.confirmed=false; render();
-    });
-    toggle($('fixturing-custom-wrap'), state.fixturing==='Custom');
-  }
-}
-function onFixturingCustom(v){ state.fixturingCustom=v; }
-
-// --- STAGE 4 ---
-function renderStage4(){
-  const c=$('module-opts');
-  c.innerHTML='';
-
-  let mods = [...ALL_MODULES];
-  if(state.flex===true){
-    mods=FLEX_ONLY_MODULES;
-  } else if(state.flex===false){
-    mods=NON_FLEX_MODULES;
-  }
-
-  if(mods.length===0){
-    hide($('module-no-match'));
-    return;
-  }
-
-  mods.forEach(m=>{
-    const btn=makeOptBtn(m,'',state.selectedModule===m,false,()=>{
-      state.selectedModule=m; state.touched.stage4=true; state.confirmed=false;
-      renderVoltage(); renderChannels(); updateBuildCompletionDate(); render();
-    });
+function renderTypeOpts(){
+  const c = $('type-opts'); c.innerHTML='';
+  ['Sales','Demo','Rental'].forEach(v=>{
+    const btn = makeOptBtn(v,'',state.type===v,false,()=>{state.type=v;state.confirmed=false;render();});
     c.appendChild(btn);
   });
-
-  show($('voltage-row'));
-  renderVoltage();
-  renderChannels();
-  hide($('module-no-match'));
 }
 
-function renderVoltage(){
-  const v=getVoltage(state.selectedModule);
-  $('field-voltage').textContent = v||'— (select module)';
-  $('sum-voltage').textContent = v||'—';
-}
-
-function renderChannels(){
-  const isMulti = state.selectedModule && MULTI_CHANNEL_MODULES.some(m=>state.selectedModule.includes(m.replace(' FLEX','').replace(' HF','')));
-  const el=$('channels-row');
-  if(isMulti && state.selectedModule){
-    show(el);
-    // Derive channel count from module name
-    let ch='—';
-    const match=state.selectedModule.match(/(\d)CH/);
-    if(match) ch=match[1];
-    $('field-channels').textContent=ch+' channel'+(ch!=='1'?'s':'');
-  } else {
-    hide(el);
-  }
-}
-
-// --- STAGE 5 ---
-function renderStage5(){
-  const body=$('options-body');
-  body.innerHTML='';
-
-  const mod=state.selectedModule||'';
-  const isFlex=state.flex===true;
-
-  // Hide all options for FLEX (per spec constraint) — but surface Q-004 flag
-  if(isFlex){
-    const note=document.createElement('div');
-    note.className='amber-note';
-    note.innerHTML=`All options are hidden for FLEX systems per the spec.
-      <span class="q-flag" onclick="openQ('Q-004')">⚑ Q-004 — additive tension</span>
-      <br><span style="font-size:12px;margin-top:6px;display:block;color:#7A4E0A">Open question: FLEX hose rules reference Additive Injection being set — see Q-004 for the unresolved logic.</span>`;
-    body.appendChild(note);
-    return;
-  }
-
-  const optDefs=[
-    {id:'Ultrafiltration',label:'Ultrafiltration',hint:'Available for 1500, 1500A, 4000 only',
-      available: !mod || mod.includes('1500') || mod.includes('4000')},
-    {id:'Additive Injection',label:'Additive Injection',hint:'Not available for 1500 or 1500A',
-      available: !mod || (!mod.includes('1500 (') && !mod.includes('1500A'))},
-    {id:'Intrinsically Safe',label:'Intrinsically Safe',hint:'Intrinsically safe valve (PV)',
-      available: true},
-  ];
-
-  optDefs.forEach(o=>{
-    const sel=state.options.includes(o.id);
-    const locked=!o.available;
-    const row=document.createElement('div');
-    row.className='toggle-row '+(locked?'off':sel?'on':'off');
-    if(locked) row.style.opacity='.4';
-    row.innerHTML=`<div class="check-box ${sel&&!locked?'on':'off'}">${sel&&!locked?'✓':''}</div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:15px;font-weight:600">${o.label}${locked?'<span style="font-size:11px;font-weight:400;color:#B45309;margin-left:8px">(not available for this module)</span>':''}</div>
-        <div style="font-size:12px;color:#8A94A6">${o.hint}</div>
-      </div>`;
-    if(!locked){
-      row.style.cursor='pointer';
-      row.onclick=()=>{
-        if(sel) state.options=state.options.filter(x=>x!==o.id);
-        else state.options=[...state.options,o.id];
-        state.touched.stage5=true; state.confirmed=false; render();
-      };
-    }
-    body.appendChild(row);
+function renderQuals(){
+  ['flex','is','add','uf'].forEach(k=>{
+    const row = $('q-'+k);
+    const box = $('q-'+k+'-box');
+    if(state[k]){ row.classList.add('on'); box.className='check-box on'; box.textContent='✓'; }
+    else { row.classList.remove('on'); box.className='check-box off'; box.textContent=''; }
   });
 }
 
-// --- STAGE 6 ---
-function renderStage6(){
-  const body=$('hoses-body');
-  body.innerHTML='';
-  const mod=state.selectedModule||'';
+function toggleQual(k){ state[k]=!state[k]; state.confirmed=false; render(); }
 
-  function addSection(title, content){
-    const wrap=document.createElement('div');
-    wrap.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">${title}</div>${content}`;
-    body.appendChild(wrap);
-    body.appendChild(document.createElement('br'));
-  }
-
-  // Determine branch
-  const isStd1500 = mod.includes('1500') && !mod.includes('FLEX');
-  const is1500Flex = mod.includes('1500 FLEX');
-  const isBigFlex = ['3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'].some(m=>mod.includes(m.replace(' FLEX','').replace(' HF','')));
-  const is4000 = mod.includes('4000');
-
-  if(!mod){
-    body.innerHTML='<div style="font-size:13px;color:#8A94A6">Select a module in Stage 4 to see hose options.</div>';
-    return;
-  }
-
-  // Hose type
-  const c_ht=document.createElement('div');
-  c_ht.style.marginBottom='16px';
-  const htLabel=document.createElement('div');
-  htLabel.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px';
-
-  if(isStd1500||is4000){
-    htLabel.textContent='Hose type';
-    c_ht.appendChild(htLabel);
-    const htOpts=document.createElement('div');
-    htOpts.style.cssText='display:flex;gap:10px;flex-wrap:wrap';
-    ['Black Corrugated','Bare PFA Tubing'].forEach(v=>{
-      const btn=makeOptBtn(v,'',state.hoseType===v,false,()=>{state.hoseType=v;state.touched.stage6=true;state.confirmed=false;render();});
-      htOpts.appendChild(btn);
+function renderHosesChan(){
+  // Hoses
+  const hc = $('hose-opts'); hc.innerHTML='';
+  [1,2,3,4].forEach(v=>{
+    const btn=makeOptBtn(String(v),'',state.hoses===v,false,()=>{
+      state.hoses=v;
+      if(state.channels>v) state.channels=v;
+      state.confirmed=false; render();
     });
-    c_ht.appendChild(htOpts);
-    body.appendChild(c_ht);
-
-    // Dual Split — automatic (BR-61): derived from flex=false + multipleHeads=true
-    const autoDualSplit = state.flex===false && state.multipleHeads===true;
-    if(autoDualSplit){
-      const dsBr=document.createElement('div');
-      dsBr.style.marginBottom='16px';
-      dsBr.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:6px">Dual Split</div>
-        <div class="ro-field" style="display:inline-block;color:#1F9D6B">Automatic — Flex=No + multiple heads</div>`;
-      const inp=document.createElement('input');
-      inp.type='text'; inp.placeholder='Split details (optional)…';
-      inp.style.cssText='margin-top:8px;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%';
-      inp.value=state.dualSplitDetails||'';
-      inp.oninput=()=>{state.dualSplitDetails=inp.value;};
-      dsBr.appendChild(inp);
-      body.appendChild(dsBr);
-    }
-  } else if(is1500Flex){
-    const htDisp=document.createElement('div');
-    htDisp.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Hose type</div>
-      <div class="ro-field" style="display:inline-block">Black Corrugated <span style="font-size:11px;color:#8A94A6">(fixed for 1500 FLEX)</span></div>`;
-    body.appendChild(htDisp);
-  } else if(isBigFlex){
-    const htDisp=document.createElement('div');
-    htDisp.innerHTML=`<div style="font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px">Hose type</div>
-      <div class="ro-field" style="display:inline-block">Black Corrugated <span style="font-size:11px;color:#8A94A6">(fixed for FLEX systems)</span></div>`;
-    body.appendChild(htDisp);
-  }
-
-  // Standard length
-  const slBr=document.createElement('div');
-  slBr.style.marginBottom='16px';
-  const slLbl=document.createElement('div');
-  slLbl.style.cssText='font-size:14px;font-weight:600;color:#16203A;margin-bottom:9px';
-  slLbl.textContent='Standard Length?';
-  slBr.appendChild(slLbl);
-  const slOpts=document.createElement('div');
-  slOpts.style.cssText='display:flex;gap:10px;flex-wrap:wrap';
-  [{val:true,l:'Yes',h:'Use standard assembly'},{val:false,l:'No',h:'Specify custom length'}].forEach(o=>{
-    const btn=makeOptBtn(o.l,o.h,state.standardLength===o.val,false,()=>{state.standardLength=o.val;state.touched.stage6=true;state.confirmed=false;render();});
-    slOpts.appendChild(btn);
+    hc.appendChild(btn);
   });
-  slBr.appendChild(slOpts);
 
-  // Standard length autofill
-  if(state.standardLength===true){
-    let stdDesc='';
-    if(isStd1500||is4000) stdDesc='16\' Hose Assembly – 1/2" OD Tube, 1/2" OD Tube';
-    else if(is1500Flex) stdDesc='15\' FLEX Hose Assembly – Hose 1/2" Braided SS, 1/4" Braided SS, M12 Cable';
-    else stdDesc='28\' FLEX Hose Assembly – 3/4" Braided SS CDA, 1/4" Braided SS CO2';
-    const desc=document.createElement('div');
-    desc.style.cssText='margin-top:8px;font-size:13px;color:#1F9D6B;background:#E8F6EF;border:1px solid #B4E2CC;border-radius:8px;padding:9px 12px;font-family:"IBM Plex Mono",monospace';
-    desc.textContent=stdDesc;
-    slBr.appendChild(desc);
-  } else if(state.standardLength===false){
-    const inp=document.createElement('input');
-    inp.type='text'; inp.placeholder='Custom length details…';
-    inp.style.cssText='margin-top:8px;border:1px solid #E4E8EF;border-radius:8px;padding:9px 12px;background:#fff;font-size:14px;font-family:inherit;color:#16203A;width:100%';
-    inp.value=state.customLengthDetails||'';
-    inp.oninput=()=>{state.customLengthDetails=inp.value;};
-    slBr.appendChild(inp);
-  }
-  body.appendChild(slBr);
+  // Channels — cap to hoses
+  const cc = $('chan-opts'); cc.innerHTML='';
+  [1,2,3,4].forEach(v=>{
+    const locked = v > state.hoses;
+    const btn=makeOptBtn(String(v),'',state.channels===v,locked,()=>{
+      state.channels=v; state.confirmed=false; render();
+    });
+    cc.appendChild(btn);
+  });
+
+  const capNote = $('chan-cap-note');
+  if(state.hoses < 4) capNote.classList.remove('hidden');
+  else capNote.classList.add('hidden');
+  capNote.textContent = `Channels capped to ${state.hoses} (cannot exceed hoses)`;
 }
 
-// --- STAGE 7 ---
-function renderStage7(){
-  const hasAdditive=state.options.includes('Additive Injection');
-  const el=$('sec-additive-hoses');
-  toggle(el, hasAdditive);
-  if(!hasAdditive) return;
-
-  const mod=state.selectedModule||'';
-  const body=$('additive-hoses-body');
-  body.innerHTML='';
-
-  let hoses=[];
-  if(mod.includes('1500 FLEX')){
-    hoses=[
-      '15\' Pneumatic Hose Assembly – 1/2" Braided SS, 1/4" Braided SS, 1/4" OD Tube',
-      '15\' Additive FLEX Hose Assembly – 1/4" Braided SS, 1/4" OD Tube'
-    ];
-  } else if(mod.includes('4000')){
-    hoses=['Some version of a 16\' additive hose assembly'];
-    const flag=document.createElement('span');
-    flag.className='q-flag';
-    flag.textContent='⚑ Q-002 — spec unconfirmed';
-    flag.onclick=()=>openQ('Q-002');
-  } else if(['3000 FLEX','3500 FLEX','3500 FLEX HF','9000 FLEX','9500 FLEX'].some(m=>mod.includes(m.replace(' FLEX','').replace(' HF','')))){
-    hoses=['28\' Pneumatic FLEX Hose Assembly – 1/2" Braided SS, 1/4" Braided SS, 1/4" OD Tube'];
-  } else if(mod.includes('1500')||mod.includes('1500A')){
-    // 1500/1500A: none per spec
-    body.innerHTML='<div style="font-size:13px;color:#8A94A6">No additive hoses for 1500/1500A systems.</div>';
-    return;
-  }
-
-  if(hoses.length===0){
-    body.innerHTML='<div style="font-size:13px;color:#8A94A6">Select a module to see additive hose specification.</div>';
-    return;
-  }
-
-  hoses.forEach(h=>{
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:8px;background:#E8F6EF;border:1px solid #B4E2CC;margin-bottom:8px';
-    row.innerHTML=`<span style="color:#1F9D6B;font-size:16px">✓</span><span class="mono" style="font-size:13px;color:#0B5A50">${h}</span>`;
-    body.appendChild(row);
-    if(h.includes('16\'')&&mod.includes('4000')){
-      const note=document.createElement('div');
-      note.innerHTML=`<span class="q-flag" onclick="openQ('Q-002')" style="margin-left:0">⚑ Q-002 — exact 4000 additive hose spec unconfirmed</span>`;
-      body.appendChild(note);
-    }
+function renderNozzleType(){
+  const c=$('nozzle-type-opts'); c.innerHTML='';
+  [
+    {v:'Coanda',h:'General coatings'},
+    {v:'Coax',h:'Coaxial spray'},
+    {v:'HEN',h:'High Efficiency Nozzle'},
+    {v:'SWH',h:'SW-HEN variant'},
+  ].forEach(({v,h})=>{
+    const btn=makeOptBtn(v,h,state.nozzleType===v,false,()=>{state.nozzleType=v;state.confirmed=false;render();});
+    c.appendChild(btn);
   });
 }
 
-// --- STEPPER ---
+function changeNozzles(delta){
+  const next = state.nozzleCount + delta;
+  if(next<1||next>28) return;
+  state.nozzleCount=next; state.confirmed=false; render();
+}
+
+function renderNozzleCount(){
+  $('noz-val').textContent = state.nozzleCount;
+  $('noz-dec').disabled = state.nozzleCount <= 1;
+  $('noz-inc').disabled = state.nozzleCount >= 28;
+}
+
 function renderStepper(){
-  const s=$('stepper');
-  s.innerHTML='';
+  const s=$('stepper'); s.innerHTML='';
   const steps=[
-    {n:'1',l:'Project',key:'sec-project',done: !!state.type && state.shipConfirmed},
-    {n:'2',l:'Flex config',key:'sec-flex',done: state.flex!==null},
-    {n:'3',l:'Fixturing',key:'sec-fixturing',done: state.flex===false ? !!state.fixturing : true},
-    {n:'4',l:'Options',key:'sec-options',done: !!state.touched.stage5},
-    {n:'5',l:'Modules',key:'sec-modules',done: !!state.selectedModule},
-    {n:'6',l:'Hoses',key:'sec-hoses',done: state.standardLength!==null},
-    {n:'7',l:'Resolve',key:'sec-resolve',done: state.confirmed},
+    {n:'1',l:'Qualifiers',  key:'sec-step1', done: true},  // always touched (defaults are valid)
+    {n:'2',l:'Hoses',       key:'sec-step2', done: true},
+    {n:'3',l:'Nozzle',      key:'sec-step3', done: !!state.nozzleType},
+    {n:'4',l:'Resolve',     key:'sec-resolve',done: state.confirmed},
   ];
-  let firstIncomplete=null;
+  let firstIncomplete = null;
+  steps.forEach((st,i)=>{ if(!st.done && firstIncomplete===null) firstIncomplete=i; });
   steps.forEach((st,i)=>{
-    if(!st.done && firstIncomplete===null) firstIncomplete=i;
-  });
-  steps.forEach((st,i)=>{
-    const isActive=i===firstIncomplete;
-    const isDone=st.done;
-    const isResolve=i===6;
+    const isActive = i===firstIncomplete;
+    const isDone   = st.done;
     let cls='step-pill ';
-    if(isResolve&&state.confirmed) cls+='resolved';
-    else if(isDone) cls+='complete';
+    if(i===3&&state.confirmed) cls+='resolved';
+    else if(isDone&&!isActive) cls+='complete';
     else if(isActive) cls+='active';
     else cls+='upcoming';
     const pill=document.createElement('button');
     pill.className=cls;
-    const mark = isDone||state.confirmed ? '✓' : st.n;
+    const mark = (isDone&&!isActive)||state.confirmed ? '✓' : st.n;
     pill.innerHTML=`<span class="step-dot">${mark}</span><span>${st.l}</span>`;
-    pill.onclick=()=>{
-      const el=$(st.key);
-      if(el){ const y=el.getBoundingClientRect().top+window.scrollY-80; window.scrollTo({top:y,behavior:'smooth'}); }
-    };
+    pill.onclick=()=>{ const el=$(st.key); if(el){ const y=el.getBoundingClientRect().top+window.scrollY-80; window.scrollTo({top:y,behavior:'smooth'}); } };
     s.appendChild(pill);
   });
 }
 
-// --- PANEL ---
 function renderPanel(){
-  const matches=resolveSystem();
-  const matchCount=matches.length;
-  $('matchCountLabel').textContent = matchCount===0 ? 'No match' : matchCount===1 ? '1 match' : `${matchCount} matches`;
-
-  // Summary items
-  const sum=$('stage-summary');
-  sum.innerHTML='';
-  function sumRow(label,value,warn){
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;padding:4px 0;border-bottom:1px solid #F4F6FA';
-    row.innerHTML=`<span style="color:#8A94A6;font-weight:500">${label}</span><span class="mono" style="color:${warn?'#B45309':'#16203A'};font-size:12px">${value||'—'}</span>`;
-    sum.appendChild(row);
+  // Inputs summary
+  const sum=$('inputs-summary'); sum.innerHTML='';
+  function sumRow(lbl,val){
+    const r=document.createElement('div');
+    r.style.cssText='display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;padding:3px 0;border-bottom:1px solid #F4F6FA';
+    r.innerHTML=`<span style="color:#8A94A6;font-weight:500">${lbl}</span><span class="mono" style="font-size:12px;color:#16203A">${val||'—'}</span>`;
+    sum.appendChild(r);
   }
-  sumRow('Type', state.type);
-  sumRow('Flex', state.flex===null?null:state.flex?'Yes':'No');
-  const activeNozzleTypesPanel = getActiveNozzleTypes();
-  sumRow('Nozzle type(s)', activeNozzleTypesPanel.join(', ')||null);
-  sumRow('Total nozzles', state.flex!==null ? String(totalNozzleCount()) : null);
-  sumRow('Module', state.selectedModule);
-  const optStr=state.options.join(', ')||'None';
-  sumRow('Options', optStr);
+  sumRow('Flex', state.flex?'Yes':'No');
+  sumRow('Intrinsically Safe', state.is?'Yes':'No');
+  sumRow('Additive', state.add?'Yes':'No');
+  sumRow('Ultra Filtration', state.uf?'Yes':'No');
+  sumRow('Hoses / Channels', `${state.hoses} / ${state.channels}`);
+  sumRow('Nozzle type', state.nozzleType||'—');
+  sumRow('Nozzle count', String(state.nozzleCount));
 
-  $('sum-type').textContent=state.type||'—';
-  $('sum-flex').textContent=state.flex===null?'—':state.flex?'Yes — Flex':'No — Fixed';
-  $('sum-nozzles').textContent=getActiveNozzleTypes().join(', ')||'—';
-  $('sum-options').textContent=state.options.length?state.options.join(', '):'None';
+  // Hide all outputs first
+  hide($('out-empty'));
+  hide($('out-no-match'));
+  hide($('out-stock'));
+  hide($('out-custom'));
+  hide($('out-multi'));
 
-  // Match cards
-  hide($('no-match-msg'));
-  hide($('single-match-card'));
-  hide($('multi-match-card'));
+  if(!state.nozzleType){
+    show($('out-empty'));
+    $('match-label').textContent='—';
+    return;
+  }
 
-  if(state.flex===null){
-    hide($('build-summary-block'));
+  const rows = lookup();
+  if(rows.length===0){
+    show($('out-no-match'));
+    $('match-label').textContent='No match';
+    return;
+  }
+
+  // Use first row as primary
+  const row = rows[0];
+  const isCustom = row[10] === 'Custom';
+  $('match-label').textContent = `1 match`;
+
+  if(isCustom){
+    show($('out-custom'));
+    $('out-custom-name').textContent = row[8];
+    $('out-custom-base').textContent = row[10];
+    $('out-custom-kit').textContent  = row[11];
+    // Fix: base/kit are indices 10,11 — nozzle_head is index 9
+    $('out-custom-base').textContent = row[10];
+    $('out-custom-kit').textContent  = row[11];
   } else {
-    show($('build-summary-block'));
-    if(matchCount===0){
-      show($('no-match-msg'));
-    } else if(matchCount===1){
-      show($('single-match-card'));
-      $('resolved-name').textContent=matches[0].system_name;
-      $('resolved-base-pdm').textContent=matches[0].base_pdm;
-      $('resolved-kit-pdm').textContent=matches[0].kit_pdm;
-      toggle($('locked-badge'), state.confirmed);
-    } else {
-      show($('multi-match-card'));
-      const list=$('multi-match-list');
-      list.innerHTML='';
-      matches.forEach(m=>{
-        const row=document.createElement('div');
-        row.className='multi-match-item';
-        row.textContent=`${m.system_name}  |  Base: ${m.base_pdm}  |  Kit: ${m.kit_pdm}`;
-        list.appendChild(row);
-      });
-      // Also show in single-match card as selection needed
-      show($('multi-match-card'));
-    }
+    show($('out-stock'));
+    $('out-stock-name').textContent = row[8];
+    $('out-stock-base').textContent = row[10];
+    $('out-stock-kit').textContent  = row[11];
   }
+
+  // Fix PDM indices (nozzle=0, count=1, hoses=2, ch=3, flex=4, is=5, add=6, uf=7, omega=8, head=9, base=10, kit=11)
+  const basePDM = row[10];
+  const kitPDM  = row[11];
+  const omegaName = row[8];
+  const headType  = row[9];
+
+  if(isCustom){
+    $('out-custom-name').textContent = omegaName;
+    $('out-custom-base').textContent = basePDM;
+    $('out-custom-kit').textContent  = kitPDM;
+  } else {
+    $('out-stock-name').textContent = omegaName;
+    $('out-stock-base').textContent = basePDM;
+    $('out-stock-kit').textContent  = kitPDM;
+  }
+
+  // Multiple rows with same combo — surface them
+  if(rows.length>1){
+    show($('out-multi'));
+    const list=$('out-multi-list');
+    list.innerHTML='';
+    rows.forEach(r=>{
+      const d=document.createElement('div');
+      d.style.cssText='padding:3px 0;border-bottom:1px solid #F2D9A8';
+      d.textContent=`${r[8]}  |  Head: ${r[9]}  |  Base: ${r[10]}  |  Kit: ${r[11]}`;
+      list.appendChild(d);
+    });
+    $('match-label').textContent=`${rows.length} rows`;
+  }
+
+  // Nozzle head type note
+  const headNote = isCustom ? $('out-custom') : $('out-stock');
+  // Remove old head note if any
+  const oldNote = headNote.querySelector('.head-note');
+  if(oldNote) oldNote.remove();
+  const hn = document.createElement('div');
+  hn.className='head-note';
+  hn.style.cssText=`margin-top:10px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;display:inline-block;${
+    headType==='Custom'
+    ? 'background:#FEF4E3;color:#B45309;border:1px solid #F2D9A8'
+    : 'background:#E8F6EF;color:#0B5A50;border:1px solid #B4E2CC'
+  }`;
+  hn.textContent = headType==='Custom' ? '⚑ Custom nozzle head — engineering required' : '✓ Standard nozzle head';
+  headNote.appendChild(hn);
+
+  toggle($('locked-badge'), state.confirmed);
 }
+
+function toggle(el,cond){ cond?show(el):hide(el); }
 
 function confirmSheet(){
   state.confirmed=true;
-  state.touched={...state.touched,stage1:true,stage2:true,stage3:true,stage4:true,stage5:true,stage6:true};
   render();
 }
 
-// ============================================================
-// BOOT
-// ============================================================
+// ─── INIT ────────────────────────────────────────────────────────────────────
+function init(){
+  const today = new Date(2026,5,17);
+  $('f-contact').textContent='Samantha Baguio';
+  $('f-date').textContent=today.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  render();
+}
+
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
