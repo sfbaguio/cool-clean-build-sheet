@@ -32,6 +32,7 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
 
 .toggle-row{display:flex;align-items:flex-start;gap:12px;text-align:left;padding:12px 14px;border-radius:10px;cursor:pointer;font-family:inherit;transition:box-shadow .12s,border-color .12s,background .12s;border:1.5px solid #E4E8EF;background:#fff}
 .toggle-row.on{border-color:#0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.10)}
+.toggle-row.locked{border:1.5px solid #EDF0F5;background:#F4F6FA;cursor:not-allowed;opacity:.4;pointer-events:none}
 .check-box{width:20px;height:20px;border-radius:6px;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
 .check-box.on{background:#0E9F8E;color:#fff}
 .check-box.off{background:#fff;border:1.5px solid #C3CAD6;color:transparent}
@@ -97,12 +98,58 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
 /* channel cap note */
 .cap-note{font-size:12px;color:#B45309;margin-top:6px}
 
-/* stage 8 draft */
+/* system tray */
+.sys-card{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:1.5px solid #E4E8EF;background:#fff;cursor:pointer;transition:border-color .12s,background .12s;font-family:inherit;text-align:left;width:100%}
+.sys-card.active{border-color:#0E9F8E;background:#F0FBF8;box-shadow:0 0 0 3px rgba(14,159,142,.10)}
+.sys-card-num{width:26px;height:26px;border-radius:6px;background:#16203A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'IBM Plex Mono',monospace;flex:none}
+.sys-card-num.resolved{background:#0E9F8E}
+.sys-card-name{font-size:14px;font-weight:600;color:#16203A;line-height:1.2}
+.sys-card-sub{font-size:11px;color:#8A94A6;margin-top:2px}
+.sys-add-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;border:1.5px dashed #C3CAD6;background:#F8FAFC;color:#5A6478;font-size:14px;font-weight:500;cursor:pointer;width:100%;justify-content:center;transition:border-color .12s,background .12s;font-family:inherit}
+.sys-add-btn:hover{border-color:#0E9F8E;color:#0B5A50;background:#F0FBF8}
+
+/* generation picker */
+.gen-pick-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+/* quantity stepper (per-system, reuses nozzle stepper styles) */
+.qty-stepper{display:flex;align-items:center;gap:12px;margin-top:8px}
+
+/* checkout / summary */
+.checkout-hidden{display:none}
+.co-section{margin-bottom:20px}
+.co-section-title{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#8A94A6;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #EEF1F6}
+.co-sys-block{border:1px solid #E4E8EF;border-radius:10px;padding:14px 16px;margin-bottom:10px;background:#FAFBFD}
+.co-sys-block.stock{border-color:#B4E2CC;background:#F0FBF8}
+.co-sys-block.custom{border-color:#F2D9A8;background:#FEF4E3}
+.co-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;padding:2px 0}
+.co-lbl{color:#8A94A6;font-weight:500}
+.co-val{font-family:'IBM Plex Mono',monospace;color:#16203A;font-size:12px}
+.co-placeholder{font-family:'IBM Plex Mono',monospace;color:#B45309;font-size:12px}
+
+@media print{
+  body{background:#fff}
+  .no-print{display:none!important}
+  .cfg-grid{display:block}
+  .cfg-aside{display:none!important}
+  #checkout-panel{display:block!important;max-width:100%;padding:0}
+  #sec-project,#sec-step1,#sec-step2,#sec-step3,#sec-stage8,#sec-sys-tray,#stepper{display:none!important}
+  .card{box-shadow:none;border:1px solid #ddd;margin-bottom:16px}
+}
+
+/* stage 8 */
 .stage8-section{margin-bottom:16px}
 .stage8-title{font-size:13px;font-weight:600;color:#5A6478;letter-spacing:.4px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #EEF1F6}
-.stage8-row{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:8px;background:#F8FAFC;border:1px solid #EEF1F6;margin-bottom:6px;cursor:not-allowed;opacity:.7}
-.stage8-check{width:18px;height:18px;border-radius:4px;border:1.5px solid #C3CAD6;flex:none;margin-top:1px}
-.stage8-lbl{font-size:14px;color:#5A6478}
+.stage8-row{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:8px;background:#F8FAFC;border:1px solid #EEF1F6;margin-bottom:6px}
+.stage8-lbl{font-size:14px;color:#5A6478;flex:1}
+
+/* equipment unit stepper (Stage 8) */
+.eq-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:8px;background:#F8FAFC;border:1px solid #EEF1F6;margin-bottom:6px}
+.eq-name{font-size:14px;color:#16203A;flex:1}
+.eq-rec{font-size:11px;color:#8A94A6;margin-top:2px}
+.eq-stepper{display:flex;align-items:center;gap:8px;flex:none}
+.eq-btn{width:30px;height:30px;flex:none;border:1px solid #D8DDE7;background:#fff;border-radius:6px;font-size:16px;line-height:1;cursor:pointer;color:#16203A;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.eq-btn:disabled{opacity:.35;cursor:not-allowed}
+.eq-val{min-width:28px;text-align:center;font-size:18px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#16203A}
 </style>
 </head>
 <body>
@@ -131,7 +178,7 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
       </div>
       <div style="display:flex;align-items:center;gap:10px">
         <div class="mono" style="font-size:12px;color:#5A6478;border:1px solid #E4E8EF;border-radius:8px;padding:8px 13px;background:#F8FAFC">Quote #FA-20488</div>
-        <button style="display:flex;align-items:center;gap:7px;border:1px solid #D8DDE7;background:#fff;color:#16203A;border-radius:8px;padding:8px 14px;font-size:14px;font-weight:500;cursor:pointer">Export</button>
+        <button id="checkout-btn" style="display:flex;align-items:center;gap:7px;border:1px solid #0E9F8E;background:#F0FBF8;color:#0B5A50;border-radius:8px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" onclick="openCheckout()">Checkout / Export →</button>
       </div>
     </div>
   </div>
@@ -184,30 +231,38 @@ United Kingdom</textarea>
         </div>
       </div>
 
+      <!-- SYSTEMS TRAY -->
+      <div class="card" id="sec-sys-tray">
+        <div class="prog-header">
+          <div class="badge dark" style="font-size:11px">SYS</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:600;line-height:1.2">Systems in this project</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Configure one or more Omega systems per project</div>
+          </div>
+        </div>
+        <div id="sys-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px"></div>
+        <button class="sys-add-btn" onclick="addSystem()">+ Add another system</button>
+      </div>
+
       <!-- STEP 1: QUALIFIERS -->
       <div class="card" id="sec-step1">
         <div class="prog-header">
           <div class="badge dark">1</div>
           <div style="flex:1">
             <div style="font-size:17px;font-weight:600;line-height:1.2">Qualifiers</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Step 1 · four yes/no toggles</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Step 1 · system qualifiers</div>
           </div>
         </div>
-        <div class="qual-grid">
-          <div class="toggle-row" id="q-flex" onclick="toggleQual('flex')">
-            <div class="check-box off" id="q-flex-box"></div>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:15px;font-weight:600">Flex</div>
-              <div style="font-size:12px;color:#8A94A6">Adjustable / FLEX system</div>
-            </div>
-          </div>
-          <div class="toggle-row" id="q-is" onclick="toggleQual('is')">
-            <div class="check-box off" id="q-is-box"></div>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:15px;font-weight:600">Intrinsically Safe</div>
-              <div style="font-size:12px;color:#8A94A6">ATEX / spark-safe (PV valve)</div>
-            </div>
-          </div>
+
+        <!-- CO2 Source -->
+        <div style="margin-bottom:14px">
+          <div class="field-label" style="margin-bottom:8px">CO2 Source</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="co2source-opts"></div>
+        </div>
+
+        <!-- Additive Injection -->
+        <div style="margin-bottom:10px">
+          <div class="field-label" style="margin-bottom:8px">Additive Injection</div>
           <div class="toggle-row" id="q-add" onclick="toggleQual('add')">
             <div class="check-box off" id="q-add-box"></div>
             <div style="flex:1;min-width:0">
@@ -215,7 +270,36 @@ United Kingdom</textarea>
               <div style="font-size:12px;color:#8A94A6">Additive injection (AIS)</div>
             </div>
           </div>
-          <div class="toggle-row" id="q-uf" onclick="toggleQual('uf')">
+        </div>
+
+        <!-- Flex -->
+        <div style="margin-bottom:10px">
+          <div class="field-label" style="margin-bottom:8px">Flex</div>
+          <div class="toggle-row" id="q-flex" onclick="toggleQual('flex')">
+            <div class="check-box off" id="q-flex-box"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:15px;font-weight:600">Flex</div>
+              <div style="font-size:12px;color:#8A94A6">Automated CO2 on/off switch</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intrinsically Safe (shown/locked based on Flex) -->
+        <div style="margin-bottom:10px">
+          <div class="field-label" style="margin-bottom:8px" id="q-is-label">Intrinsically Safe <span id="q-is-note" style="font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;color:#8A94A6"></span></div>
+          <div class="toggle-row" id="q-is" onclick="handleIsClick()">
+            <div class="check-box off" id="q-is-box"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:15px;font-weight:600">Intrinsically Safe</div>
+              <div style="font-size:12px;color:#8A94A6">ATEX / spark-safe (PV valve)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ultra Filtration (shown/locked based on Flex) -->
+        <div>
+          <div class="field-label" style="margin-bottom:8px" id="q-uf-label">Ultra Filtration <span id="q-uf-note" style="font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;color:#8A94A6"></span></div>
+          <div class="toggle-row" id="q-uf" onclick="handleUfClick()">
             <div class="check-box off" id="q-uf-box"></div>
             <div style="flex:1;min-width:0">
               <div style="font-size:15px;font-weight:600">Ultra Filtration</div>
@@ -275,42 +359,41 @@ United Kingdom</textarea>
 
       <!-- STEP 4 OUTPUTS (left column mirror) removed — outputs are in right panel only -->
 
-      <!-- STAGE 8 DRAFT -->
+      <!-- STAGE 8: Controls, boosters, condensers & other -->
+      <!-- TODO (pending client confirmation): 1500 Black-handle vs L-bracket conditional input; deeper CO2-source -> conditioning-equipment logic. NOT YET IMPLEMENTED. -->
       <div class="card" id="sec-stage8">
         <div class="prog-header">
           <div class="badge dark" style="font-size:11px">S8</div>
           <div style="flex:1">
             <div style="font-size:17px;font-weight:600;line-height:1.2">Controls, boosters, condensers &amp; other</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Rules TBD</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Recommended units based on nozzle count</div>
           </div>
         </div>
-        <div class="draft-banner">⚑ Draft — behaviour rules TBD</div>
-        <div style="font-size:13px;color:#B45309;margin-bottom:16px;line-height:1.4">These fields are not wired up — no selection logic is active.</div>
         <div class="stage8-section">
           <div class="stage8-title">Controls</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Ethernet IP <span style="font-size:11px;color:#8A94A6">(Standard)</span></div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Discrete I/O through Remote Communication Connector</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">BUS Communication Type</div></div>
+          <div class="stage8-row"><div class="stage8-lbl">Ethernet IP <span style="font-size:11px;color:#8A94A6">(Standard)</span></div></div>
+          <div class="stage8-row"><div class="stage8-lbl">Discrete I/O through Remote Communication Connector</div></div>
+          <div class="stage8-row"><div class="stage8-lbl">BUS Communication Type</div></div>
         </div>
         <div class="stage8-section">
-          <div class="stage8-title">Booster modules</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">AMP Booster</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LB-40 Booster</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">ECB1 (CS) / ECB1-SS / ECB1-R / ECB2 (CS) / ECB2-SS</div></div>
+          <div class="stage8-title">Booster modules — recommended unit counts</div>
+          <div id="eq-amp"></div>
+          <div id="eq-ecb"></div>
+          <div id="eq-lb40"></div>
         </div>
         <div class="stage8-section">
-          <div class="stage8-title">Condensers &amp; purification</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">LC2000 / LC2000-W</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Purification System / Purification System – Basic</div></div>
+          <div class="stage8-title">Condensers &amp; purification — recommended unit counts</div>
+          <div id="eq-lc2000"></div>
+          <div id="eq-purification"></div>
         </div>
         <div class="stage8-section">
           <div class="stage8-title">Interconnect hoses</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">No Hoses / Standard Bottle Connection Kit / CO2 Supply to Booster / Booster to Omega / Liquid Booster–LC2000 to Omega / Custom</div></div>
+          <div class="stage8-row"><div class="stage8-lbl">No Hoses / Standard Bottle Connection Kit / CO2 Supply to Booster / Booster to Omega / Liquid Booster–LC2000 to Omega / Custom</div></div>
         </div>
         <div class="stage8-section">
           <div class="stage8-title">Other</div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">CO2 Monitor (Standard)</div></div>
-          <div class="stage8-row"><div class="stage8-check"></div><div class="stage8-lbl">Intrinsically Safe CO2 Monitor (Class 1, Division 1)</div></div>
+          <div class="stage8-row"><div class="stage8-lbl">CO2 Monitor (Standard)</div></div>
+          <div class="stage8-row"><div class="stage8-lbl">Intrinsically Safe CO2 Monitor (Class 1, Division 1)</div></div>
         </div>
       </div>
 
@@ -386,12 +469,34 @@ United Kingdom</textarea>
           <div id="out-multi-list" style="font-size:12px;font-family:'IBM Plex Mono',monospace;color:#7A4E0A"></div>
         </div>
 
-        <button class="confirm-btn" onclick="confirmSheet()">Confirm build sheet →</button>
-        <div style="margin-top:10px;font-size:12px;color:#9AA3B5;line-height:1.45">All outputs are driven from the Omega system sizing spreadsheet. Confirm to lock.</div>
+        <!-- Generation picker — shown only when resolved omega string contains multiple gens -->
+        <div id="gen-section" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid #F4F6FA">
+          <div class="field-label" style="margin-bottom:6px">Generation</div>
+          <div id="gen-opts" class="gen-pick-row"></div>
+          <div id="gen-note" style="font-size:12px;color:#8A94A6;margin-top:6px"></div>
+        </div>
+
+        <button class="confirm-btn" onclick="confirmSheet()">Confirm &amp; add to project →</button>
+        <div style="margin-top:10px;font-size:12px;color:#9AA3B5;line-height:1.45">All outputs are driven from the Omega system sizing spreadsheet. Confirm to lock and add to the project.</div>
       </div>
     </aside>
 
   </div>
+</div>
+
+<!-- CHECKOUT PANEL (hidden until openCheckout()) -->
+<div id="checkout-panel" class="checkout-hidden no-print" style="max-width:900px;margin:0 auto;padding:24px 28px 80px">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap">
+    <div>
+      <div style="font-size:24px;font-weight:700;letter-spacing:-.2px">Project Build Sheet — Summary</div>
+      <div style="font-size:14px;color:#8A94A6;margin-top:4px">Review all systems before exporting</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button onclick="closeCheckout()" style="padding:9px 16px;border:1px solid #D8DDE7;border-radius:8px;background:#fff;color:#16203A;font-size:14px;font-weight:500;cursor:pointer">← Back to configurator</button>
+      <button onclick="window.print()" style="padding:9px 16px;border:1px solid #0E9F8E;border-radius:8px;background:#0E9F8E;color:#fff;font-size:14px;font-weight:600;cursor:pointer">Print / Save as PDF</button>
+    </div>
+  </div>
+  <div id="checkout-content"></div>
 </div>
 
 <script>
@@ -817,28 +922,55 @@ const CSV = [
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
+// Project-level fields live at the top level; per-system config lives in state.systems[].
+// state.activeSystem is the index of the system currently being edited.
+
+function makeSystem(){
+  return {
+    // Step 1
+    co2Source: null,    // 'Liquid' | 'Gas'
+    flex: false,
+    is: false,
+    add: false,
+    uf: false,
+    // Step 2
+    hoses: 1,
+    channels: 1,
+    // Step 3
+    nozzleType: null,   // 'Coanda'|'Coax'|'HEN'|'SWH'
+    nozzleCount: 1,
+    // Stage 8 equipment overrides (null = use recommended)
+    eqAmp: null,
+    eqEcb: null,
+    eqLb40: null,
+    eqLc2000: null,
+    eqPurification: null,
+    // Generation (null = not yet chosen; set when omega string contains multiple gens)
+    // NOTE: parsing gen from the omega string is a temporary approach — a dedicated
+    // generation column in the CSV would be cleaner once the data is available.
+    generation: null,   // 'Gen2' | 'Gen3' | null
+    // Quantity
+    quantity: 1,
+    // Confirm
+    confirmed: false,
+    // Type (Sales/Demo/Rental) — each system can have its own type
+    type: null,
+  };
+}
+
 const state = {
-  type: null,
+  // Project-level (shared across all systems)
   shipConfirmed: false,
-  // Step 1
-  flex: false,
-  is: false,
-  add: false,
-  uf: false,
-  // Step 2
-  hoses: 1,
-  channels: 1,
-  // Step 3
-  nozzleType: null,   // 'Coanda'|'Coax'|'HEN'|'SWH'
-  nozzleCount: 1,
-  // Confirm
-  confirmed: false,
+  // Multi-system
+  systems: [makeSystem()],
+  activeSystem: 0,
 };
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function $(id){ return document.getElementById(id); }
 function show(el){ if(el) el.classList.remove('hidden'); }
 function hide(el){ if(el) el.classList.add('hidden'); }
+function toggle(el,cond){ cond?show(el):hide(el); }
 
 function makeOptBtn(label, hint, selected, locked, onClick){
   const btn = document.createElement('button');
@@ -848,17 +980,44 @@ function makeOptBtn(label, hint, selected, locked, onClick){
   return btn;
 }
 
+// Shorthand to get the currently active system object
+function sys(){ return state.systems[state.activeSystem]; }
+
+// ─── MULTI-SYSTEM ACTIONS ────────────────────────────────────────────────────
+function addSystem(){
+  state.systems.push(makeSystem());
+  state.activeSystem = state.systems.length - 1;
+  render();
+  const el = $('sec-sys-tray');
+  if(el){ window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'}); }
+}
+
+function switchSystem(idx){
+  state.activeSystem = idx;
+  render();
+}
+
+// ─── GENERATION PARSING ──────────────────────────────────────────────────────
+// NOTE: parsing gen from the omega string is a temporary approach.
+// A dedicated generation column in the CSV would be cleaner once the data is updated.
+function parseGens(omegaStr){
+  const matches = omegaStr.match(/Gen\s*\d+/gi) || [];
+  const seen = new Set();
+  return matches.map(m => m.replace(/\s+/,'').replace('gen','Gen')).filter(m=>{ if(seen.has(m)) return false; seen.add(m); return true; });
+}
+
 // ─── LOOKUP ──────────────────────────────────────────────────────────────────
 function lookup(){
-  const flexVal  = state.flex  ? "Yes" : "No";
-  const isVal    = state.is    ? "YES" : "NO";
-  const addVal   = state.add   ? "YES" : "NO";
-  const ufVal    = state.uf    ? "YES" : "NO";
+  const s = sys();
+  const flexVal  = s.flex  ? "Yes" : "No";
+  const isVal    = s.is    ? "YES" : "NO";
+  const addVal   = s.add   ? "YES" : "NO";
+  const ufVal    = s.uf    ? "YES" : "NO";
   return CSV.filter(r =>
-    r[0] === state.nozzleType &&
-    r[1] === state.nozzleCount &&
-    r[2] === state.hoses &&
-    r[3] === state.channels &&
+    r[0] === s.nozzleType &&
+    r[1] === s.nozzleCount &&
+    r[2] === s.hoses &&
+    r[3] === s.channels &&
     r[4] === flexVal &&
     r[5] === isVal &&
     r[6] === addVal &&
@@ -869,11 +1028,15 @@ function lookup(){
 // ─── RENDER ──────────────────────────────────────────────────────────────────
 function render(){
   renderShipBtn();
+  renderSysTray();
   renderTypeOpts();
+  renderCo2Source();
   renderQuals();
   renderHosesChan();
   renderNozzleType();
   renderNozzleCount();
+  renderEquipment();
+  renderGenQty();
   renderStepper();
   renderPanel();
 }
@@ -891,54 +1054,193 @@ function renderShipBtn(){
   }
 }
 
+function removeSystem(idx){
+  if(state.systems.length <= 1) return;
+  state.systems.splice(idx, 1);
+  if(state.activeSystem >= state.systems.length) state.activeSystem = state.systems.length - 1;
+  render();
+}
+
+function renderSysTray(){
+  const list = $('sys-list'); list.innerHTML='';
+  const canDelete = state.systems.length > 1;
+  state.systems.forEach((s,i)=>{
+    const rows = (()=>{
+      const fv=s.flex?"Yes":"No",iv=s.is?"YES":"NO",av=s.add?"YES":"NO",uv=s.uf?"YES":"NO";
+      return CSV.filter(r=>r[0]===s.nozzleType&&r[1]===s.nozzleCount&&r[2]===s.hoses&&r[3]===s.channels&&r[4]===fv&&r[5]===iv&&r[6]===av&&r[7]===uv);
+    })();
+    const resolved = rows.length > 0;
+    const name = resolved ? rows[0][8] : 'Not yet resolved';
+    const sub = s.nozzleType ? `${s.nozzleType} · ${s.nozzleCount} nozzle${s.nozzleCount!==1?'s':''} · ${s.hoses}H/${s.channels}CH` : 'Configure below ↓';
+
+    const wrap = document.createElement('div');
+    wrap.style.cssText='display:flex;align-items:center;gap:8px';
+
+    const card = document.createElement('button');
+    card.className = 'sys-card' + (i===state.activeSystem?' active':'');
+    card.style.flex='1';
+    card.onclick = ()=>switchSystem(i);
+
+    const numEl = document.createElement('div');
+    numEl.className = 'sys-card-num' + (resolved?' resolved':'');
+    numEl.textContent = i+1;
+
+    const info = document.createElement('div');
+    info.style.flex='1';
+    info.innerHTML=`<div class="sys-card-name">${name}</div><div class="sys-card-sub">${sub}${s.confirmed?' · ✓ Confirmed':''}</div>`;
+
+    const qty = document.createElement('div');
+    qty.style.cssText='font-size:11px;color:#8A94A6;font-family:\'IBM Plex Mono\',monospace;flex:none';
+    qty.textContent = `×${s.quantity}`;
+
+    card.appendChild(numEl); card.appendChild(info);
+    wrap.appendChild(card);
+
+    // Inline quantity stepper
+    const qtyWrap = document.createElement('div');
+    qtyWrap.style.cssText='display:flex;align-items:center;gap:5px;flex:none';
+
+    const qDec = document.createElement('button');
+    qDec.style.cssText='width:24px;height:24px;border-radius:6px;border:1px solid #D8DDE7;background:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#16203A;font-family:inherit;flex:none';
+    qDec.textContent='−';
+    qDec.disabled = s.quantity <= 1;
+    qDec.onclick=(e)=>{ e.stopPropagation(); if(s.quantity>1){ state.systems[i].quantity--; render(); } };
+
+    const qVal = document.createElement('div');
+    qVal.style.cssText='font-size:13px;font-weight:600;font-family:\'IBM Plex Mono\',monospace;color:#16203A;min-width:20px;text-align:center';
+    qVal.textContent = `×${s.quantity}`;
+
+    const qInc = document.createElement('button');
+    qInc.style.cssText='width:24px;height:24px;border-radius:6px;border:1px solid #D8DDE7;background:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#16203A;font-family:inherit;flex:none';
+    qInc.textContent='+';
+    qInc.onclick=(e)=>{ e.stopPropagation(); state.systems[i].quantity++; render(); };
+
+    qtyWrap.appendChild(qDec);
+    qtyWrap.appendChild(qVal);
+    qtyWrap.appendChild(qInc);
+    wrap.appendChild(qtyWrap);
+
+    if(canDelete){
+      const del = document.createElement('button');
+      del.title = 'Remove this system';
+      del.style.cssText='flex:none;width:30px;height:30px;border-radius:8px;border:1px solid #E4E8EF;background:#fff;color:#8A94A6;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s,color .12s,border-color .12s;font-family:inherit';
+      del.textContent='×';
+      del.onmouseenter=()=>{ del.style.background='#FEF2F2'; del.style.color='#DC2626'; del.style.borderColor='#FECACA'; };
+      del.onmouseleave=()=>{ del.style.background='#fff'; del.style.color='#8A94A6'; del.style.borderColor='#E4E8EF'; };
+      del.onclick=(e)=>{ e.stopPropagation(); removeSystem(i); };
+      wrap.appendChild(del);
+    }
+
+    list.appendChild(wrap);
+  });
+}
+
 function renderTypeOpts(){
   const c = $('type-opts'); c.innerHTML='';
   ['Sales','Demo','Rental'].forEach(v=>{
-    const btn = makeOptBtn(v,'',state.type===v,false,()=>{state.type=v;state.confirmed=false;render();});
+    const btn = makeOptBtn(v,'',sys().type===v,false,()=>{sys().type=v;sys().confirmed=false;render();});
+    c.appendChild(btn);
+  });
+}
+
+function renderCo2Source(){
+  const c = $('co2source-opts'); c.innerHTML='';
+  ['Liquid','Gas'].forEach(v=>{
+    const btn = makeOptBtn(v, v==='Liquid'?'Liquid CO2 supply':'Gaseous CO2 supply', sys().co2Source===v, false, ()=>{
+      sys().co2Source=v; sys().confirmed=false; render();
+    });
     c.appendChild(btn);
   });
 }
 
 function renderQuals(){
-  ['flex','is','add','uf'].forEach(k=>{
+  // Flex + Additive: standard toggle rendering
+  ['flex','add'].forEach(k=>{
     const row = $('q-'+k);
     const box = $('q-'+k+'-box');
     if(state[k]){ row.classList.add('on'); box.className='check-box on'; box.textContent='✓'; }
     else { row.classList.remove('on'); box.className='check-box off'; box.textContent=''; }
   });
+
+  // IS: only selectable when Flex=Yes; non-Flex systems are inherently safe so IS is meaningless there.
+  // UF: only selectable when Flex=No; UF cannot be combined with a Flex system.
+  const isRow = $('q-is');
+  const isBox = $('q-is-box');
+  const ufRow = $('q-uf');
+  const ufBox = $('q-uf-box');
+  const isNote = $('q-is-note');
+  const ufNote = $('q-uf-note');
+
+  if(s.flex){
+    isRow.classList.remove('locked');
+    isRow.style.opacity=''; isRow.style.cursor='';
+    if(s.is){ isRow.classList.add('on'); isBox.className='check-box on'; isBox.textContent='✓'; }
+    else { isRow.classList.remove('on'); isBox.className='check-box off'; isBox.textContent=''; }
+    isNote.textContent='';
+    ufRow.classList.add('locked'); ufRow.classList.remove('on');
+    ufBox.className='check-box off'; ufBox.textContent='';
+    ufNote.textContent='— not available with Flex';
+  } else {
+    ufRow.classList.remove('locked');
+    ufRow.style.opacity=''; ufRow.style.cursor='';
+    if(s.uf){ ufRow.classList.add('on'); ufBox.className='check-box on'; ufBox.textContent='✓'; }
+    else { ufRow.classList.remove('on'); ufBox.className='check-box off'; ufBox.textContent=''; }
+    ufNote.textContent='';
+    isRow.classList.add('locked'); isRow.classList.remove('on');
+    isBox.className='check-box off'; isBox.textContent='';
+    isNote.textContent='— available only with Flex';
+  }
 }
 
-function toggleQual(k){ state[k]=!state[k]; state.confirmed=false; render(); }
+function toggleQual(k){
+  sys()[k]=!sys()[k];
+  if(k==='flex'){
+    if(sys().flex){ sys().uf=false; }
+    else           { sys().is=false; }
+  }
+  sys().confirmed=false;
+  render();
+}
+
+function handleIsClick(){
+  if(!sys().flex) return;
+  toggleQual('is');
+}
+
+function handleUfClick(){
+  if(sys().flex) return;
+  toggleQual('uf');
+}
 
 function renderHosesChan(){
-  // Hoses
+  const s = sys();
   const hc = $('hose-opts'); hc.innerHTML='';
   [1,2,3,4].forEach(v=>{
-    const btn=makeOptBtn(String(v),'',state.hoses===v,false,()=>{
-      state.hoses=v;
-      if(state.channels>v) state.channels=v;
-      state.confirmed=false; render();
+    const btn=makeOptBtn(String(v),'',s.hoses===v,false,()=>{
+      sys().hoses=v;
+      if(sys().channels>v) sys().channels=v;
+      sys().confirmed=false; render();
     });
     hc.appendChild(btn);
   });
 
-  // Channels — cap to hoses
   const cc = $('chan-opts'); cc.innerHTML='';
   [1,2,3,4].forEach(v=>{
-    const locked = v > state.hoses;
-    const btn=makeOptBtn(String(v),'',state.channels===v,locked,()=>{
-      state.channels=v; state.confirmed=false; render();
+    const locked = v > s.hoses;
+    const btn=makeOptBtn(String(v),'',s.channels===v,locked,()=>{
+      sys().channels=v; sys().confirmed=false; render();
     });
     cc.appendChild(btn);
   });
 
   const capNote = $('chan-cap-note');
-  if(state.hoses < 4) capNote.classList.remove('hidden');
+  if(s.hoses < 4) capNote.classList.remove('hidden');
   else capNote.classList.add('hidden');
-  capNote.textContent = `Channels capped to ${state.hoses} (cannot exceed hoses)`;
+  capNote.textContent = `Channels capped to ${s.hoses} (cannot exceed hoses)`;
 }
 
 function renderNozzleType(){
+  const s = sys();
   const c=$('nozzle-type-opts'); c.innerHTML='';
   [
     {v:'Coanda',h:'General coatings'},
@@ -946,30 +1248,133 @@ function renderNozzleType(){
     {v:'HEN',h:'High Efficiency Nozzle'},
     {v:'SWH',h:'SW-HEN variant'},
   ].forEach(({v,h})=>{
-    const btn=makeOptBtn(v,h,state.nozzleType===v,false,()=>{state.nozzleType=v;state.confirmed=false;render();});
+    const btn=makeOptBtn(v,h,s.nozzleType===v,false,()=>{sys().nozzleType=v;sys().confirmed=false;render();});
     c.appendChild(btn);
   });
 }
 
 function changeNozzles(delta){
-  const next = state.nozzleCount + delta;
+  const next = sys().nozzleCount + delta;
   if(next<1||next>28) return;
-  state.nozzleCount=next; state.confirmed=false; render();
+  sys().nozzleCount=next; sys().confirmed=false; render();
 }
 
 function renderNozzleCount(){
-  $('noz-val').textContent = state.nozzleCount;
-  $('noz-dec').disabled = state.nozzleCount <= 1;
-  $('noz-inc').disabled = state.nozzleCount >= 28;
+  $('noz-val').textContent = sys().nozzleCount;
+  $('noz-dec').disabled = sys().nozzleCount <= 1;
+  $('noz-inc').disabled = sys().nozzleCount >= 28;
+}
+
+// Equipment max-nozzles-per-unit table
+const EQ_SPECS = [
+  {id:'amp',          label:'AMP Booster',        maxPerUnit:7,  stateKey:'eqAmp'},
+  {id:'ecb',          label:'ECB',                maxPerUnit:60, stateKey:'eqEcb'},
+  {id:'lb40',         label:'LB-40',              maxPerUnit:8,  stateKey:'eqLb40'},
+  {id:'lc2000',       label:'LC-2000',            maxPerUnit:6,  stateKey:'eqLc2000'},
+  {id:'purification', label:'Purification System',maxPerUnit:13, stateKey:'eqPurification'},
+];
+
+function renderEquipment(){
+  const s = sys();
+  EQ_SPECS.forEach(spec=>{
+    const container = $('eq-'+spec.id);
+    if(!container) return;
+    const rec = Math.ceil(s.nozzleCount / spec.maxPerUnit);
+    const current = s[spec.stateKey] !== null ? s[spec.stateKey] : rec;
+
+    container.innerHTML='';
+    const row = document.createElement('div');
+    row.className='eq-row';
+
+    const nameDiv = document.createElement('div');
+    nameDiv.innerHTML=`<div class="eq-name">${spec.label}</div><div class="eq-rec">Recommended: ${rec} unit${rec!==1?'s':''} (max ${spec.maxPerUnit} nozzles each)</div>`;
+
+    const stepper = document.createElement('div');
+    stepper.className='eq-stepper';
+
+    const decBtn = document.createElement('button');
+    decBtn.className='eq-btn';
+    decBtn.textContent='−';
+    decBtn.disabled = current <= 0;
+    decBtn.onclick = ()=>{
+      const cur = sys()[spec.stateKey]!==null ? sys()[spec.stateKey] : rec;
+      if(cur<=0) return;
+      sys()[spec.stateKey] = cur-1;
+      render();
+    };
+
+    const valEl = document.createElement('div');
+    valEl.className='eq-val';
+    valEl.textContent = current;
+    if(current !== rec){
+      valEl.style.color='#B45309';
+      valEl.title='Overridden from recommended';
+    }
+
+    const incBtn = document.createElement('button');
+    incBtn.className='eq-btn';
+    incBtn.textContent='+';
+    incBtn.onclick = ()=>{
+      const cur = sys()[spec.stateKey]!==null ? sys()[spec.stateKey] : rec;
+      sys()[spec.stateKey] = cur+1;
+      render();
+    };
+
+    const resetBtn = document.createElement('button');
+    resetBtn.style.cssText='font-size:11px;color:#8A94A6;background:none;border:none;cursor:pointer;padding:0 4px;text-decoration:underline';
+    resetBtn.textContent='reset';
+    resetBtn.title='Reset to recommended';
+    resetBtn.style.display = current!==rec ? '' : 'none';
+    resetBtn.onclick = ()=>{ sys()[spec.stateKey]=null; render(); };
+
+    stepper.appendChild(decBtn);
+    stepper.appendChild(valEl);
+    stepper.appendChild(incBtn);
+    stepper.appendChild(resetBtn);
+
+    row.appendChild(nameDiv);
+    row.appendChild(stepper);
+    container.appendChild(row);
+  });
+}
+
+function renderGenQty(){
+  const s = sys();
+  const rows = lookup();
+  const genSection = $('gen-section');
+  const genOpts = $('gen-opts');
+  const genNote = $('gen-note');
+  genOpts.innerHTML='';
+  if(rows.length > 0){
+    const omegaStr = rows[0][8];
+    const gens = parseGens(omegaStr);
+    if(gens.length > 1){
+      genSection.style.display='';
+      genNote.textContent = `"${omegaStr}" covers multiple generations — choose one.`;
+      gens.forEach(g=>{
+        const btn = makeOptBtn(g, '', s.generation===g, false, ()=>{ sys().generation=g; render(); });
+        genOpts.appendChild(btn);
+      });
+      if(s.generation && !gens.includes(s.generation)) sys().generation = null;
+    } else {
+      genSection.style.display='none';
+      if(gens.length===1 && s.generation !== gens[0]){ sys().generation = gens[0]; }
+      else if(gens.length===0){ sys().generation = null; }
+    }
+  } else {
+    genSection.style.display='none';
+    sys().generation = null;
+  }
 }
 
 function renderStepper(){
-  const s=$('stepper'); s.innerHTML='';
+  const s = sys();
+  const stepper=$('stepper'); stepper.innerHTML='';
   const steps=[
-    {n:'1',l:'Qualifiers',  key:'sec-step1', done: true},  // always touched (defaults are valid)
+    {n:'1',l:'Qualifiers',  key:'sec-step1', done: true},
     {n:'2',l:'Hoses',       key:'sec-step2', done: true},
-    {n:'3',l:'Nozzle',      key:'sec-step3', done: !!state.nozzleType},
-    {n:'4',l:'Resolve',     key:'sec-resolve',done: state.confirmed},
+    {n:'3',l:'Nozzle',      key:'sec-step3', done: !!s.nozzleType},
+    {n:'4',l:'Resolve',     key:'sec-resolve',done: s.confirmed},
   ];
   let firstIncomplete = null;
   steps.forEach((st,i)=>{ if(!st.done && firstIncomplete===null) firstIncomplete=i; });
@@ -977,21 +1382,21 @@ function renderStepper(){
     const isActive = i===firstIncomplete;
     const isDone   = st.done;
     let cls='step-pill ';
-    if(i===3&&state.confirmed) cls+='resolved';
+    if(i===3&&s.confirmed) cls+='resolved';
     else if(isDone&&!isActive) cls+='complete';
     else if(isActive) cls+='active';
     else cls+='upcoming';
     const pill=document.createElement('button');
     pill.className=cls;
-    const mark = (isDone&&!isActive)||state.confirmed ? '✓' : st.n;
+    const mark = (isDone&&!isActive)||s.confirmed ? '✓' : st.n;
     pill.innerHTML=`<span class="step-dot">${mark}</span><span>${st.l}</span>`;
     pill.onclick=()=>{ const el=$(st.key); if(el){ const y=el.getBoundingClientRect().top+window.scrollY-80; window.scrollTo({top:y,behavior:'smooth'}); } };
-    s.appendChild(pill);
+    stepper.appendChild(pill);
   });
 }
 
 function renderPanel(){
-  // Inputs summary
+  const s = sys();
   const sum=$('inputs-summary'); sum.innerHTML='';
   function sumRow(lbl,val){
     const r=document.createElement('div');
@@ -999,22 +1404,23 @@ function renderPanel(){
     r.innerHTML=`<span style="color:#8A94A6;font-weight:500">${lbl}</span><span class="mono" style="font-size:12px;color:#16203A">${val||'—'}</span>`;
     sum.appendChild(r);
   }
-  sumRow('Flex', state.flex?'Yes':'No');
-  sumRow('Intrinsically Safe', state.is?'Yes':'No');
-  sumRow('Additive', state.add?'Yes':'No');
-  sumRow('Ultra Filtration', state.uf?'Yes':'No');
-  sumRow('Hoses / Channels', `${state.hoses} / ${state.channels}`);
-  sumRow('Nozzle type', state.nozzleType||'—');
-  sumRow('Nozzle count', String(state.nozzleCount));
+  sumRow('System', `#${state.activeSystem+1} of ${state.systems.length}`);
+  sumRow('CO2 Source', s.co2Source||'—');
+  sumRow('Additive', s.add?'Yes':'No');
+  sumRow('Flex', s.flex?'Yes':'No');
+  sumRow('Intrinsically Safe', s.flex ? (s.is?'Yes':'No') : 'N/A (no Flex)');
+  sumRow('Ultra Filtration', !s.flex ? (s.uf?'Yes':'No') : 'N/A (Flex)');
+  sumRow('Hoses / Channels', `${s.hoses} / ${s.channels}`);
+  sumRow('Nozzle type', s.nozzleType||'—');
+  sumRow('Nozzle count', String(s.nozzleCount));
 
-  // Hide all outputs first
   hide($('out-empty'));
   hide($('out-no-match'));
   hide($('out-stock'));
   hide($('out-custom'));
   hide($('out-multi'));
 
-  if(!state.nozzleType){
+  if(!s.nozzleType){
     show($('out-empty'));
     $('match-label').textContent='—';
     return;
@@ -1027,43 +1433,27 @@ function renderPanel(){
     return;
   }
 
-  // Use first row as primary
   const row = rows[0];
-  const isCustom = row[10] === 'Custom';
-  $('match-label').textContent = `1 match`;
+  const isCustom = row[9] === 'Custom';
+  $('match-label').textContent = rows.length > 1 ? `${rows.length} rows` : `1 match`;
 
-  if(isCustom){
-    show($('out-custom'));
-    $('out-custom-name').textContent = row[8];
-    $('out-custom-base').textContent = row[10];
-    $('out-custom-kit').textContent  = row[11];
-    // Fix: base/kit are indices 10,11 — nozzle_head is index 9
-    $('out-custom-base').textContent = row[10];
-    $('out-custom-kit').textContent  = row[11];
-  } else {
-    show($('out-stock'));
-    $('out-stock-name').textContent = row[8];
-    $('out-stock-base').textContent = row[10];
-    $('out-stock-kit').textContent  = row[11];
-  }
-
-  // Fix PDM indices (nozzle=0, count=1, hoses=2, ch=3, flex=4, is=5, add=6, uf=7, omega=8, head=9, base=10, kit=11)
   const basePDM = row[10];
   const kitPDM  = row[11];
   const omegaName = row[8];
   const headType  = row[9];
 
   if(isCustom){
+    show($('out-custom'));
     $('out-custom-name').textContent = omegaName;
     $('out-custom-base').textContent = basePDM;
     $('out-custom-kit').textContent  = kitPDM;
   } else {
+    show($('out-stock'));
     $('out-stock-name').textContent = omegaName;
     $('out-stock-base').textContent = basePDM;
     $('out-stock-kit').textContent  = kitPDM;
   }
 
-  // Multiple rows with same combo — surface them
   if(rows.length>1){
     show($('out-multi'));
     const list=$('out-multi-list');
@@ -1074,12 +1464,9 @@ function renderPanel(){
       d.textContent=`${r[8]}  |  Head: ${r[9]}  |  Base: ${r[10]}  |  Kit: ${r[11]}`;
       list.appendChild(d);
     });
-    $('match-label').textContent=`${rows.length} rows`;
   }
 
-  // Nozzle head type note
   const headNote = isCustom ? $('out-custom') : $('out-stock');
-  // Remove old head note if any
   const oldNote = headNote.querySelector('.head-note');
   if(oldNote) oldNote.remove();
   const hn = document.createElement('div');
@@ -1092,14 +1479,124 @@ function renderPanel(){
   hn.textContent = headType==='Custom' ? '⚑ Custom nozzle head — engineering required' : '✓ Standard nozzle head';
   headNote.appendChild(hn);
 
-  toggle($('locked-badge'), state.confirmed);
+  toggle($('locked-badge'), s.confirmed);
 }
 
-function toggle(el,cond){ cond?show(el):hide(el); }
-
 function confirmSheet(){
-  state.confirmed=true;
-  render();
+  sys().confirmed=true;
+  renderSysTray();
+  renderPanel();
+  renderStepper();
+  renderGenQty();
+}
+
+// ─── CHECKOUT ────────────────────────────────────────────────────────────────
+function openCheckout(){
+  document.querySelectorAll('#stepper, .cfg-grid').forEach(el=>el.style.display='none');
+  const panel = $('checkout-panel');
+  panel.classList.remove('checkout-hidden');
+  panel.style.display='';
+  renderCheckout();
+}
+
+function closeCheckout(){
+  $('checkout-panel').style.display='none';
+  $('checkout-panel').classList.add('checkout-hidden');
+  document.querySelectorAll('#stepper, .cfg-grid').forEach(el=>el.style.display='');
+}
+
+function renderCheckout(){
+  const co = $('checkout-content');
+  co.innerHTML='';
+
+  const projSec = document.createElement('div');
+  projSec.className='card co-section';
+  projSec.style.marginBottom='20px';
+  const shipText = $('f-ship') ? $('f-ship').value : '';
+  projSec.innerHTML=`
+    <div class="co-section-title">Project details</div>
+    <div class="co-row"><span class="co-lbl">Sales Contact</span><span class="co-val">${$('f-contact')?$('f-contact').textContent:'—'}</span></div>
+    <div class="co-row"><span class="co-lbl">Date</span><span class="co-val">${$('f-date')?$('f-date').textContent:'—'}</span></div>
+    <div class="co-row"><span class="co-lbl">Company</span><span class="co-val">Northgate Coatings Ltd</span></div>
+    <div class="co-row"><span class="co-lbl">Contact</span><span class="co-val">J. Halloran</span></div>
+    <div class="co-row"><span class="co-lbl">Quote Ref</span><span class="co-val">#FA-20488</span></div>
+    <div class="co-row" style="align-items:flex-start;margin-top:4px"><span class="co-lbl">Ship To</span><span class="co-val" style="white-space:pre-line;text-align:right">${shipText}</span></div>
+  `;
+  co.appendChild(projSec);
+
+  const sysSec = document.createElement('div');
+  sysSec.className='co-section';
+  const sysTitle = document.createElement('div');
+  sysTitle.className='co-section-title card';
+  sysTitle.style.cssText='margin-bottom:12px;border-radius:8px;padding:10px 16px';
+  sysTitle.textContent=`Systems (${state.systems.length})`;
+  sysSec.appendChild(sysTitle);
+
+  state.systems.forEach((s,i)=>{
+    const sRows = (()=>{
+      const fv=s.flex?"Yes":"No",iv=s.is?"YES":"NO",av=s.add?"YES":"NO",uv=s.uf?"YES":"NO";
+      return CSV.filter(r=>r[0]===s.nozzleType&&r[1]===s.nozzleCount&&r[2]===s.hoses&&r[3]===s.channels&&r[4]===fv&&r[5]===iv&&r[6]===av&&r[7]===uv);
+    })();
+
+    const resolved = sRows.length > 0;
+    const row = resolved ? sRows[0] : null;
+    const isCustom = resolved && row[9]==='Custom';
+    const omegaName = resolved ? row[8] : 'Not resolved';
+    const basePDM = resolved ? row[10] : '—';
+    const kitPDM  = resolved ? row[11] : '—';
+    const headType = resolved ? row[9] : '—';
+    const gens = resolved ? parseGens(omegaName) : [];
+    const genDisplay = s.generation ? s.generation : (gens.length===1 ? gens[0] : (gens.length>1 ? 'Not selected' : '—'));
+
+    const block = document.createElement('div');
+    block.className = 'co-sys-block' + (isCustom?' custom':resolved?' stock':'');
+
+    const eqLines = EQ_SPECS.map(spec=>{
+      const rec = Math.ceil(s.nozzleCount / spec.maxPerUnit);
+      const cur = s[spec.stateKey] !== null ? s[spec.stateKey] : rec;
+      return `<div class="co-row"><span class="co-lbl">${spec.label}</span><span class="co-val">${cur} unit${cur!==1?'s':''}${cur!==rec?' (override)':''}</span></div>`;
+    }).join('');
+
+    block.innerHTML=`
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="width:26px;height:26px;border-radius:6px;background:${resolved?'#0E9F8E':'#16203A'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'IBM Plex Mono',monospace;flex:none">${i+1}</div>
+        <div style="font-size:16px;font-weight:700;color:${isCustom?'#7A4E0A':resolved?'#0B5A50':'#16203A'}">${omegaName}</div>
+        <div style="margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.6px;padding:3px 9px;border-radius:6px;background:${isCustom?'#F2D9A8':resolved?'#0E9F8E':'#E4E8EF'};color:${isCustom?'#7A4E0A':resolved?'#fff':'#5A6478'}">${isCustom?'CUSTOM':resolved?'STOCK':'PENDING'}</div>
+      </div>
+      <div class="co-row"><span class="co-lbl">Type</span><span class="co-val">${s.type||'—'}</span></div>
+      <div class="co-row"><span class="co-lbl">CO2 Source</span><span class="co-val">${s.co2Source||'—'}</span></div>
+      <div class="co-row"><span class="co-lbl">Flex</span><span class="co-val">${s.flex?'Yes':'No'}</span></div>
+      <div class="co-row"><span class="co-lbl">Intrinsically Safe</span><span class="co-val">${s.flex?(s.is?'Yes':'No'):'N/A'}</span></div>
+      <div class="co-row"><span class="co-lbl">Additive</span><span class="co-val">${s.add?'Yes':'No'}</span></div>
+      <div class="co-row"><span class="co-lbl">Ultra Filtration</span><span class="co-val">${!s.flex?(s.uf?'Yes':'No'):'N/A'}</span></div>
+      <div class="co-row"><span class="co-lbl">Hoses / Channels</span><span class="co-val">${s.hoses} / ${s.channels}</span></div>
+      <div class="co-row"><span class="co-lbl">Nozzle type</span><span class="co-val">${s.nozzleType||'—'}</span></div>
+      <div class="co-row"><span class="co-lbl">Nozzle count</span><span class="co-val">${s.nozzleCount}</span></div>
+      <div class="co-row"><span class="co-lbl">Generation</span><span class="co-val">${genDisplay}</span></div>
+      <div class="co-row"><span class="co-lbl">Quantity</span><span class="co-val">×${s.quantity}</span></div>
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #EEF1F6">
+        <div class="co-row"><span class="co-lbl">Base PDM</span><span class="co-val">${basePDM}</span></div>
+        <div class="co-row"><span class="co-lbl">Kit PDM</span><span class="co-val">${kitPDM}</span></div>
+        <div class="co-row"><span class="co-lbl">Nozzle head</span><span class="co-val">${headType}</span></div>
+        <div class="co-row"><span class="co-lbl">Hose length</span><span class="co-placeholder">TBD — pending CSV update</span></div>
+        <div class="co-row"><span class="co-lbl">Voltage spec</span><span class="co-placeholder">TBD — pending CSV update</span></div>
+      </div>
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #EEF1F6">
+        <div style="font-size:11px;font-weight:600;color:#5A6478;letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px">Conditioning equipment</div>
+        ${eqLines}
+      </div>
+      ${isCustom?'<div style="margin-top:8px;font-size:12px;color:#B45309;background:#fff;border:1px solid #F2D9A8;border-radius:6px;padding:7px 10px">Pricing: next highest existing system + engineering fee</div>':''}
+    `;
+    sysSec.appendChild(block);
+  });
+
+  co.appendChild(sysSec);
+
+  const printNote = document.createElement('div');
+  printNote.className='no-print';
+  printNote.style.cssText='font-size:12px;color:#8A94A6;margin-top:16px;text-align:center;line-height:1.5';
+  printNote.textContent='Use "Print / Save as PDF" above to export this build sheet. In the print dialog, select "Save as PDF" and choose paper size A4 or Letter.';
+  co.appendChild(printNote);
 }
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
