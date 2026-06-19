@@ -150,6 +150,43 @@ button{font-family:inherit;line-height:1.3;border:none;background:none;cursor:po
 .eq-btn{width:30px;height:30px;flex:none;border:1px solid #D8DDE7;background:#fff;border-radius:6px;font-size:16px;line-height:1;cursor:pointer;color:#16203A;display:flex;align-items:center;justify-content:center;font-family:inherit}
 .eq-btn:disabled{opacity:.35;cursor:not-allowed}
 .eq-val{min-width:28px;text-align:center;font-size:18px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#16203A}
+
+/* Stage 8 cart model */
+.s8-item{border:1px solid #E4E8EF;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.s8-item-header{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;background:#FAFBFD;transition:background .12s}
+.s8-item-header:hover{background:#F4F6FA}
+.s8-item-header.checked{background:#F0FBF8;border-bottom:1px solid #C6EAD8}
+.s8-cb{width:18px;height:18px;border-radius:5px;border:1.5px solid #C3CAD6;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none;transition:background .12s,border-color .12s}
+.s8-cb.on{background:#0E9F8E;border-color:#0E9F8E;color:#fff}
+.s8-item-title{font-size:14px;font-weight:600;color:#16203A;flex:1}
+.s8-item-sub{font-size:11px;color:#8A94A6;margin-top:1px}
+.s8-rec{font-size:11px;color:#8A94A6;flex:none}
+.s8-rec.over{color:#B45309;font-weight:600}
+.s8-body{padding:12px 14px;border-top:1px solid #EEF1F6;display:none}
+.s8-body.open{display:block}
+.s8-qty-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.s8-qty-btn{width:26px;height:26px;border-radius:6px;border:1px solid #D8DDE7;background:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#16203A;font-family:inherit;flex:none}
+.s8-qty-val{font-size:15px;font-weight:600;font-family:'IBM Plex Mono',monospace;min-width:22px;text-align:center}
+.s8-qty-lbl{font-size:12px;color:#5A6478}
+.s8-sub-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;color:#16203A}
+.s8-sub-row label{cursor:pointer}
+.s8-radio{accent-color:#0E9F8E}
+.s8-section-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#8A94A6;margin:14px 0 6px}
+.s8-locked{opacity:.4;pointer-events:none}
+.s8-ctrl-btn{display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:8px;border:1.5px solid #E4E8EF;background:#fff;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;transition:border-color .12s,background .12s;text-align:left;width:100%;margin-bottom:6px}
+.s8-ctrl-btn.selected{border-color:#0E9F8E;background:#F0FBF8;color:#0B5A50}
+.s8-ctrl-dot{width:14px;height:14px;border-radius:999px;border:1.5px solid #C3CAD6;flex:none;transition:background .12s,border-color .12s}
+.s8-ctrl-dot.on{background:#0E9F8E;border-color:#0E9F8E}
+/* cart panel */
+.s8-cart{border-top:1px solid #EEF1F6;margin-top:14px;padding-top:12px}
+.s8-cart-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#8A94A6;margin-bottom:8px}
+.s8-cart-empty{font-size:12px;color:#C3CAD6;font-style:italic}
+.s8-cart-line{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;padding:3px 0;border-bottom:1px solid #F4F6FA}
+.s8-cart-name{color:#16203A;font-weight:500}
+.s8-cart-qty{font-family:'IBM Plex Mono',monospace;color:#0E9F8E;font-size:12px;font-weight:600}
+/* nozzle hose */
+.s8-input{border:1px solid #E4E8EF;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;color:#16203A;background:#fff;width:100%}
+.s8-input:focus{outline:2px solid #0E9F8E;border-color:#0E9F8E}
 </style>
 </head>
 <body>
@@ -366,35 +403,34 @@ United Kingdom</textarea>
           <div class="badge dark" style="font-size:11px">S8</div>
           <div style="flex:1">
             <div style="font-size:17px;font-weight:600;line-height:1.2">Controls, boosters, condensers &amp; other</div>
-            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Recommended units based on nozzle count</div>
+            <div style="font-size:11px;color:#8A94A6;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:3px">Select options — ticked items appear in cart</div>
           </div>
         </div>
-        <div class="stage8-section">
-          <div class="stage8-title">Controls</div>
-          <div class="stage8-row"><div class="stage8-lbl">Ethernet IP <span style="font-size:11px;color:#8A94A6">(Standard)</span></div></div>
-          <div class="stage8-row"><div class="stage8-lbl">Discrete I/O through Remote Communication Connector</div></div>
-          <div class="stage8-row"><div class="stage8-lbl">BUS Communication Type</div></div>
-        </div>
-        <div class="stage8-section">
-          <div class="stage8-title">Booster modules — recommended unit counts</div>
-          <div id="eq-amp"></div>
-          <div id="eq-ecb"></div>
-          <div id="eq-lb40"></div>
-        </div>
-        <div class="stage8-section">
-          <div class="stage8-title">Condensers &amp; purification — recommended unit counts</div>
-          <div id="eq-lc2000"></div>
-          <div id="eq-purification"></div>
-        </div>
-        <div class="stage8-section">
-          <div class="stage8-title">Interconnect hoses</div>
-          <div class="stage8-row"><div class="stage8-lbl">No Hoses / Standard Bottle Connection Kit / CO2 Supply to Booster / Booster to Omega / Liquid Booster–LC2000 to Omega / Custom</div></div>
-        </div>
-        <div class="stage8-section">
-          <div class="stage8-title">Other</div>
-          <div class="stage8-row"><div class="stage8-lbl">CO2 Monitor (Standard)</div></div>
-          <div class="stage8-row"><div class="stage8-lbl">Intrinsically Safe CO2 Monitor (Class 1, Division 1)</div></div>
-        </div>
+
+        <div class="s8-section-title">Controls</div>
+        <div id="s8-controls"></div>
+
+        <div class="s8-section-title">Booster modules</div>
+        <div id="s8-amp"></div>
+        <div id="s8-lb40"></div>
+        <div id="s8-ecb"></div>
+
+        <div class="s8-section-title">Condensers &amp; purification</div>
+        <div id="s8-lc2000"></div>
+        <div id="s8-purification"></div>
+
+        <div class="s8-section-title">Interconnect hoses</div>
+        <div id="s8-hoses"></div>
+
+        <div class="s8-section-title">Nozzle Hose</div>
+        <div id="s8-nozzle-hose"></div>
+
+        <div class="s8-section-title">Fixturing</div>
+        <div id="s8-fixturing"></div>
+
+        <div class="s8-section-title">Other</div>
+        <div id="s8-monitors-co2"></div>
+        <div id="s8-monitors-is"></div>
       </div>
 
     </div><!-- end left column -->
@@ -431,11 +467,11 @@ United Kingdom</textarea>
             <div id="out-stock-name" style="font-size:22px;font-weight:700;line-height:1.1;color:#0B5A50;margin-bottom:12px"></div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Base PDM</div>
+                <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">SAP BOM #</div>
                 <div class="mono" id="out-stock-base" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
               </div>
               <div>
-                <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM</div>
+                <div style="font-size:11px;color:#1F9D6B;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM (TBD)</div>
                 <div class="mono" id="out-stock-kit" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
               </div>
             </div>
@@ -453,11 +489,11 @@ United Kingdom</textarea>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <div style="font-size:11px;color:#B45309;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Base PDM</div>
+                <div style="font-size:11px;color:#B45309;font-weight:600;letter-spacing:.5px;text-transform:uppercase">SAP BOM #</div>
                 <div class="mono" id="out-custom-base" style="font-size:13px;color:#7A4E0A;margin-top:2px"></div>
               </div>
               <div>
-                <div style="font-size:11px;color:#B45309;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM</div>
+                <div style="font-size:11px;color:#B45309;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Kit PDM (TBD)</div>
                 <div class="mono" id="out-custom-kit" style="font-size:13px;color:#7A4E0A;margin-top:2px"></div>
               </div>
             </div>
@@ -470,6 +506,9 @@ United Kingdom</textarea>
           <div style="font-size:11px;font-weight:600;color:#B45309;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">⚑ Multiple rows match — review PDMs</div>
           <div id="out-multi-list" style="font-size:12px;font-family:'IBM Plex Mono',monospace;color:#7A4E0A"></div>
         </div>
+
+        <!-- Stage 8 cart -->
+        <div id="s8-cart-panel" style="margin-bottom:14px"></div>
 
         <!-- Generation picker — shown only when resolved omega string contains multiple gens -->
         <div id="gen-section" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid #F4F6FA">
@@ -503,424 +542,509 @@ United Kingdom</textarea>
 
 <script>
 // ─── LOOKUP DATA (from CSV, parsed exactly) ───────────────────────────────────
-// Columns: nozzle, nozzle_count, hoses, channels, flex, is, additive, uf, omega, nozzle_head, base_pdm, kit_pdm
+// Columns: nozzle, nozzle_count, hoses, channels, flex, is, additive, uf, omega, sap_bom, custom_flag
 const CSV = [
-["Coanda",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["Coanda",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["Coanda",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
-["Coanda",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
-["Coanda",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["Coax",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["Coax",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["Coax",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
-["Coax",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
-["Coax",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["HEN",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["HEN",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["HEN",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
-["HEN",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
-["HEN",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["SWH",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["SWH",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["SWH",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
-["SWH",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
-["SWH",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["HEN",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["Coanda",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["Coanda",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["Coanda",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
-["Coanda",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
-["Coanda",2,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["Coanda",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Not Custom","4105","TBD"],
-["Coanda",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Not Custom","4105","TBD"],
-["Coanda",2,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 4000 2CH","Not Custom","1126","TBD"],
-["Coanda",2,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","Not Custom","3500-001126,4000-004105","TBD"],
-["Coanda",2,2,2,"Yes","YES","NO","NO","4000 SV Flex 2CH","Not Custom","4105","TBD"],
-["Coax",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["Coax",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Not Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["HEN",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Custom","Gen2-001483,Gen3-003437","Gen3-003571"],
-["HEN",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["HEN",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Custom","Gen3-003437","Gen-003572"],
-["HEN",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Custom","Gen3-003437","Gen3-003573"],
-["HEN",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
-["HEN",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
-["HEN",2,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["HEN",2,2,2,"Yes","NO","YES","NO","3500 2CH Flex w/AIS","Custom","1126","TBD"],
-["Coax",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Not Custom","Gen3-003437","Gen3-003571"],
-["Coax",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Not Custom","Gen3-003437","Gen3-003573"],
-["SWH",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003613"],
-["SWH",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","Custom","Gen2-001483,Gen3-003437","Gen2-TBD,Gen3-003616"],
-["SWH",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","Custom","Gen3-003437","Gen3-003571"],
-["SWH",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","Custom","Gen3-003437","Gen3-003573"],
-["Coax",2,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","Not Custom","Gen3-003437","Gen-003572"],
-["Coax",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Not Custom","4105","TBD"],
-["Coax",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Not Custom","4105","TBD"],
-["Coax",2,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 4000 2CH","Not Custom","3500-001126,4000-004105","TBD"],
-["Coax",2,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","Not Custom","3500-001126,4000-004105","TBD"],
-["Coax",2,2,2,"Yes","YES","NO","NO","4000 SV Flex 2CH","Not Custom","4105","TBD"],
-["SWH",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
-["SWH",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
-["SWH",2,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["SWH",2,2,2,"Yes","NO","YES","NO","3500 2CH Flex w/AIS","Custom","1126","TBD"],
-["Coax",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
-["Coax",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Not Custom","4105","TBD"],
-["Coax",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
-["Coax",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
-["Coanda",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["Coanda",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["Coanda",3,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
-["Coanda",3,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
-["Coanda",3,2,2,"Yes","NO","NO","NO","4000 SV 2CH","Custom","4105","TBD"],
-["Coanda",3,2,2,"Yes","YES","YES","NO","4000 PV w/AIS 2CH","Custom","4105","TBD"],
-["Coanda",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
-["Coanda",3,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Not Custom","4105","TBD"],
-["Coanda",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
-["Coanda",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
-["HEN",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
-["HEN",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Not Custom","4105","TBD"],
-["HEN",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
-["HEN",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
-["Coax",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["Coax",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["Coax",3,2,2,"No","NO","NO","NO","4000 FLC 2CH","Custom","4105","TBD"],
-["Coax",3,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","Custom","4105","TBD"],
-["Coax",3,2,2,"Yes","NO","NO","NO","4000 SV 2CH","Custom","4105","TBD"],
-["Coax",3,2,2,"Yes","YES","YES","NO","4000 PV w/AIS 2CH","Custom","4105","TBD"],
-["HEN",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["HEN",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["HEN",3,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["HEN",3,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["SWH",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","Not Custom","4105","TBD"],
-["SWH",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Not Custom","4105","TBD"],
-["SWH",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Not Custom","4105","TBD"],
-["SWH",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Not Custom","4105","TBD"],
-["SWH",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["SWH",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["SWH",3,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["SWH",3,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coax",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
-["Coax",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
-["Coax",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
-["Coanda",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["Coanda",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["Coanda",4,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
-["Coanda",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","Not Custom","4105","TBD"],
-["Coanda",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
-["Coanda",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
-["Coanda",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
-["HEN",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","Not Custom","4105","TBD"],
-["HEN",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
-["HEN",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
-["HEN",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
-["Coax",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["Coax",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["Coax",4,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
-["Coax",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["HEN",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["HEN",4,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["HEN",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",4,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["HEN",4,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
-["HEN",4,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["HEN",4,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
-["SWH",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","Not Custom","4105","TBD"],
-["SWH",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Not Custom","4105","TBD"],
-["SWH",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Not Custom","4105","TBD"],
-["SWH",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Not Custom","4105","TBD"],
-["SWH",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["SWH",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["SWH",4,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["SWH",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["SWH",4,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["SWH",4,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
-["SWH",4,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["SWH",4,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
-["Coanda",5,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["Coanda",5,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["Coanda",5,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
-["Coanda",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["Coanda",5,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
-["Coanda",5,3,3,"Yes","NO","NO","NO","4000 SV FLEX 3CH","Custom","4105","TBD"],
-["Coanda",5,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
-["Coanda",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["Coanda",5,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
-["Coanda",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
-["Coanda",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS Flex 4CH","Custom","4105","TBD"],
-["Coax",5,1,1,"Yes","NO","NO","NO","3000 SV Flex","Custom","1088","TBD"],
-["Coax",5,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Custom","1088","TBD"],
-["Coax",5,2,2,"Yes","NO","NO","NO","3500 2CH","Custom","1126","TBD"],
-["Coax",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coax",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["Coax",5,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
-["Coax",5,3,3,"Yes","NO","NO","NO","4000 SV FLEX 3CH","Custom","4105","TBD"],
-["Coax",5,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
-["Coax",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["Coax",5,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
-["Coax",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
-["Coax",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS Flex 4CH","Custom","4105","TBD"],
-["HEN",5,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["HEN",5,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["HEN",5,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["HEN",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["HEN",5,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
-["HEN",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
-["HEN",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
-["HEN",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["HEN",5,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
-["HEN",5,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["HEN",5,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
-["SWH",5,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["SWH",5,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["SWH",5,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["SWH",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["SWH",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["SWH",5,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
-["SWH",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
-["SWH",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
-["SWH",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["SWH",5,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
-["SWH",5,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["SWH",5,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
-["Coanda",6,1,1,"Yes","YES","NO","NO","3000 SV Flex","Not Custom","1088","TBD"],
-["Coanda",6,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Not Custom","1088","TBD"],
-["Coanda",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Not Custom","1126","TBD"],
-["Coanda",6,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS","Not Custom","1126","TBD"],
-["Coanda",6,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 9000 SV Flex, 9500 SV Flex","Not Custom","3500-00126,9000-TBD,9500-002341","TBD"],
-["Coanda",6,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
-["Coanda",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["Coanda",6,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
-["Coanda",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["Coanda",6,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
-["Coanda",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["Coanda",6,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
-["Coanda",6,4,4,"Yes","NO","NO","NO","4000 SV FLEX 4CH","Custom","4105","TBD"],
-["Coanda",6,4,4,"Yes","YES","YES","YES","4000 PV Flex w/AIS 4CH","Custom","4105","TBD"],
-["Coax",6,1,1,"Yes","YES","NO","NO","3000 SV Flex","Not Custom","1088","TBD"],
-["Coax",6,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","Not Custom","1088","TBD"],
-["Coax",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Not Custom","1126","TBD"],
-["Coax",6,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS","Not Custom","1126","TBD"],
-["Coax",6,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 9000 SV Flex, 9500 SV Flex","Not Custom","3500-00126,9000-TBD,9500-002341","TBD"],
-["Coax",6,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
-["Coax",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["Coax",6,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","Custom","4105","TBD"],
-["Coax",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["Coax",6,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","Custom","4105","TBD"],
-["Coax",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["Coax",6,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","Custom","4105","TBD"],
-["Coax",6,4,4,"Yes","NO","NO","NO","4000 SV FLEX 4CH","Custom","4105","TBD"],
-["Coax",6,4,4,"Yes","YES","YES","YES","4000 PV Flex w/AIS 4CH","Custom","4105","TBD"],
-["HEN",6,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
-["HEN",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
-["HEN",6,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["HEN",6,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["HEN",6,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
-["HEN",6,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
-["HEN",6,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
-["HEN",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["HEN",6,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
-["HEN",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["HEN",6,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
-["SWH",6,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
-["SWH",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
-["SWH",6,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["SWH",6,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["SWH",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","Custom","4105","TBD"],
-["SWH",6,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","Custom","4105","TBD"],
-["SWH",6,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","Custom","4105","TBD"],
-["SWH",6,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","Custom","4105","TBD"],
-["SWH",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","Custom","4105","TBD"],
-["SWH",6,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","Custom","4105","TBD"],
-["SWH",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","Custom","4105","TBD"],
-["SWH",6,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","Custom","4105","TBD"],
-["Coanda",7,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["Coanda",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["Coanda",7,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coanda",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coax",7,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["Coax",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["Coax",7,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coax",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",7,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
-["HEN",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
-["HEN",7,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["HEN",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["SWH",7,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
-["SWH",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
-["SWH",7,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["SWH",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coax",8,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
-["Coax",8,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
-["Coax",8,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coax",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",8,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
-["Coanda",8,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
-["Coanda",8,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coanda",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",8,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
-["HEN",8,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
-["HEN",8,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["HEN",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["SWH",8,1,1,"Yes","NO","NO","NO","3500 1CH Flex","Custom","1126","TBD"],
-["SWH",8,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","Custom","1126","TBD"],
-["SWH",8,2,2,"Yes","NO","NO","NO","3500 2CH Flex","Custom","1126","TBD"],
-["SWH",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",9,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["Coanda",9,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["Coanda",9,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coanda",9,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coax",9,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["Coax",9,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["Coax",9,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coax",9,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",9,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["HEN",9,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
-["HEN",9,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["HEN",9,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["SWH",9,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["SWH",9,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
-["SWH",9,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["SWH",9,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["Coax",10,1,1,"Yes","NO","NO","NO","3500 Flex 1 CH","Not Custom","1126","TBD"],
-["Coax",10,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
-["Coax",10,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coax",10,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",10,1,1,"Yes","NO","NO","NO","3500 Flex 1 CH","Not Custom","1126","TBD"],
-["Coanda",10,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
-["Coanda",10,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coanda",10,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",10,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["HEN",10,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
-["HEN",10,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["HEN",10,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["SWH",10,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["SWH",10,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
-["SWH",10,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["SWH",10,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",11,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["Coanda",11,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["Coanda",11,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coanda",11,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coax",11,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","Custom","1126","TBD"],
-["Coax",11,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","Custom","1126","TBD"],
-["Coax",11,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coax",11,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",11,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["HEN",11,1,1,"Yes","NO","YES","NO","3500HF1CH w/AIS","Custom","1126","TBD"],
-["HEN",11,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["HEN",11,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["SWH",11,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["SWH",11,1,1,"Yes","NO","YES","NO","3500HF1CH w/AIS","Custom","1126","TBD"],
-["SWH",11,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["SWH",11,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["Coax",12,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
-["Coax",12,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
-["Coax",12,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coax",12,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",12,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","Not Custom","1126","TBD"],
-["Coanda",12,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","Not Custom","1126","TBD"],
-["Coanda",12,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","Custom","1126","TBD"],
-["Coanda",12,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","Custom","1126","TBD"],
-["HEN",12,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["HEN",12,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
-["HEN",12,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["HEN",12,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["SWH",12,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","Custom","1126","TBD"],
-["SWH",12,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","Custom","1126","TBD"],
-["SWH",12,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","Custom","1126","TBD"],
-["SWH",12,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","Custom","1126","TBD"],
-["Coanda",13,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coanda",13,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["Coax",13,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coax",13,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["HEN",13,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["HEN",13,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["SWH",13,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["SWH",13,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",14,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coanda",14,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["Coax",14,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coax",14,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["HEN",14,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["HEN",14,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["SWH",14,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["SWH",14,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",15,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coanda",15,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["Coax",15,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coax",15,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["HEN",15,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["HEN",15,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["SWH",15,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["SWH",15,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",16,2,2,"Yes","NO","NO","NO","9000 SV Flex, 9500 SV Flex","Not Custom","9000-TBD,9500-002341","TBD"],
-["Coax",16,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
-["Coanda",16,2,2,"Yes","NO","NO","NO","9000 SV Flex, 9500 SV Flex","Not Custom","9000-TBD,9500-002341","TBD"],
-["Coanda",16,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","Not Custom","9000-TBD,9500-002341","TBD"],
-["HEN",16,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["HEN",16,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["SWH",16,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["SWH",16,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",17,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coanda",17,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["Coax",17,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coax",17,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["HEN",17,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["HEN",17,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["SWH",17,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["SWH",17,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",18,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coanda",18,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["Coax",18,2,2,"Yes","NO","NO","NO","9000 SV Flex","Custom","TBD","TBD"],
-["Coax",18,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","Custom","TBD","TBD"],
-["HEN",18,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["HEN",18,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["SWH",18,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["SWH",18,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",19,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",19,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",19,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",19,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",20,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
-["Coax",20,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
-["Coanda",20,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
-["Coanda",20,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
-["Coanda",21,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",21,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",21,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",21,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",22,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",22,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",22,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",22,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",23,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",23,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",23,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",23,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",24,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
-["Coax",24,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
-["Coanda",24,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Not Custom","2341","TBD"],
-["Coanda",24,2,2,"Yes","NO","NO","NO","9500 SV Flex","Not Custom","2341","TBD"],
-["Coanda",25,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",25,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",25,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",25,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",26,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",26,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",26,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",26,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",27,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",27,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",27,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",27,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coanda",28,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coanda",28,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"],
-["Coax",28,2,2,"Yes","NO","NO","NO","9500 SV Flex","Custom","2341","TBD"],
-["Coax",28,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","Custom","2341","TBD"]
+["Coanda",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Not Custom"],
+["Coanda",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Not Custom"],
+["Coanda",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Not Custom"],
+["Coanda",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Not Custom"],
+["Coanda",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["Coax",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Not Custom"],
+["Coax",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Not Custom"],
+["Coax",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Not Custom"],
+["Coax",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Not Custom"],
+["Coax",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["HEN",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Not Custom"],
+["HEN",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Not Custom"],
+["HEN",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Not Custom"],
+["HEN",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Not Custom"],
+["HEN",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["SWH",1,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Not Custom"],
+["SWH",1,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Not Custom"],
+["SWH",1,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Not Custom"],
+["SWH",1,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Not Custom"],
+["SWH",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["HEN",1,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["Coanda",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Not Custom"],
+["Coanda",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Not Custom"],
+["Coanda",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Not Custom"],
+["Coanda",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Not Custom"],
+["Coanda",2,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["Coanda",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","","Not Custom"],
+["Coanda",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","","Not Custom"],
+["Coanda",2,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 4000 2CH","","Not Custom"],
+["Coanda",2,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","","Not Custom"],
+["Coanda",2,2,2,"Yes","YES","NO","NO","4000 SV Flex 2CH","","Not Custom"],
+["Coax",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Not Custom"],
+["Coax",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Not Custom"],
+["HEN",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Custom"],
+["HEN",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Custom"],
+["HEN",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Custom"],
+["HEN",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Custom"],
+["HEN",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","","Custom"],
+["HEN",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","","Custom"],
+["HEN",2,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["HEN",2,2,2,"Yes","NO","YES","NO","3500 2CH Flex w/AIS","","Custom"],
+["Coax",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Not Custom"],
+["Coax",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Not Custom"],
+["SWH",2,1,1,"No","NO","NO","NO","1500 Gen2, 1500 Gen 3","","Custom"],
+["SWH",2,1,1,"No","NO","NO","YES","1500 Gen2 w/UF, 1500 Gen 3 w/UF","","Custom"],
+["SWH",2,1,1,"Yes","NO","NO","NO","1500 Gen3 SV Flex","","Custom"],
+["SWH",2,1,1,"Yes","YES","NO","NO","1500 Gen3 PV Flex","","Custom"],
+["Coax",2,1,1,"Yes","YES","YES","NO","1500 Gen3 PV Flex w/AIS","","Not Custom"],
+["Coax",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","","Not Custom"],
+["Coax",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","","Not Custom"],
+["Coax",2,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 4000 2CH","","Not Custom"],
+["Coax",2,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS, 4000 PV Flex w/AIS 2CH","","Not Custom"],
+["Coax",2,2,2,"Yes","YES","NO","NO","4000 SV Flex 2CH","","Not Custom"],
+["SWH",2,2,2,"No","NO","NO","NO","4000 FLC 2CH","","Custom"],
+["SWH",2,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","","Custom"],
+["SWH",2,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["SWH",2,2,2,"Yes","NO","YES","NO","3500 2CH Flex w/AIS","","Custom"],
+["Coax",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Not Custom"],
+["Coax",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Not Custom"],
+["Coax",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Not Custom"],
+["Coax",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Not Custom"],
+["Coanda",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["Coanda",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["Coanda",3,2,2,"No","NO","NO","NO","4000 FLC 2CH","","Custom"],
+["Coanda",3,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","","Custom"],
+["Coanda",3,2,2,"Yes","NO","NO","NO","4000 SV 2CH","","Custom"],
+["Coanda",3,2,2,"Yes","YES","YES","NO","4000 PV w/AIS 2CH","","Custom"],
+["Coanda",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Not Custom"],
+["Coanda",3,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","","Not Custom"],
+["Coanda",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Not Custom"],
+["Coanda",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Not Custom"],
+["HEN",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Not Custom"],
+["HEN",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Not Custom"],
+["HEN",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Not Custom"],
+["HEN",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Not Custom"],
+["Coax",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["Coax",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["Coax",3,2,2,"No","NO","NO","NO","4000 FLC 2CH","","Custom"],
+["Coax",3,2,2,"No","NO","NO","YES","4000 FLC w/UF 2CH","","Custom"],
+["Coax",3,2,2,"Yes","NO","NO","NO","4000 SV 2CH","","Custom"],
+["Coax",3,2,2,"Yes","YES","YES","NO","4000 PV w/AIS 2CH","","Custom"],
+["HEN",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["HEN",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["HEN",3,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["HEN",3,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["SWH",3,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Not Custom"],
+["SWH",3,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Not Custom"],
+["SWH",3,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Not Custom"],
+["SWH",3,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Not Custom"],
+["SWH",3,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["SWH",3,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["SWH",3,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["SWH",3,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coax",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Not Custom"],
+["Coax",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Not Custom"],
+["Coax",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Not Custom"],
+["Coanda",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["Coanda",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["Coanda",4,2,2,"Yes","NO","NO","NO","3500 2CH","","Custom"],
+["Coanda",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coanda",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Not Custom"],
+["Coanda",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Not Custom"],
+["Coanda",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Not Custom"],
+["Coanda",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Not Custom"],
+["HEN",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Not Custom"],
+["HEN",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Not Custom"],
+["HEN",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Not Custom"],
+["HEN",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Not Custom"],
+["Coax",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["Coax",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["Coax",4,2,2,"Yes","NO","NO","NO","3500 2CH","","Custom"],
+["Coax",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["HEN",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["HEN",4,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["HEN",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",4,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["HEN",4,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Custom"],
+["HEN",4,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["HEN",4,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Custom"],
+["SWH",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Not Custom"],
+["SWH",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Not Custom"],
+["SWH",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Not Custom"],
+["SWH",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Not Custom"],
+["SWH",4,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Not Custom"],
+["SWH",4,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Not Custom"],
+["SWH",4,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Not Custom"],
+["SWH",4,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Not Custom"],
+["SWH",4,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["SWH",4,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["SWH",4,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["SWH",4,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["SWH",4,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["SWH",4,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Custom"],
+["SWH",4,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["SWH",4,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Custom"],
+["Coanda",5,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["Coanda",5,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["Coanda",5,2,2,"Yes","NO","NO","NO","3500 2CH","","Custom"],
+["Coanda",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coanda",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["Coanda",5,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","","Custom"],
+["Coanda",5,3,3,"Yes","NO","NO","NO","4000 SV FLEX 3CH","","Custom"],
+["Coanda",5,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","","Custom"],
+["Coanda",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["Coanda",5,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","","Custom"],
+["Coanda",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Custom"],
+["Coanda",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS Flex 4CH","","Custom"],
+["Coax",5,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Custom"],
+["Coax",5,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Custom"],
+["Coax",5,2,2,"Yes","NO","NO","NO","3500 2CH","","Custom"],
+["Coax",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coax",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["Coax",5,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","","Custom"],
+["Coax",5,3,3,"Yes","NO","NO","NO","4000 SV FLEX 3CH","","Custom"],
+["Coax",5,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","","Custom"],
+["Coax",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["Coax",5,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","","Custom"],
+["Coax",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Custom"],
+["Coax",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS Flex 4CH","","Custom"],
+["HEN",5,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["HEN",5,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["HEN",5,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["HEN",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["HEN",5,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Custom"],
+["HEN",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Custom"],
+["HEN",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Custom"],
+["HEN",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["HEN",5,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Custom"],
+["HEN",5,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["HEN",5,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Custom"],
+["SWH",5,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["SWH",5,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["SWH",5,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["SWH",5,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["SWH",5,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["SWH",5,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Custom"],
+["SWH",5,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Custom"],
+["SWH",5,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Custom"],
+["SWH",5,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["SWH",5,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Custom"],
+["SWH",5,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["SWH",5,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Custom"],
+["Coanda",6,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Not Custom"],
+["Coanda",6,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Not Custom"],
+["Coanda",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Not Custom"],
+["Coanda",6,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS","","Not Custom"],
+["Coanda",6,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 9000 SV Flex, 9500 SV Flex","","Not Custom"],
+["Coanda",6,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","","Not Custom"],
+["Coanda",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["Coanda",6,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","","Custom"],
+["Coanda",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["Coanda",6,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","","Custom"],
+["Coanda",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["Coanda",6,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","","Custom"],
+["Coanda",6,4,4,"Yes","NO","NO","NO","4000 SV FLEX 4CH","","Custom"],
+["Coanda",6,4,4,"Yes","YES","YES","YES","4000 PV Flex 4CH w/UF&AIS","","Custom"],
+["Coax",6,1,1,"Yes","NO","NO","NO","3000 SV Flex","","Not Custom"],
+["Coax",6,1,1,"Yes","YES","YES","NO","3000 PV w/AIS Flex","","Not Custom"],
+["Coax",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Not Custom"],
+["Coax",6,2,2,"Yes","NO","YES","NO","3500 Flex 2CH w/AIS","","Not Custom"],
+["Coax",6,2,2,"Yes","NO","NO","NO","3500 Flex 2CH, 9000 SV Flex, 9500 SV Flex","","Not Custom"],
+["Coax",6,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","","Not Custom"],
+["Coax",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["Coax",6,3,3,"No","NO","NO","YES","4000 FLC w/UF 3CH","","Custom"],
+["Coax",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["Coax",6,3,3,"Yes","YES","YES","NO","4000 PV Flex w/AIS 3CH","","Custom"],
+["Coax",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["Coax",6,4,4,"No","NO","NO","YES","4000 FLC w/UF 4CH","","Custom"],
+["Coax",6,4,4,"Yes","NO","NO","NO","4000 SV FLEX 4CH","","Custom"],
+["Coax",6,4,4,"Yes","YES","YES","YES","4000 PV Flex 4CH w/UF&AIS","","Custom"],
+["HEN",6,1,1,"Yes","NO","NO","NO","3500 1CH Flex","","Custom"],
+["HEN",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","","Custom"],
+["HEN",6,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["HEN",6,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["HEN",6,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Custom"],
+["HEN",6,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Custom"],
+["HEN",6,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Custom"],
+["HEN",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["HEN",6,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Custom"],
+["HEN",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["HEN",6,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Custom"],
+["SWH",6,1,1,"Yes","NO","NO","NO","3500 1CH Flex","","Custom"],
+["SWH",6,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","","Custom"],
+["SWH",6,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["SWH",6,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["SWH",6,4,4,"No","NO","NO","NO","4000 FLC 4CH","","Custom"],
+["SWH",6,4,4,"No","NO","NO","YES","4000 SV FLC w/UF 4CH","","Custom"],
+["SWH",6,4,4,"Yes","NO","NO","NO","4000 SV Flex 4CH","","Custom"],
+["SWH",6,4,4,"Yes","YES","YES","NO","4000 PV w/AIS 4CH","","Custom"],
+["SWH",6,3,3,"No","NO","NO","NO","4000 FLC 3CH","","Custom"],
+["SWH",6,3,3,"No","NO","NO","YES","4000 SV FLC w/UF 3CH","","Custom"],
+["SWH",6,3,3,"Yes","NO","NO","NO","4000 SV Flex 3CH","","Custom"],
+["SWH",6,3,3,"Yes","YES","YES","NO","4000 PV w/AIS 3CH","","Custom"],
+["Coanda",7,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["Coanda",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["Coanda",7,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coanda",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coax",7,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["Coax",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["Coax",7,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coax",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",7,1,1,"Yes","NO","NO","NO","3500 1CH Flex","","Custom"],
+["HEN",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","","Custom"],
+["HEN",7,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["HEN",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["SWH",7,1,1,"Yes","NO","NO","NO","3500 1CH Flex","","Custom"],
+["SWH",7,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","","Custom"],
+["SWH",7,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["SWH",7,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coax",8,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","","Not Custom"],
+["Coax",8,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","","Not Custom"],
+["Coax",8,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coax",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coanda",8,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","","Not Custom"],
+["Coanda",8,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","","Not Custom"],
+["Coanda",8,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coanda",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",8,1,1,"Yes","NO","NO","NO","3500 1CH Flex","","Custom"],
+["HEN",8,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","","Custom"],
+["HEN",8,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["HEN",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["SWH",8,1,1,"Yes","NO","NO","NO","3500 1CH Flex","","Custom"],
+["SWH",8,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS","","Custom"],
+["SWH",8,2,2,"Yes","NO","NO","NO","3500 2CH Flex","","Custom"],
+["SWH",8,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coanda",9,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["Coanda",9,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["Coanda",9,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coanda",9,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coax",9,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["Coax",9,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["Coax",9,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coax",9,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",9,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["HEN",9,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","","Custom"],
+["HEN",9,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["HEN",9,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["SWH",9,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["SWH",9,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","","Custom"],
+["SWH",9,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["SWH",9,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["Coax",10,1,1,"Yes","NO","NO","NO","3500 Flex 1 CH","","Not Custom"],
+["Coax",10,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","","Not Custom"],
+["Coax",10,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coax",10,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coanda",10,1,1,"Yes","NO","NO","NO","3500 Flex 1 CH","","Not Custom"],
+["Coanda",10,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","","Not Custom"],
+["Coanda",10,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coanda",10,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",10,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["HEN",10,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","","Custom"],
+["HEN",10,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["HEN",10,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["SWH",10,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["SWH",10,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","","Custom"],
+["SWH",10,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["SWH",10,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["Coanda",11,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["Coanda",11,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["Coanda",11,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coanda",11,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coax",11,1,1,"Yes","NO","NO","NO","3500 1CH FLEX","","Custom"],
+["Coax",11,1,1,"Yes","NO","YES","NO","3500 1CH w/AIS Flex","","Custom"],
+["Coax",11,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coax",11,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",11,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["HEN",11,1,1,"Yes","NO","YES","NO","3500HF1CH w/AIS","","Custom"],
+["HEN",11,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["HEN",11,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["SWH",11,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["SWH",11,1,1,"Yes","NO","YES","NO","3500HF1CH w/AIS","","Custom"],
+["SWH",11,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["SWH",11,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["Coax",12,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","","Not Custom"],
+["Coax",12,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","","Not Custom"],
+["Coax",12,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coax",12,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["Coanda",12,1,1,"Yes","NO","NO","NO","3500 Flex 1CH","","Not Custom"],
+["Coanda",12,1,1,"Yes","NO","YES","NO","3500 Flex 1CH w/AIS","","Not Custom"],
+["Coanda",12,2,2,"Yes","NO","NO","NO","3500 2CH FLEX","","Custom"],
+["Coanda",12,2,2,"Yes","NO","YES","NO","3500 2CH w/AIS","","Custom"],
+["HEN",12,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["HEN",12,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","","Custom"],
+["HEN",12,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["HEN",12,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["SWH",12,1,1,"Yes","NO","NO","NO","3500HF 1CH Flex","","Custom"],
+["SWH",12,1,1,"Yes","NO","YES","NO","3500HF 1CH w/AIS","","Custom"],
+["SWH",12,2,2,"Yes","NO","NO","NO","3500HF 2CH Flex","","Custom"],
+["SWH",12,2,2,"Yes","NO","YES","NO","3500HF 2CH w/AIS","","Custom"],
+["Coanda",13,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coanda",13,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["Coax",13,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coax",13,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["HEN",13,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["HEN",13,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["SWH",13,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["SWH",13,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",14,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coanda",14,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["Coax",14,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coax",14,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["HEN",14,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["HEN",14,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["SWH",14,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["SWH",14,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",15,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coanda",15,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["Coax",15,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coax",15,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["HEN",15,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["HEN",15,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["SWH",15,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["SWH",15,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",16,2,2,"Yes","NO","NO","NO","9000 SV Flex, 9500 SV Flex","","Not Custom"],
+["Coax",16,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","","Not Custom"],
+["Coanda",16,2,2,"Yes","NO","NO","NO","9000 SV Flex, 9500 SV Flex","","Not Custom"],
+["Coanda",16,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS, 9500 PV Flex w/AIS","","Not Custom"],
+["HEN",16,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["HEN",16,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["SWH",16,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["SWH",16,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",17,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coanda",17,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["Coax",17,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coax",17,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["HEN",17,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["HEN",17,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["SWH",17,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["SWH",17,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",18,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coanda",18,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["Coax",18,2,2,"Yes","NO","NO","NO","9000 SV Flex","","Custom"],
+["Coax",18,2,2,"Yes","YES","YES","NO","9000 PV Flex w/AIS","","Custom"],
+["HEN",18,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["HEN",18,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["SWH",18,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["SWH",18,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",19,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",19,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",19,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",19,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",20,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Not Custom"],
+["Coax",20,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Not Custom"],
+["Coanda",20,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Not Custom"],
+["Coanda",20,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Not Custom"],
+["Coanda",21,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",21,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",21,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",21,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",22,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",22,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",22,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",22,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",23,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",23,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",23,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",23,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",24,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Not Custom"],
+["Coax",24,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Not Custom"],
+["Coanda",24,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Not Custom"],
+["Coanda",24,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Not Custom"],
+["Coanda",25,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",25,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",25,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",25,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",26,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",26,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",26,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",26,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",27,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",27,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",27,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",27,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",28,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coanda",28,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coax",28,2,2,"Yes","NO","NO","NO","9500 SV Flex","","Custom"],
+["Coax",28,2,2,"Yes","YES","YES","NO","9500 PV Flex w/AIS","","Custom"],
+["Coanda",1,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["Coanda",1,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["Coax",1,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["Coax",1,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["HEN",1,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["HEN",1,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["SWH",1,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["SWH",1,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["Coanda",2,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["Coanda",2,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["Coanda",2,2,2,"No","NO","YES","NO","4000 FLC 2CH w/AIS","","CUSTOM"],
+["Coanda",2,2,2,"No","NO","YES","YES","4000 FLC 2CH w/UF&AIS","","CUSTOM"],
+["Coax",2,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["Coax",2,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["HEN",2,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["HEN",2,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["HEN",2,2,2,"No","NO","YES","NO","4000 FLC 2CH w/AIS","","CUSTOM"],
+["HEN",2,2,2,"No","NO","YES","YES","4000 FLC 2CH w/UF&AIS","","CUSTOM"],
+["SWH",2,1,1,"No","NO","YES","NO","1500 Gen2 \"BackToBack\" w/AIS","","CUSTOM"],
+["SWH",2,1,1,"No","NO","YES","YES","1500 Gen2 \"BackToBack\"  w/UF&AIS","","CUSTOM"],
+["Coax",2,2,2,"No","NO","YES","NO","4000 FLC 2CH w/AIS","","CUSTOM"],
+["Coax",2,2,2,"No","NO","YES","YES","4000 FLC 2CH w/UF&AIS","","CUSTOM"],
+["SWH",2,2,2,"No","NO","YES","NO","4000 FLC 2CH w/AIS","","CUSTOM"],
+["SWH",2,2,2,"No","NO","YES","YES","4000 FLC 2CH w/UF&AIS","","CUSTOM"],
+["Coax",3,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["Coax",3,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coanda",3,2,2,"No","NO","YES","NO","4000 FLC 2CH w/AIS","","CUSTOM"],
+["Coanda",3,2,2,"No","NO","YES","YES","4000 FLC 2CH w/UF&AIS","","CUSTOM"],
+["Coanda",3,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["Coanda",3,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["HEN",3,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["HEN",3,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coax",3,2,2,"No","NO","YES","NO","4000 FLC 2CH w/AIS","","CUSTOM"],
+["Coax",3,2,2,"No","NO","YES","YES","4000 FLC 2CH w/UF&AIS","","CUSTOM"],
+["SWH",3,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["SWH",3,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coax",4,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["Coanda",4,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["Coanda",4,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["HEN",4,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["HEN",4,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["HEN",4,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["HEN",4,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["SWH",4,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["SWH",4,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["SWH",4,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["SWH",4,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["SWH",4,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["SWH",4,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coanda",5,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["Coanda",5,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coanda",5,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["Coanda",5,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["Coax",5,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["Coax",5,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coax",5,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["Coax",5,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["HEN",5,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["HEN",5,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["HEN",5,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["HEN",5,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["SWH",5,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["SWH",5,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["SWH",5,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["SWH",5,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coanda",6,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["Coanda",6,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coanda",6,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["Coanda",6,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["Coax",6,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["Coax",6,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["Coax",6,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["Coax",6,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["HEN",6,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["HEN",6,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["HEN",6,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["HEN",6,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
+["SWH",6,4,4,"No","NO","YES","NO","4000 FLC 4CH w/AIS","","CUSTOM"],
+["SWH",6,4,4,"No","NO","YES","YES","4000 FLC 4CH w/UF&AIS","","CUSTOM"],
+["SWH",6,3,3,"No","NO","YES","NO","4000 FLC 3CH w/AIS","","CUSTOM"],
+["SWH",6,3,3,"No","NO","YES","YES","4000 SV FLC 3CH w/UF&AIS","","CUSTOM"],
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
@@ -930,7 +1054,7 @@ const CSV = [
 function makeSystem(){
   return {
     // Step 1
-    co2Source: null,    // 'Liquid' | 'Gas'
+    co2Source: 'Gas',   // 'Liquid' | 'Gas'
     flex: false,
     is: false,
     add: false,
@@ -941,12 +1065,18 @@ function makeSystem(){
     // Step 3
     nozzleType: null,   // 'Coanda'|'Coax'|'HEN'|'SWH'
     nozzleCount: 1,
-    // Stage 8 equipment overrides (null = use recommended)
-    eqAmp: null,
-    eqEcb: null,
-    eqLb40: null,
-    eqLc2000: null,
-    eqPurification: null,
+    // Stage 8 — cart model
+    s8Control: null,            // 'ethernet' | 'discrete' | 'bus'
+    s8Amp:     {on:false, qty:1, heatEx:false, parallel:false},
+    s8Lb40:    {on:false, qty:1},
+    s8Ecb:     {on:false, qty:1, tank:'CS', redundant:false, controller:'ethernet'},
+    s8Lc2000:  {on:false, qty:1, waterCooled:false},
+    s8Purif:   {on:false, qty:1},
+    s8Hoses:   {noHoses:false, stdBottle:false, co2ToBooster:false, boosterToOmega:false, liquidToOmega:false, custom:false, customText:'', qtys:{stdBottle:1,co2ToBooster:1,boosterToOmega:1,liquidToOmega:1,custom:1}},
+    s8NozzleHose: {useCustom:false, customLen:'', material:'corrugated', otherNote:''},
+    s8Fixturing: null,          // 'blackHandle' | 'bulkheadTee' | 'custom'
+    s8Co2Monitor: {on:false, qty:1},
+    s8IsMonitor:  {on:false, qty:1},
     // Generation (null = not yet chosen; set when omega string contains multiple gens)
     // NOTE: parsing gen from the omega string is a temporary approach — a dedicated
     // generation column in the CSV would be cleaner once the data is available.
@@ -1069,7 +1199,8 @@ function render(){
   renderHosesChan();
   renderNozzleType();
   renderNozzleCount();
-  renderEquipment();
+  renderStage8();
+  renderS8Cart();
   renderGenQty();
   renderStepper();
   renderPanel();
@@ -1179,7 +1310,7 @@ function renderTypeOpts(){
 
 function renderCo2Source(){
   const c = $('co2source-opts'); c.innerHTML='';
-  ['Liquid','Gas'].forEach(v=>{
+  ['Gas','Liquid'].forEach(v=>{
     const btn = makeOptBtn(v, v==='Liquid'?'Liquid CO2 supply':'Gaseous CO2 supply', sys().co2Source===v, false, ()=>{
       sys().co2Source=v; sys().confirmed=false; render();
     });
@@ -1300,75 +1431,433 @@ function renderNozzleCount(){
 }
 
 // Equipment max-nozzles-per-unit table
-const EQ_SPECS = [
-  {id:'amp',          label:'AMP Booster',        maxPerUnit:7,  stateKey:'eqAmp'},
-  {id:'ecb',          label:'ECB',                maxPerUnit:60, stateKey:'eqEcb'},
-  {id:'lb40',         label:'LB-40',              maxPerUnit:8,  stateKey:'eqLb40'},
-  {id:'lc2000',       label:'LC-2000',            maxPerUnit:6,  stateKey:'eqLc2000'},
-  {id:'purification', label:'Purification System',maxPerUnit:13, stateKey:'eqPurification'},
-];
+// Nozzle hose standard lengths — [PENDING] editable constants
+const NOZZLE_HOSE_LENGTHS = {
+  '1500':    16,
+  '1500FLEX': 15,
+  'FLEX':    28,  // 3000/3500/3500HF/9000/9500 FLEX
+};
+// Custom length min/max — [PENDING] editable constants
+const HOSE_MIN_MAX = {
+  '1500': {min:10, max:20},
+  'FLEX': {min:15, max:40},
+};
 
-function renderEquipment(){
+function getNozzleHoseStdLen(omegaStr){
+  if(!omegaStr) return null;
+  const u = omegaStr.toUpperCase();
+  if(u.includes('1500') && u.includes('FLEX')) return NOZZLE_HOSE_LENGTHS['1500FLEX'];
+  if(u.includes('1500')) return NOZZLE_HOSE_LENGTHS['1500'];
+  return NOZZLE_HOSE_LENGTHS['FLEX'];
+}
+
+function getNozzleHoseMinMax(omegaStr){
+  if(!omegaStr) return HOSE_MIN_MAX['FLEX'];
+  const u = omegaStr.toUpperCase();
+  if(u.includes('1500') && !u.includes('FLEX')) return HOSE_MIN_MAX['1500'];
+  return HOSE_MIN_MAX['FLEX'];
+}
+
+function is1500System(omegaStr){
+  return omegaStr && omegaStr.toUpperCase().includes('1500');
+}
+
+function isFlexSystem(omegaStr){
+  return omegaStr && omegaStr.toUpperCase().includes('FLEX');
+}
+
+function is4000System(omegaStr){
+  return omegaStr && /\b4000\b/.test(omegaStr.toUpperCase());
+}
+
+function showFixturing(omegaStr){
+  if(!omegaStr) return false;
+  if(isFlexSystem(omegaStr)) return false;
+  return is1500System(omegaStr) || is4000System(omegaStr);
+}
+
+function getDefaultControl(omegaStr){
+  if(is1500System(omegaStr)) return 'discrete';
+  return 'ethernet';
+}
+
+function renderStage8(){
   const s = sys();
-  EQ_SPECS.forEach(spec=>{
-    const container = $('eq-'+spec.id);
-    if(!container) return;
-    const rec = Math.ceil(s.nozzleCount / spec.maxPerUnit);
-    const current = s[spec.stateKey] !== null ? s[spec.stateKey] : rec;
+  const rows = lookup();
+  const omegaName = rows.length > 0 ? rows[0][8] : null;
 
-    container.innerHTML='';
-    const row = document.createElement('div');
-    row.className='eq-row';
+  if(omegaName && !s.s8Control){
+    sys().s8Control = getDefaultControl(omegaName);
+  }
 
-    const nameDiv = document.createElement('div');
-    nameDiv.innerHTML=`<div class="eq-name">${spec.label}</div><div class="eq-rec">Recommended: ${rec} unit${rec!==1?'s':''} (max ${spec.maxPerUnit} nozzles each)</div>`;
+  renderS8Controls(s, omegaName);
+  renderS8Amp(s, omegaName);
+  renderS8Lb40(s, omegaName);
+  renderS8Ecb(s, omegaName);
+  renderS8Lc2000(s, omegaName);
+  renderS8Purif(s, omegaName);
+  renderS8Hoses(s, omegaName);
+  renderS8NozzleHose(s, omegaName);
+  renderS8Fixturing(s, omegaName);
+  renderS8Monitors(s, omegaName);
+}
 
-    const stepper = document.createElement('div');
-    stepper.className='eq-stepper';
+function s8QtyRow(obj, key, label, onchange){
+  const wrap = document.createElement('div');
+  wrap.className = 's8-qty-row';
+  const dec = document.createElement('button');
+  dec.className='s8-qty-btn'; dec.textContent='−'; dec.disabled = obj.qty<=1;
+  dec.onclick=()=>{ if(obj.qty>1){obj.qty--; onchange();} };
+  const val = document.createElement('div');
+  val.className='s8-qty-val'; val.textContent = obj.qty;
+  const inc = document.createElement('button');
+  inc.className='s8-qty-btn'; inc.textContent='+';
+  inc.onclick=()=>{ obj.qty++; onchange(); };
+  const lbl = document.createElement('span');
+  lbl.className='s8-qty-lbl'; lbl.textContent = label||'units';
+  wrap.appendChild(dec); wrap.appendChild(val); wrap.appendChild(inc); wrap.appendChild(lbl);
+  return wrap;
+}
 
-    const decBtn = document.createElement('button');
-    decBtn.className='eq-btn';
-    decBtn.textContent='−';
-    decBtn.disabled = current <= 0;
-    decBtn.onclick = ()=>{
-      const cur = sys()[spec.stateKey]!==null ? sys()[spec.stateKey] : rec;
-      if(cur<=0) return;
-      sys()[spec.stateKey] = cur-1;
+function s8YesNo(label, value, onChange){
+  const wrap = document.createElement('div');
+  wrap.className='s8-sub-row';
+  wrap.style.flexWrap='wrap'; wrap.style.gap='14px';
+  const lbl = document.createElement('div');
+  lbl.style.cssText='font-size:12px;color:#5A6478;font-weight:600;min-width:160px'; lbl.textContent=label;
+  wrap.appendChild(lbl);
+  ['Yes','No'].forEach(opt=>{
+    const id = label.replace(/\s+/g,'')+opt+Math.random().toString(36).slice(2,6);
+    const radio = document.createElement('input');
+    radio.type='radio'; radio.name=id; radio.className='s8-radio';
+    radio.checked = (opt==='Yes') ? value : !value;
+    radio.onchange=()=>{ onChange(opt==='Yes'); };
+    const rl = document.createElement('label');
+    rl.htmlFor=radio.id; rl.style.cssText='font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px';
+    rl.appendChild(radio);
+    rl.appendChild(document.createTextNode(opt));
+    wrap.appendChild(rl);
+  });
+  return wrap;
+}
+
+function s8Item(id, title, sub, isOn, recText, onToggle, bodyFn){
+  const container = $(id);
+  if(!container) return;
+  container.innerHTML='';
+  const item = document.createElement('div');
+  item.className='s8-item';
+
+  const header = document.createElement('div');
+  header.className='s8-item-header' + (isOn?' checked':'');
+  header.onclick = onToggle;
+
+  const cb = document.createElement('div');
+  cb.className='s8-cb'+(isOn?' on':''); cb.textContent=isOn?'✓':'';
+  const titleWrap = document.createElement('div'); titleWrap.style.flex='1';
+  titleWrap.innerHTML=`<div class="s8-item-title">${title}</div>${sub?`<div class="s8-item-sub">${sub}</div>`:''}`;
+  const rec = document.createElement('div');
+  rec.className='s8-rec'; rec.textContent=recText||'';
+
+  header.appendChild(cb); header.appendChild(titleWrap); header.appendChild(rec);
+  item.appendChild(header);
+
+  if(isOn && bodyFn){
+    const body = document.createElement('div');
+    body.className='s8-body open';
+    bodyFn(body);
+    item.appendChild(body);
+  }
+  container.appendChild(item);
+}
+
+function renderS8Controls(s, omegaName){
+  const container=$('s8-controls'); if(!container) return;
+  container.innerHTML='';
+  const opts=[
+    {k:'ethernet', label:'Ethernet IP', sub:'Standard for 3000+'},
+    {k:'discrete', label:'Discrete I/O through Remote Communication Connector', sub:'Standard for 1500s'},
+    {k:'bus',      label:'BUS Communication Type', sub:''},
+  ];
+  opts.forEach(opt=>{
+    const btn = document.createElement('button');
+    btn.className='s8-ctrl-btn'+(s.s8Control===opt.k?' selected':'');
+    btn.onclick=()=>{ sys().s8Control=opt.k; render(); };
+    const dot = document.createElement('div');
+    dot.className='s8-ctrl-dot'+(s.s8Control===opt.k?' on':'');
+    const txt = document.createElement('div');
+    txt.innerHTML=`<div style="font-size:13px;font-weight:${s.s8Control===opt.k?'600':'500'}">${opt.label}</div>${opt.sub?`<div class="s8-item-sub">${opt.sub}</div>`:''}`;
+    btn.appendChild(dot); btn.appendChild(txt);
+    container.appendChild(btn);
+  });
+}
+
+function renderS8Amp(s, omegaName){
+  const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/7)} (max 7 nozzles each)` : '';
+  const isOn = s.s8Amp.on;
+  s8Item('s8-amp','AMP Booster','',isOn, rec, ()=>{ sys().s8Amp.on=!sys().s8Amp.on; if(sys().s8Amp.on && sys().s8Amp.qty<1) sys().s8Amp.qty=1; render(); }, (body)=>{
+    body.appendChild(s8QtyRow(sys().s8Amp,'qty','units',()=>render()));
+    body.appendChild(s8YesNo('w/ Heat Exchanger (Y if within 50ft of Omega)',sys().s8Amp.heatEx,(v)=>{ sys().s8Amp.heatEx=v; render(); }));
+    body.appendChild(s8YesNo('Parallel Setup (Y when 2+ AMPs support one Omega)',sys().s8Amp.parallel,(v)=>{ sys().s8Amp.parallel=v; render(); }));
+  });
+}
+
+function renderS8Lb40(s, omegaName){
+  const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/8)} (max 8 nozzles each)` : '';
+  s8Item('s8-lb40','LB-40','',s.s8Lb40.on, rec, ()=>{ sys().s8Lb40.on=!sys().s8Lb40.on; if(sys().s8Lb40.on && sys().s8Lb40.qty<1) sys().s8Lb40.qty=1; render(); }, (body)=>{
+    body.appendChild(s8QtyRow(sys().s8Lb40,'qty','units',()=>render()));
+  });
+}
+
+function renderS8Ecb(s, omegaName){
+  const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/60)} (max 60 nozzles each)` : '';
+  const isOn = s.s8Ecb.on;
+  s8Item('s8-ecb','ECB','',isOn, rec, ()=>{ sys().s8Ecb.on=!sys().s8Ecb.on; if(sys().s8Ecb.on && sys().s8Ecb.qty<1) sys().s8Ecb.qty=1; render(); }, (body)=>{
+    body.appendChild(s8QtyRow(sys().s8Ecb,'qty','units',()=>render()));
+
+    const tankWrap=document.createElement('div'); tankWrap.className='s8-sub-row'; tankWrap.style.flexWrap='wrap'; tankWrap.style.gap='14px';
+    const tankLbl=document.createElement('div'); tankLbl.style.cssText='font-size:12px;color:#5A6478;font-weight:600;min-width:160px'; tankLbl.textContent='Tank Type';
+    tankWrap.appendChild(tankLbl);
+    [{k:'CS',l:'Carbon (CS)'},{k:'SS',l:'Stainless (SS)'}].forEach(opt=>{
+      const radio=document.createElement('input'); radio.type='radio'; radio.name='ecb-tank'+state.activeSystem; radio.className='s8-radio'; radio.checked=s.s8Ecb.tank===opt.k;
+      radio.onchange=()=>{ sys().s8Ecb.tank=opt.k; render(); };
+      const rl=document.createElement('label'); rl.style.cssText='font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px';
+      rl.appendChild(radio); rl.appendChild(document.createTextNode(opt.l));
+      tankWrap.appendChild(rl);
+    });
+    body.appendChild(tankWrap);
+
+    body.appendChild(s8YesNo('Redundant Compressor (Yes=ECB2 / No=ECB1)',s.s8Ecb.redundant,(v)=>{ sys().s8Ecb.redundant=v; render(); }));
+
+    const ctrlWrap=document.createElement('div'); ctrlWrap.className='s8-sub-row'; ctrlWrap.style.flexWrap='wrap'; ctrlWrap.style.gap='14px';
+    const ctrlLbl=document.createElement('div'); ctrlLbl.style.cssText='font-size:12px;color:#5A6478;font-weight:600;min-width:160px'; ctrlLbl.textContent='Controller Type';
+    ctrlWrap.appendChild(ctrlLbl);
+    [{k:'ethernet',l:'Ethernet IP'},{k:'relay',l:'Relay Control'}].forEach(opt=>{
+      const radio=document.createElement('input'); radio.type='radio'; radio.name='ecb-ctrl'+state.activeSystem; radio.className='s8-radio'; radio.checked=s.s8Ecb.controller===opt.k;
+      radio.onchange=()=>{ sys().s8Ecb.controller=opt.k; render(); };
+      const rl=document.createElement('label'); rl.style.cssText='font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px';
+      rl.appendChild(radio); rl.appendChild(document.createTextNode(opt.l));
+      ctrlWrap.appendChild(rl);
+    });
+    body.appendChild(ctrlWrap);
+  });
+}
+
+function renderS8Lc2000(s, omegaName){
+  const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/6)} (max 6 nozzles each)` : '';
+  s8Item('s8-lc2000','LC-2000','',s.s8Lc2000.on, rec, ()=>{ sys().s8Lc2000.on=!sys().s8Lc2000.on; if(sys().s8Lc2000.on && sys().s8Lc2000.qty<1) sys().s8Lc2000.qty=1; render(); }, (body)=>{
+    body.appendChild(s8QtyRow(sys().s8Lc2000,'qty','units',()=>render()));
+    body.appendChild(s8YesNo('Water Cooled? (Yes = LC-2000-W)',s.s8Lc2000.waterCooled,(v)=>{ sys().s8Lc2000.waterCooled=v; render(); }));
+  });
+}
+
+function renderS8Purif(s, omegaName){
+  const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/13)} (max 13 nozzles each)` : '';
+  s8Item('s8-purification','Purification System','',s.s8Purif.on, rec, ()=>{ sys().s8Purif.on=!sys().s8Purif.on; if(sys().s8Purif.on && sys().s8Purif.qty<1) sys().s8Purif.qty=1; render(); }, (body)=>{
+    body.appendChild(s8QtyRow(sys().s8Purif,'qty','units',()=>render()));
+  });
+}
+
+function renderS8Hoses(s, omegaName){
+  const container=$('s8-hoses'); if(!container) return;
+  container.innerHTML='';
+  const h = s.s8Hoses;
+  const HOSE_OPTS=[
+    {k:'noHoses',       label:'No Hoses Included',                       sub:'',                                                                          master:true},
+    {k:'stdBottle',     label:'Standard Bottle Connection Kit',          sub:"6'L, 1/4\" Braided SS Hose w/ CGA 320 CO2 Fitting"},
+    {k:'co2ToBooster',  label:'CO2 Supply to Booster',                   sub:"12'L, 1/2\" Tube Stub End Braided SS Hose"},
+    {k:'boosterToOmega',label:'Booster to Omega',                        sub:"12'L, 3/8\" Tube Stub End Braided SS Hose w/ Teflon Lining"},
+    {k:'liquidToOmega', label:'Liquid Booster / LC2000 to Omega',        sub:"6'L, 1/4\" Tube Stub End Braided SS Hose w/ Teflon Lining"},
+    {k:'custom',        label:'Custom',                                   sub:'Free-text detail'},
+  ];
+  HOSE_OPTS.forEach(opt=>{
+    const locked = !opt.master && h.noHoses;
+    const isOn = h[opt.k];
+    const item=document.createElement('div');
+    item.className='s8-item'+(locked?' s8-locked':'');
+
+    const header=document.createElement('div');
+    header.className='s8-item-header'+(isOn?' checked':'');
+    if(!locked) header.onclick=()=>{
+      if(opt.master){
+        sys().s8Hoses.noHoses=!h.noHoses;
+        if(sys().s8Hoses.noHoses){
+          ['stdBottle','co2ToBooster','boosterToOmega','liquidToOmega','custom'].forEach(k=>{ sys().s8Hoses[k]=false; });
+        }
+      } else {
+        sys().s8Hoses[opt.k]=!h[opt.k];
+      }
       render();
     };
 
-    const valEl = document.createElement('div');
-    valEl.className='eq-val';
-    valEl.textContent = current;
-    if(current !== rec){
-      valEl.style.color='#B45309';
-      valEl.title='Overridden from recommended';
+    const cb=document.createElement('div'); cb.className='s8-cb'+(isOn?' on':''); cb.textContent=isOn?'✓':'';
+    const titleWrap=document.createElement('div'); titleWrap.style.flex='1';
+    titleWrap.innerHTML=`<div class="s8-item-title">${opt.label}</div>${opt.sub?`<div class="s8-item-sub">${opt.sub}</div>`:''}`;
+    header.appendChild(cb); header.appendChild(titleWrap);
+    item.appendChild(header);
+
+    if(isOn && !opt.master){
+      const body=document.createElement('div'); body.className='s8-body open';
+      if(opt.k!=='custom'){
+        const qObj={qty: h.qtys[opt.k]||1};
+        const qRow=s8QtyRow(qObj,'qty','units',()=>{ sys().s8Hoses.qtys[opt.k]=qObj.qty; render(); });
+        body.appendChild(qRow);
+      }
+      if(opt.k==='custom'){
+        const inp=document.createElement('input'); inp.type='text'; inp.className='s8-input'; inp.placeholder='Describe custom hose…'; inp.value=h.customText||'';
+        inp.oninput=()=>{ sys().s8Hoses.customText=inp.value; };
+        body.appendChild(inp);
+      }
+      item.appendChild(body);
     }
+    container.appendChild(item);
+  });
+}
 
-    const incBtn = document.createElement('button');
-    incBtn.className='eq-btn';
-    incBtn.textContent='+';
-    incBtn.onclick = ()=>{
-      const cur = sys()[spec.stateKey]!==null ? sys()[spec.stateKey] : rec;
-      sys()[spec.stateKey] = cur+1;
-      render();
-    };
+function renderS8NozzleHose(s, omegaName){
+  const container=$('s8-nozzle-hose'); if(!container) return;
+  container.innerHTML='';
+  const h = s.s8NozzleHose;
+  const stdLen = getNozzleHoseStdLen(omegaName);
+  const minMax = getNozzleHoseMinMax(omegaName);
 
-    const resetBtn = document.createElement('button');
-    resetBtn.style.cssText='font-size:11px;color:#8A94A6;background:none;border:none;cursor:pointer;padding:0 4px;text-decoration:underline';
-    resetBtn.textContent='reset';
-    resetBtn.title='Reset to recommended';
-    resetBtn.style.display = current!==rec ? '' : 'none';
-    resetBtn.onclick = ()=>{ sys()[spec.stateKey]=null; render(); };
+  const stdLbl=document.createElement('div'); stdLbl.style.cssText='font-size:12px;color:#5A6478;margin-bottom:6px';
+  stdLbl.textContent = stdLen ? `Standard length: ${stdLen}ft` : 'Resolve system to see standard length';
 
-    stepper.appendChild(decBtn);
-    stepper.appendChild(valEl);
-    stepper.appendChild(incBtn);
-    stepper.appendChild(resetBtn);
+  const modeRow=document.createElement('div'); modeRow.style.cssText='display:flex;gap:10px;margin-bottom:10px';
+  [{k:false,l:`Standard (${stdLen?stdLen+'ft':'TBD'})`},{k:true,l:'Custom length'}].forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='s8-ctrl-btn'+(h.useCustom===opt.k?' selected':''); btn.style.flex='1';
+    btn.onclick=()=>{ sys().s8NozzleHose.useCustom=opt.k; render(); };
+    const dot=document.createElement('div'); dot.className='s8-ctrl-dot'+(h.useCustom===opt.k?' on':'');
+    const txt=document.createElement('span'); txt.textContent=opt.l; txt.style.fontSize='13px';
+    btn.appendChild(dot); btn.appendChild(txt);
+    modeRow.appendChild(btn);
+  });
+  container.appendChild(stdLbl);
+  container.appendChild(modeRow);
 
-    row.appendChild(nameDiv);
-    row.appendChild(stepper);
-    container.appendChild(row);
+  if(h.useCustom){
+    const inp=document.createElement('input'); inp.type='number'; inp.className='s8-input'; inp.style.marginBottom='10px';
+    inp.placeholder=`Custom length (${minMax.min}–${minMax.max}ft)`; inp.min=minMax.min; inp.max=minMax.max;
+    inp.value=h.customLen||''; inp.oninput=()=>{ sys().s8NozzleHose.customLen=inp.value; };
+    container.appendChild(inp);
+  }
+
+  const matLbl=document.createElement('div'); matLbl.style.cssText='font-size:12px;color:#5A6478;font-weight:600;margin-bottom:6px'; matLbl.textContent='Hose material';
+  container.appendChild(matLbl);
+  const matRow=document.createElement('div'); matRow.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px';
+  [{k:'corrugated',l:'Corrugated'},{k:'barePFA',l:'Bare-PFA'},{k:'other',l:'Other (TBD)'}].forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='s8-ctrl-btn'+(h.material===opt.k?' selected':''); btn.style.flex='1';
+    btn.onclick=()=>{ sys().s8NozzleHose.material=opt.k; render(); };
+    const dot=document.createElement('div'); dot.className='s8-ctrl-dot'+(h.material===opt.k?' on':'');
+    const txt=document.createElement('span'); txt.textContent=opt.l; txt.style.fontSize='13px';
+    btn.appendChild(dot); btn.appendChild(txt);
+    matRow.appendChild(btn);
+  });
+  container.appendChild(matRow);
+
+  if(h.material==='other'){
+    const note=document.createElement('textarea'); note.className='s8-input ship-textarea'; note.placeholder='Required: describe other hose material…'; note.style.marginTop='6px';
+    note.value=h.otherNote||''; note.oninput=()=>{ sys().s8NozzleHose.otherNote=note.value; };
+    container.appendChild(note);
+  }
+}
+
+function renderS8Fixturing(s, omegaName){
+  const container=$('s8-fixturing'); if(!container) return;
+  container.innerHTML='';
+  const show = showFixturing(omegaName);
+  if(!show){
+    const msg=document.createElement('div'); msg.style.cssText='font-size:12px;color:#C3CAD6;font-style:italic;padding:4px 0';
+    msg.textContent = omegaName ? 'Not applicable for this system (FLEX systems excluded)' : 'Resolve system to see fixturing options';
+    container.appendChild(msg); return;
+  }
+  [{k:'blackHandle',l:'Black Handle (Standard)'},{k:'bulkheadTee',l:'Bulkhead Tee'},{k:'custom',l:'Custom'}].forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='s8-ctrl-btn'+(s.s8Fixturing===opt.k?' selected':'');
+    btn.onclick=()=>{ sys().s8Fixturing=opt.k; render(); };
+    const dot=document.createElement('div'); dot.className='s8-ctrl-dot'+(s.s8Fixturing===opt.k?' on':'');
+    const txt=document.createElement('span'); txt.textContent=opt.l; txt.style.fontSize='13px';
+    btn.appendChild(dot); btn.appendChild(txt);
+    container.appendChild(btn);
+  });
+}
+
+function renderS8Monitors(s, omegaName){
+  const rec='';
+  s8Item('s8-monitors-co2','CO2 Monitor','Safety Alarm with Remote',s.s8Co2Monitor.on, rec,
+    ()=>{ sys().s8Co2Monitor.on=!sys().s8Co2Monitor.on; render(); },
+    (body)=>{ body.appendChild(s8QtyRow(sys().s8Co2Monitor,'qty','units',()=>render())); });
+  s8Item('s8-monitors-is','Intrinsically Safe CO2 Monitor','Class 1, Division 1 Rated',s.s8IsMonitor.on, rec,
+    ()=>{ sys().s8IsMonitor.on=!sys().s8IsMonitor.on; render(); },
+    (body)=>{ body.appendChild(s8QtyRow(sys().s8IsMonitor,'qty','units',()=>render())); });
+}
+
+function renderS8Cart(){
+  const panel = $('s8-cart-panel'); if(!panel) return;
+  panel.innerHTML='';
+  const s = sys();
+  const lines = [];
+
+  if(s.s8Control){
+    const labels={ethernet:'Ethernet IP',discrete:'Discrete I/O',bus:'BUS Communication Type'};
+    lines.push({name:`Control: ${labels[s.s8Control]||s.s8Control}`, qty:null});
+  }
+  if(s.s8Amp.on){
+    let detail = s.s8Amp.heatEx ? ' w/ Heat Exchanger' : '';
+    if(s.s8Amp.parallel) detail += (detail?', ':' ')+'Parallel';
+    lines.push({name:`AMP Booster${detail}`, qty:s.s8Amp.qty});
+  }
+  if(s.s8Lb40.on) lines.push({name:'LB-40', qty:s.s8Lb40.qty});
+  if(s.s8Ecb.on){
+    const model = s.s8Ecb.redundant ? 'ECB2' : 'ECB1';
+    const tank = s.s8Ecb.tank;
+    const ctrl = s.s8Ecb.controller==='ethernet'?'Ethernet IP':'Relay Control';
+    lines.push({name:`${model}-${tank} (${ctrl})`, qty:s.s8Ecb.qty});
+  }
+  if(s.s8Lc2000.on) lines.push({name:s.s8Lc2000.waterCooled?'LC-2000-W':'LC-2000', qty:s.s8Lc2000.qty});
+  if(s.s8Purif.on) lines.push({name:'Purification System', qty:s.s8Purif.qty});
+
+  const h=s.s8Hoses;
+  if(h.noHoses) lines.push({name:'No Hoses Included', qty:null});
+  else {
+    if(h.stdBottle)      lines.push({name:'Standard Bottle Connection Kit', qty:h.qtys.stdBottle||1});
+    if(h.co2ToBooster)   lines.push({name:'CO2 Supply to Booster', qty:h.qtys.co2ToBooster||1});
+    if(h.boosterToOmega) lines.push({name:'Booster to Omega', qty:h.qtys.boosterToOmega||1});
+    if(h.liquidToOmega)  lines.push({name:'Liquid Booster / LC2000 to Omega', qty:h.qtys.liquidToOmega||1});
+    if(h.custom)         lines.push({name:`Custom Hose${h.customText?' — '+h.customText:''}`, qty:h.qtys.custom||1});
+  }
+
+  const nh=s.s8NozzleHose;
+  const rows = lookup(); const omega = rows.length>0?rows[0][8]:null;
+  const stdLen = getNozzleHoseStdLen(omega);
+  const lenStr = nh.useCustom && nh.customLen ? `${nh.customLen}ft` : (stdLen?`${stdLen}ft`:'TBD');
+  const matStr = nh.material==='corrugated'?'Corrugated':nh.material==='barePFA'?'Bare-PFA':'Other';
+  lines.push({name:`Nozzle Hose — ${lenStr}, ${matStr}`, qty:null});
+
+  if(s.s8Fixturing){
+    const fl={blackHandle:'Black Handle',bulkheadTee:'Bulkhead Tee',custom:'Custom Fixturing'};
+    lines.push({name:fl[s.s8Fixturing]||s.s8Fixturing, qty:null});
+  }
+  if(s.s8Co2Monitor.on) lines.push({name:'CO2 Monitor (Safety Alarm w/ Remote)', qty:s.s8Co2Monitor.qty});
+  if(s.s8IsMonitor.on)  lines.push({name:'IS CO2 Monitor (Class 1, Div. 1)', qty:s.s8IsMonitor.qty});
+
+  if(lines.length===0){
+    panel.innerHTML='<div style="font-size:11px;color:#C3CAD6;padding:4px 0">No accessories selected yet</div>';
+    return;
+  }
+
+  const title=document.createElement('div'); title.className='s8-cart-title'; title.textContent='Accessories';
+  panel.appendChild(title);
+  lines.forEach(l=>{
+    const row=document.createElement('div'); row.className='s8-cart-line';
+    const name=document.createElement('div'); name.className='s8-cart-name'; name.textContent=l.name;
+    const qty=document.createElement('div'); qty.className='s8-cart-qty';
+    qty.textContent = l.qty!==null ? `×${l.qty}` : '';
+    row.appendChild(name); row.appendChild(qty);
+    panel.appendChild(row);
   });
 }
 
@@ -1468,24 +1957,23 @@ function renderPanel(){
   }
 
   const row = rows[0];
-  const isCustom = row[9] === 'Custom';
+  const isCustom = row[10] === 'Custom' || row[10] === 'CUSTOM';
   $('match-label').textContent = rows.length > 1 ? `${rows.length} rows` : `1 match`;
 
-  const basePDM = row[10];
-  const kitPDM  = row[11];
+  const sapBOM    = row[9];   // SAP BOM # (blank for now)
   const omegaName = row[8];
-  const headType  = row[9];
+  // headType no longer a separate column — use isCustom for styling
 
   if(isCustom){
     show($('out-custom'));
     $('out-custom-name').textContent = omegaName;
-    $('out-custom-base').textContent = basePDM;
-    $('out-custom-kit').textContent  = kitPDM;
+    $('out-custom-base').textContent = sapBOM || '—';
+    $('out-custom-kit').textContent  = '—';
   } else {
     show($('out-stock'));
     $('out-stock-name').textContent = omegaName;
-    $('out-stock-base').textContent = basePDM;
-    $('out-stock-kit').textContent  = kitPDM;
+    $('out-stock-base').textContent = sapBOM || '—';
+    $('out-stock-kit').textContent  = '—';
   }
 
   if(rows.length>1){
@@ -1495,7 +1983,7 @@ function renderPanel(){
     rows.forEach(r=>{
       const d=document.createElement('div');
       d.style.cssText='padding:3px 0;border-bottom:1px solid #F2D9A8';
-      d.textContent=`${r[8]}  |  Head: ${r[9]}  |  Base: ${r[10]}  |  Kit: ${r[11]}`;
+      d.textContent=`${r[8]}  |  BOM: ${r[9]||'—'}  |  ${r[10]}`;
       list.appendChild(d);
     });
   }
@@ -1506,11 +1994,11 @@ function renderPanel(){
   const hn = document.createElement('div');
   hn.className='head-note';
   hn.style.cssText=`margin-top:10px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;display:inline-block;${
-    headType==='Custom'
+    isCustom
     ? 'background:#FEF4E3;color:#B45309;border:1px solid #F2D9A8'
     : 'background:#E8F6EF;color:#0B5A50;border:1px solid #B4E2CC'
   }`;
-  hn.textContent = headType==='Custom' ? '⚑ Custom nozzle head — engineering required' : '✓ Standard nozzle head';
+  hn.textContent = isCustom ? '⚑ Custom nozzle head — engineering required' : '✓ Standard nozzle head';
   headNote.appendChild(hn);
 
   // Voltage spec
@@ -1581,22 +2069,16 @@ function renderCheckout(){
 
     const resolved = sRows.length > 0;
     const row = resolved ? sRows[0] : null;
-    const isCustom = resolved && row[9]==='Custom';
+    const isCustom = resolved && (row[10]==='Custom' || row[10]==='CUSTOM');
     const omegaName = resolved ? row[8] : 'Not resolved';
-    const basePDM = resolved ? row[10] : '—';
-    const kitPDM  = resolved ? row[11] : '—';
-    const headType = resolved ? row[9] : '—';
+    const sapBOM = resolved ? row[9] : '—';
+    const kitPDM = '—';
+    const headType = isCustom ? 'Custom' : 'Not Custom';
     const gens = resolved ? parseGens(omegaName) : [];
     const genDisplay = s.generation ? s.generation : (gens.length===1 ? gens[0] : (gens.length>1 ? 'Not selected' : '—'));
 
     const block = document.createElement('div');
     block.className = 'co-sys-block' + (isCustom?' custom':resolved?' stock':'');
-
-    const eqLines = EQ_SPECS.map(spec=>{
-      const rec = Math.ceil(s.nozzleCount / spec.maxPerUnit);
-      const cur = s[spec.stateKey] !== null ? s[spec.stateKey] : rec;
-      return `<div class="co-row"><span class="co-lbl">${spec.label}</span><span class="co-val">${cur} unit${cur!==1?'s':''}${cur!==rec?' (override)':''}</span></div>`;
-    }).join('');
 
     block.innerHTML=`
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
@@ -1616,15 +2098,10 @@ function renderCheckout(){
       <div class="co-row"><span class="co-lbl">Generation</span><span class="co-val">${genDisplay}</span></div>
       <div class="co-row"><span class="co-lbl">Quantity</span><span class="co-val">×${s.quantity}</span></div>
       <div style="margin-top:8px;padding-top:8px;border-top:1px solid #EEF1F6">
-        <div class="co-row"><span class="co-lbl">Base PDM</span><span class="co-val">${basePDM}</span></div>
+        <div class="co-row"><span class="co-lbl">SAP BOM #</span><span class="co-val">${sapBOM}</span></div>
         <div class="co-row"><span class="co-lbl">Kit PDM</span><span class="co-val">${kitPDM}</span></div>
         <div class="co-row"><span class="co-lbl">Nozzle head</span><span class="co-val">${headType}</span></div>
-        <div class="co-row"><span class="co-lbl">Hose length</span><span class="co-placeholder">TBD — pending CSV update</span></div>
         <div class="co-row"><span class="co-lbl">Voltage spec</span><span class="co-val">${getVoltageSpec(omegaName)}</span></div>
-      </div>
-      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #EEF1F6">
-        <div style="font-size:11px;font-weight:600;color:#5A6478;letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px">Conditioning equipment</div>
-        ${eqLines}
       </div>
       ${isCustom?'<div style="margin-top:8px;font-size:12px;color:#B45309;background:#fff;border:1px solid #F2D9A8;border-radius:6px;padding:7px 10px">Pricing: next highest existing system + engineering fee</div>':''}
     `;
