@@ -439,6 +439,7 @@ United Kingdom</textarea>
                 <div class="mono" id="out-stock-kit" style="font-size:13px;color:#0B5A50;margin-top:2px"></div>
               </div>
             </div>
+            <div id="out-stock-voltage" style="margin-top:10px;font-size:12px;color:#0B5A50;padding:5px 0;border-top:1px solid #C6EAD8"></div>
             <div id="locked-badge" class="locked-badge hidden">✓ Locked</div>
           </div>
           <div id="out-custom" class="out-card-custom hidden">
@@ -460,6 +461,7 @@ United Kingdom</textarea>
                 <div class="mono" id="out-custom-kit" style="font-size:13px;color:#7A4E0A;margin-top:2px"></div>
               </div>
             </div>
+            <div id="out-custom-voltage" style="margin-top:10px;font-size:12px;color:#B45309;padding:5px 0;border-top:1px solid #F2D9A8"></div>
           </div>
         </div>
 
@@ -965,6 +967,39 @@ const state = {
   systems: [makeSystem()],
   activeSystem: 0,
 };
+
+// ─── VOLTAGE SPECS ───────────────────────────────────────────────────────────
+// Data supplied by client at system-family level (not from the CSV).
+// Mapping assumes voltage depends only on base model number + flex status —
+// Gen2/Gen3, UF, AIS, SV/PV variants do NOT change the voltage spec.
+// PENDING FINAL CLIENT CONFIRMATION. Coverage of every resolvable system is
+// not yet fully verified; unmatched systems fall back to the placeholder string.
+const VOLTAGE_SPECS = {
+  "1500":      "208-240V, 1-Ph, 15A (10ft power cord with flying leads)",
+  "1500 FLEX": "208-240V, 1-Ph, 15A (10ft power cord with flying leads)",
+  "3000 FLEX": "208-240V, 1-Ph, 40A",
+  "3500 FLEX": "208-240V, 3-Ph, 40A",
+  "4000":      "208-240V, 1-Ph, 40A",
+  "9000 FLEX": "208-240V, 3-Ph, 60A",
+  "9500 FLEX": "(Dual Voltage) 480V, 3-Ph, 30A + 208-240V, 1-Ph, 25A",
+};
+
+function getVoltageSpec(omegaStr){
+  if(!omegaStr) return "Voltage: not yet confirmed for this system";
+  const s = omegaStr.toUpperCase();
+  const isFlex = s.includes("FLEX");
+  // Extract base model number
+  const modelMatch = s.match(/\b(9500|9000|4000|3500|3000|1500)\b/);
+  if(!modelMatch) return "Voltage: not yet confirmed for this system";
+  const model = modelMatch[1];
+  if(model === "1500") return VOLTAGE_SPECS["1500"]; // 1500 flex and non-flex share same spec
+  if(model === "3000" && isFlex) return VOLTAGE_SPECS["3000 FLEX"];
+  if(model === "3500" && isFlex) return VOLTAGE_SPECS["3500 FLEX"];
+  if(model === "4000") return VOLTAGE_SPECS["4000"];
+  if(model === "9000" && isFlex) return VOLTAGE_SPECS["9000 FLEX"];
+  if(model === "9500" && isFlex) return VOLTAGE_SPECS["9500 FLEX"];
+  return "Voltage: not yet confirmed for this system";
+}
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function $(id){ return document.getElementById(id); }
@@ -1488,6 +1523,13 @@ function renderPanel(){
   hn.textContent = headType==='Custom' ? '⚑ Custom nozzle head — engineering required' : '✓ Standard nozzle head';
   headNote.appendChild(hn);
 
+  // Voltage spec
+  const voltageSpec = getVoltageSpec(omegaName);
+  const voltageEl = isCustom ? $('out-custom-voltage') : $('out-stock-voltage');
+  if(voltageEl){
+    voltageEl.innerHTML = `<span style="font-weight:600;text-transform:uppercase;letter-spacing:.4px;font-size:10px">Voltage</span><br>${voltageSpec}`;
+  }
+
   toggle($('locked-badge'), s.confirmed);
 }
 
@@ -1595,7 +1637,7 @@ function renderCheckout(){
         <div class="co-row"><span class="co-lbl">Kit PDM</span><span class="co-val">${kitPDM}</span></div>
         <div class="co-row"><span class="co-lbl">Nozzle head</span><span class="co-val">${headType}</span></div>
         <div class="co-row"><span class="co-lbl">Hose length</span><span class="co-placeholder">TBD — pending CSV update</span></div>
-        <div class="co-row"><span class="co-lbl">Voltage spec</span><span class="co-placeholder">TBD — pending CSV update</span></div>
+        <div class="co-row"><span class="co-lbl">Voltage spec</span><span class="co-val">${getVoltageSpec(omegaName)}</span></div>
       </div>
       <div style="margin-top:8px;padding-top:8px;border-top:1px solid #EEF1F6">
         <div style="font-size:11px;font-weight:600;color:#5A6478;letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px">Conditioning equipment</div>
