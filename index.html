@@ -1154,11 +1154,11 @@ function renderCo2Source(){
 }
 
 function renderQuals(){
-  // Flex + Additive: standard toggle rendering
+  const s = sys();
   ['flex','add'].forEach(k=>{
     const row = $('q-'+k);
     const box = $('q-'+k+'-box');
-    if(state[k]){ row.classList.add('on'); box.className='check-box on'; box.textContent='✓'; }
+    if(s[k]){ row.classList.add('on'); box.className='check-box on'; box.textContent='✓'; }
     else { row.classList.remove('on'); box.className='check-box off'; box.textContent=''; }
   });
 
