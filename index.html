@@ -1471,14 +1471,44 @@ function is4000System(omegaStr){
 }
 
 function showFixturing(omegaStr){
-  if(!omegaStr) return false;
-  if(isFlexSystem(omegaStr)) return false;
-  return is1500System(omegaStr) || is4000System(omegaStr);
+  // All systems get the Custom Robot Fixture option.
+  // Manual Fixture and Bulkhead Tee are only for non-FLEX 1500s and 4000s.
+  return !!omegaStr;
+}
+
+function fixtureOptions(omegaStr){
+  const isFlex = isFlexSystem(omegaStr);
+  const is1500or4000 = is1500System(omegaStr) || is4000System(omegaStr);
+  const opts = [];
+  if(!isFlex && is1500or4000) opts.push({k:'blackHandle', l:'Black Handle (Standard)'});
+  if(!isFlex && is1500or4000) opts.push({k:'bulkheadTee', l:'Bulkhead Tee'});
+  opts.push({k:'custom', l:'Custom Robot Fixture'});
+  return opts;
+}
+
+// Controls availability per resolved system family
+// N = disabled/greyed; 'default' = pre-select and badge; Y = available
+function getControlsAvailability(omegaStr){
+  if(!omegaStr) return {ethernet:'Y', discrete:'Y', bus:'Y'};
+  if(is1500System(omegaStr)){
+    // 1500s: Ethernet IP = N, Discrete I/O = default, BUS = N
+    return {ethernet:'N', discrete:'default', bus:'N'};
+  }
+  // All other systems (3000, 3500, 4000, 9000, 9500): Ethernet = default, Discrete = Y, BUS = Y
+  return {ethernet:'default', discrete:'Y', bus:'Y'};
 }
 
 function getDefaultControl(omegaStr){
-  if(is1500System(omegaStr)) return 'discrete';
+  const avail = getControlsAvailability(omegaStr);
+  if(avail.ethernet === 'default') return 'ethernet';
+  if(avail.discrete === 'default') return 'discrete';
   return 'ethernet';
+}
+
+// LC-2000 availability: N for 1500 systems (per CSV)
+function lc2000Available(omegaStr){
+  if(!omegaStr) return true;
+  return !is1500System(omegaStr);
 }
 
 function renderStage8(){
@@ -1574,20 +1604,46 @@ function s8Item(id, title, sub, isOn, recText, onToggle, bodyFn){
 function renderS8Controls(s, omegaName){
   const container=$('s8-controls'); if(!container) return;
   container.innerHTML='';
+  const avail = getControlsAvailability(omegaName);
   const opts=[
-    {k:'ethernet', label:'Ethernet IP', sub:'Standard for 3000+'},
-    {k:'discrete', label:'Discrete I/O through Remote Communication Connector', sub:'Standard for 1500s'},
-    {k:'bus',      label:'BUS Communication Type', sub:''},
+    {k:'ethernet', label:'Ethernet IP'},
+    {k:'discrete', label:'Discrete I/O through Remote Communication Connector'},
+    {k:'bus',      label:'BUS Communication Type'},
   ];
   opts.forEach(opt=>{
+    const a = avail[opt.k]; // 'N' | 'Y' | 'default'
+    const isN = a === 'N';
+    const isDefault = a === 'default';
+    const isSelected = s.s8Control === opt.k;
+
     const btn = document.createElement('button');
-    btn.className='s8-ctrl-btn'+(s.s8Control===opt.k?' selected':'');
-    btn.onclick=()=>{ sys().s8Control=opt.k; render(); };
+    btn.className='s8-ctrl-btn'+(isSelected?' selected':'')+(isN?' s8-locked':'');
+    if(!isN) btn.onclick=()=>{ sys().s8Control=opt.k; render(); };
+
     const dot = document.createElement('div');
-    dot.className='s8-ctrl-dot'+(s.s8Control===opt.k?' on':'');
-    const txt = document.createElement('div');
-    txt.innerHTML=`<div style="font-size:13px;font-weight:${s.s8Control===opt.k?'600':'500'}">${opt.label}</div>${opt.sub?`<div class="s8-item-sub">${opt.sub}</div>`:''}`;
-    btn.appendChild(dot); btn.appendChild(txt);
+    dot.className='s8-ctrl-dot'+(isSelected?' on':'');
+
+    const labelRow = document.createElement('div');
+    labelRow.style.cssText='display:flex;align-items:center;gap:8px;flex:1';
+    const labelTxt = document.createElement('span');
+    labelTxt.style.cssText=`font-size:13px;font-weight:${isSelected?'600':'500'}`;
+    labelTxt.textContent = opt.label;
+    labelRow.appendChild(labelTxt);
+
+    if(isDefault){
+      const badge = document.createElement('span');
+      badge.style.cssText='font-size:10px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:999px;background:#E8F6EF;color:#0B5A50;border:1px solid #B4E2CC';
+      badge.textContent='DEFAULT';
+      labelRow.appendChild(badge);
+    }
+    if(isN){
+      const badge = document.createElement('span');
+      badge.style.cssText='font-size:10px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:999px;background:#F4F6FA;color:#C3CAD6;border:1px solid #E4E8EF';
+      badge.textContent='N/A';
+      labelRow.appendChild(badge);
+    }
+
+    btn.appendChild(dot); btn.appendChild(labelRow);
     container.appendChild(btn);
   });
 }
@@ -1604,9 +1660,28 @@ function renderS8Amp(s, omegaName){
 
 function renderS8Lb40(s, omegaName){
   const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/8)} (max 8 nozzles each)` : '';
-  s8Item('s8-lb40','LB-40','',s.s8Lb40.on, rec, ()=>{ sys().s8Lb40.on=!sys().s8Lb40.on; if(sys().s8Lb40.on && sys().s8Lb40.qty<1) sys().s8Lb40.qty=1; render(); }, (body)=>{
-    body.appendChild(s8QtyRow(sys().s8Lb40,'qty','units',()=>render()));
-  });
+  // LB-40 only available when CO2 source = Liquid (Y IF CO2 source = Liquid)
+  const isLiquid = s.co2Source === 'Liquid';
+  const container = $('s8-lb40'); if(!container) return;
+  container.innerHTML='';
+
+  if(!isLiquid){
+    // Show greyed-out locked item explaining why
+    const item = document.createElement('div'); item.className='s8-item s8-locked';
+    const header = document.createElement('div'); header.className='s8-item-header';
+    const cb = document.createElement('div'); cb.className='s8-cb';
+    const tw = document.createElement('div'); tw.style.flex='1';
+    tw.innerHTML='<div class="s8-item-title">LB-40 Booster</div><div class="s8-item-sub" style="color:#B45309">Only available when CO2 Source = Liquid (set in Step 1)</div>';
+    header.appendChild(cb); header.appendChild(tw);
+    item.appendChild(header); container.appendChild(item);
+    // Clear selection if it was on and source changed to Gas
+    if(sys().s8Lb40.on){ sys().s8Lb40.on=false; }
+    return;
+  }
+
+  s8Item('s8-lb40','LB-40 Booster','Available: CO2 Source = Liquid',s.s8Lb40.on, rec,
+    ()=>{ sys().s8Lb40.on=!sys().s8Lb40.on; if(sys().s8Lb40.on && sys().s8Lb40.qty<1) sys().s8Lb40.qty=1; render(); },
+    (body)=>{ body.appendChild(s8QtyRow(sys().s8Lb40,'qty','units',()=>render())); });
 }
 
 function renderS8Ecb(s, omegaName){
@@ -1645,10 +1720,28 @@ function renderS8Ecb(s, omegaName){
 
 function renderS8Lc2000(s, omegaName){
   const rec = omegaName ? `Rec: ${Math.ceil(sys().nozzleCount/6)} (max 6 nozzles each)` : '';
-  s8Item('s8-lc2000','LC-2000','',s.s8Lc2000.on, rec, ()=>{ sys().s8Lc2000.on=!sys().s8Lc2000.on; if(sys().s8Lc2000.on && sys().s8Lc2000.qty<1) sys().s8Lc2000.qty=1; render(); }, (body)=>{
-    body.appendChild(s8QtyRow(sys().s8Lc2000,'qty','units',()=>render()));
-    body.appendChild(s8YesNo('Water Cooled? (Yes = LC-2000-W)',s.s8Lc2000.waterCooled,(v)=>{ sys().s8Lc2000.waterCooled=v; render(); }));
-  });
+  const available = lc2000Available(omegaName);
+  const container = $('s8-lc2000'); if(!container) return;
+  container.innerHTML='';
+
+  if(!available){
+    const item = document.createElement('div'); item.className='s8-item s8-locked';
+    const header = document.createElement('div'); header.className='s8-item-header';
+    const cb = document.createElement('div'); cb.className='s8-cb';
+    const tw = document.createElement('div'); tw.style.flex='1';
+    tw.innerHTML='<div class="s8-item-title">LC-2000</div><div class="s8-item-sub" style="color:#B45309">Not available for this system (N)</div>';
+    header.appendChild(cb); header.appendChild(tw);
+    item.appendChild(header); container.appendChild(item);
+    if(sys().s8Lc2000.on){ sys().s8Lc2000.on=false; }
+    return;
+  }
+
+  s8Item('s8-lc2000','LC-2000','',s.s8Lc2000.on, rec,
+    ()=>{ sys().s8Lc2000.on=!sys().s8Lc2000.on; if(sys().s8Lc2000.on && sys().s8Lc2000.qty<1) sys().s8Lc2000.qty=1; render(); },
+    (body)=>{
+      body.appendChild(s8QtyRow(sys().s8Lc2000,'qty','units',()=>render()));
+      body.appendChild(s8YesNo('Water Cooled? (Yes = LC-2000-W)',s.s8Lc2000.waterCooled,(v)=>{ sys().s8Lc2000.waterCooled=v; render(); }));
+    });
 }
 
 function renderS8Purif(s, omegaName){
@@ -1768,13 +1861,15 @@ function renderS8NozzleHose(s, omegaName){
 function renderS8Fixturing(s, omegaName){
   const container=$('s8-fixturing'); if(!container) return;
   container.innerHTML='';
-  const show = showFixturing(omegaName);
-  if(!show){
+  if(!omegaName){
     const msg=document.createElement('div'); msg.style.cssText='font-size:12px;color:#C3CAD6;font-style:italic;padding:4px 0';
-    msg.textContent = omegaName ? 'Not applicable for this system (FLEX systems excluded)' : 'Resolve system to see fixturing options';
+    msg.textContent='Resolve system to see fixturing options';
     container.appendChild(msg); return;
   }
-  [{k:'blackHandle',l:'Black Handle (Standard)'},{k:'bulkheadTee',l:'Bulkhead Tee'},{k:'custom',l:'Custom'}].forEach(opt=>{
+  // Custom Robot Fixture available for all systems.
+  // Black Handle and Bulkhead Tee only for non-FLEX 1500s and 4000s.
+  const opts = fixtureOptions(omegaName);
+  opts.forEach(opt=>{
     const btn=document.createElement('button');
     btn.className='s8-ctrl-btn'+(s.s8Fixturing===opt.k?' selected':'');
     btn.onclick=()=>{ sys().s8Fixturing=opt.k; render(); };
@@ -1838,7 +1933,7 @@ function renderS8Cart(){
   lines.push({name:`Nozzle Hose — ${lenStr}, ${matStr}`, qty:null});
 
   if(s.s8Fixturing){
-    const fl={blackHandle:'Black Handle',bulkheadTee:'Bulkhead Tee',custom:'Custom Fixturing'};
+    const fl={blackHandle:'Black Handle (Standard)',bulkheadTee:'Bulkhead Tee',custom:'Custom Robot Fixture'};
     lines.push({name:fl[s.s8Fixturing]||s.s8Fixturing, qty:null});
   }
   if(s.s8Co2Monitor.on) lines.push({name:'CO2 Monitor (Safety Alarm w/ Remote)', qty:s.s8Co2Monitor.qty});
