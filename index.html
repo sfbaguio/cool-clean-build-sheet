@@ -1505,10 +1505,10 @@ function getDefaultControl(omegaStr){
   return 'ethernet';
 }
 
-// LC-2000 availability: N for 1500 systems (per CSV)
+// LC-2000 availability: Y for 1500 systems only; N for 3000/3500/4000/9000/9500 (per CSV)
 function lc2000Available(omegaStr){
   if(!omegaStr) return true;
-  return !is1500System(omegaStr);
+  return is1500System(omegaStr);
 }
 
 function renderStage8(){
@@ -1733,7 +1733,7 @@ function renderS8Lc2000(s, omegaName){
     const header = document.createElement('div'); header.className='s8-item-header';
     const cb = document.createElement('div'); cb.className='s8-cb';
     const tw = document.createElement('div'); tw.style.flex='1';
-    tw.innerHTML='<div class="s8-item-title">LC-2000</div><div class="s8-item-sub" style="color:#B45309">Not available for this system (N)</div>';
+    tw.innerHTML='<div class="s8-item-title">LC-2000</div><div class="s8-item-sub" style="color:#B45309">Not available for 3000/3500/4000/9000/9500 systems (N)</div>';
     header.appendChild(cb); header.appendChild(tw);
     item.appendChild(header); container.appendChild(item);
     if(sys().s8Lc2000.on){ sys().s8Lc2000.on=false; }
