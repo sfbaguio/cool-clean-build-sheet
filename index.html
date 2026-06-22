@@ -1516,8 +1516,12 @@ function renderStage8(){
   const rows = lookup();
   const omegaName = rows.length > 0 ? rows[0][8] : null;
 
-  if(omegaName && !s.s8Control){
-    sys().s8Control = getDefaultControl(omegaName);
+  if(omegaName){
+    const avail = getControlsAvailability(omegaName);
+    // Set default if nothing chosen yet, OR clear and reset if current selection is now N/A
+    if(!s.s8Control || avail[s.s8Control] === 'N'){
+      sys().s8Control = getDefaultControl(omegaName);
+    }
   }
 
   renderS8Controls(s, omegaName);
